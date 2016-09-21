@@ -1,0 +1,29 @@
+********************************************************************************
+*                    Tuesday, September 20, 2016 6:37:54 PM                    *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\temp\COMP-376-Team_Delta
+Unity 'Data' or 'Frameworks' directory: C:/Program Files/Unity/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\temp\COMP-376-Team_Delta\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -nologo -r:"C:/Program Files/Unity/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"C:/Program Files/Unity/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"C:/Program Files/Unity/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"C:/Program Files/Unity/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-adf8133a3eb28794281327a8dc3f1854
+Exit code: 0
+Elapsed time: 3.96 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (0 lines):
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\temp\COMP-376-Team_Delta\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.24 sec
+
+- pdb2mdb.exe output (0 lines):

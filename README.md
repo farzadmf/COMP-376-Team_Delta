@@ -1,2 +1,4 @@
-# COMP-376-Team_Delta
-Final Project Game for the COMP 376 Course
+COMP 376 Team Delta
+===
+
+Repo for the amazing 2D platformer game ...
