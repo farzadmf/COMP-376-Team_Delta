@@ -8,8 +8,9 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject weapon;
 	private float dmg;
 	private float radius = 0.2f;
-
+	private bool canMagic;
 	void Start() {
+		canMagic = true;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
 	}
 	public bool getGrounded() {
@@ -18,11 +19,18 @@ public class PlayerScript : MonoBehaviour {
 
 	void Update() {
 		updateGroundedStatus ();
-
+		if (Input.GetMouseButtonDown (1))
+			shootFireball ();
 	}
 
 
-
+	void shootFireball() {
+		GameObject g = (GameObject)Instantiate(Resources.Load ("Fireball"));
+		g.transform.position = new Vector3 (transform.position.x+1,transform.position.y,transform.position.z);
+		Vector3 v = new Vector3 (10, 2, 0);
+		g.GetComponent<Rigidbody2D> ().velocity = v;
+		//g.transform.GetChild (0).GetChild (0).GetComponent<Rigidbody2D> ().velocity = -v;
+	}
 
 
 	void updateGroundedStatus() {
