@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour {
 	private float dmg;
 	private float radius = 0.2f;
 	private bool canMagic;
+	public int level;
 	void Start() {
 		canMagic = true;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
@@ -19,8 +20,9 @@ public class PlayerScript : MonoBehaviour {
 
 	void Update() {
 		updateGroundedStatus ();
-		if (Input.GetMouseButtonDown (1))
+		if (Input.GetMouseButtonDown (1)) {
 			shootFireball ();
+		}
 	}
 
 
@@ -29,6 +31,10 @@ public class PlayerScript : MonoBehaviour {
 		g.transform.position = new Vector3 (transform.position.x+1,transform.position.y,transform.position.z);
 		Vector3 v = new Vector3 (10, 2, 0);
 		g.GetComponent<Rigidbody2D> ().velocity = v;
+		if (level == 1)
+			g.GetComponent<FireballScript>().type = "normal";
+		else if (level == 2)
+			g.GetComponent<FireballScript>().type = "exploding";
 		//g.transform.GetChild (0).GetChild (0).GetComponent<Rigidbody2D> ().velocity = -v;
 	}
 
