@@ -4,16 +4,18 @@ using System.Collections;
 public class WeaponScript : MonoBehaviour {
 	public float dmg;
 	private bool animating;
-	private bool forward;
+	private bool firstPart;
 	private bool finishedAnimation;
 	private float wepSpeed;
 	private Vector3 originalPos;
+	public GameObject handle;
+	private int attackStyle;
 	// Use this for initialization
 	void Start () {
 		
 		wepSpeed = 0.1f;
 		originalPos = transform.localPosition;
-		forward = true;
+		firstPart = true;
 		animating = false;
 		finishedAnimation = true;
 	}
@@ -27,17 +29,31 @@ public class WeaponScript : MonoBehaviour {
 		}
 	}
 	void stab() {
-		if (animating == true) {
-			transform.localEulerAngles = new Vector3 (0,0,322f);
-			if (forward == true) {
-				transform.Translate (new Vector3 (wepSpeed, wepSpeed - 0.02f, 0));
-			} else {
-				transform.Translate (new Vector3 (-wepSpeed, -wepSpeed + 0.02f, 0));
-			}
+		
+		transform.localEulerAngles = new Vector3 (0,0,322f);
+		if (firstPart == true) {
+			transform.Translate (new Vector3 (wepSpeed, wepSpeed - 0.02f, 0));
+		} else {
+			transform.Translate (new Vector3 (-wepSpeed, -wepSpeed + 0.02f, 0));
+		}
+	}
+	void slash() {
+		if (firstPart == true) {
+			transform.Translate (new Vector3 (0.05f, 0.1f, 0));
+			transform.RotateAround (handle.transform.position, new Vector3 (0, 0, 1), 6f);
+		} else {
+			transform.Translate (new Vector3 (0, -0.2f, 0));
+			transform.RotateAround (handle.transform.position, new Vector3 (0, 0, 1), -16f);
 		}
 	}
 	void Update () {
-		stab ();
+		if (animating == true) {
+			
+			if (attackStyle == 0)
+				stab ();
+			else if (attackStyle == 1)
+				slash ();
+		}
 		if (animating == false) {
 			GetComponent<PolygonCollider2D> ().enabled = false;
 		} else {
@@ -51,11 +67,12 @@ public class WeaponScript : MonoBehaviour {
 
 	}
 	void bringWepBack() {
-		forward = false;
+		firstPart = false;
 	}
 	public void attack() {
+		attackStyle = Random.Range (0, 2);
 		animating = true;
-		forward = true;
+		firstPart = true;
 		Invoke ("bringWepBack", 0.1f);
 		Invoke ("cancelAttackAnimation",0.2f);
 	}
