@@ -14,11 +14,21 @@ public class PlayerControllerScript : MonoBehaviour {
 	void Start () {
 		rigidBody = GetComponent<Rigidbody2D> ();
 	}
-
-
 	void Update() {
-		movex = Input.GetAxis ("Horizontal");
-
+		move ();
+		jump ();
+		attack ();
+	}
+	void attack() {
+		if (Input.GetMouseButtonDown (0)) { // left click
+			
+			if (GetComponent<PlayerScript> ().weapon.GetComponent<WeaponScript>().getAnimating() == false)
+				GetComponent<PlayerScript> ().weapon.GetComponent<WeaponScript>().attack ();
+		}
+	}
+		
+	
+	void jump() {
 		if (Input.GetKeyDown("space")) {
 			if (GetComponent<PlayerScript> ().getGrounded () == true) {
 				rigidBody.velocity = new Vector2 (rigidBody.velocity.x,0);
@@ -33,6 +43,9 @@ public class PlayerControllerScript : MonoBehaviour {
 			}
 
 		}
+	}
+	void move() {
+		movex = Input.GetAxis ("Horizontal");
 		//movey = Input.GetAxis ("Vertical"); we'll use this later for ladders
 		rigidBody.velocity = new Vector2 (movex * Speed,rigidBody.velocity.y);
 
@@ -40,5 +53,7 @@ public class PlayerControllerScript : MonoBehaviour {
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x,0,transform.eulerAngles.z);
 		else if (movex < 0)
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x,180,transform.eulerAngles.z);
+	
 	}
+
 }
