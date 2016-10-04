@@ -16,25 +16,23 @@ public class PatrolState : IAIState {
     private const float DEFAULT_PATROL_DURATION = 5;
 
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     //Runs while in the current State
     public void Execute()
     {
         Patrol();
         thisEnemy.Move();
+
+        //If the enemy finds a target while patroling and he is in range for projectile attack then go into ranged state
+        if(thisEnemy.Target != null && thisEnemy.InProjectileRange)
+        {
+            thisEnemy.ChangeState(new RangedState());
+        }
     }
     //Should be triggered when we enter this state holds a reference to its enemy
     public void Enter(Enemy enemy)
     {
+        Debug.Log("In Patrol State");
         thisEnemy = enemy;
         patrolDuration = DEFAULT_PATROL_DURATION;
 

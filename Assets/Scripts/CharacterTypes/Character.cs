@@ -1,15 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
 
 
     public Animator ThisAnimator { get; private set; }
 
+    public bool IsTakingDamage { get;  set; }
+
+    [SerializeField]
+    protected int health;
+
     [SerializeField]
     protected float movementSpeed;
 
+    [SerializeField]
+    private List<string> damageSources;
+   
     //If not faceing right then facing left
     protected bool isFacingRight;
 
@@ -26,17 +34,45 @@ public abstract class Character : MonoBehaviour {
 	
 	}
 
-    public virtual void HandleMovement()
-    {
-    }
-
-    public void ChangeDirection()
+    public virtual void ChangeDirection()
     {
         //Change facing direction to the opposite of what it currently is
         isFacingRight = !isFacingRight;
 
-        //Change to oposite direction
-        GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        //Rotate 180 to go towards other direction
+        transform.Rotate(new Vector3(transform.rotation.x, 180, transform.rotation.z));
+     
+         
+    }
 
+    public bool IsDead()
+    {
+        return health <= 0;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (!IsDead())
+        {
+            if(ThisAnimator!=null)
+            ThisAnimator.SetTrigger("damage");
+        }
+        else
+        {
+            if (ThisAnimator != null)
+            ThisAnimator.SetTrigger("death");
+        }
+    }
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+       
+        if(damageSources.Contains(other.tag))
+        {
+            TakeDamage(10);
+            //other.gameObject.GetComponent<BasicProjectile>().GetDamage()
+        }
     }
 }

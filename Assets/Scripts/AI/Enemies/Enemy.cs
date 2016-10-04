@@ -1,12 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Enemy : CombatCharacter {
 
     private IAIState currentAIState;
 
-	// Use this for initialization
-	public override void Start()
+    public GameObject Target { get; set; }
+
+    [SerializeField]
+    private float meleeRange;
+
+    [SerializeField]
+    private float projectileRange;
+    
+
+    // Use this for initialization
+    public override void Start()
     {
         //Call the start method of the parent class
         base.Start();
@@ -16,9 +26,23 @@ public class Enemy : CombatCharacter {
 	// Update is called once per frame
 	void Update ()
     {
-        //Executes the current Ai state5
-        currentAIState.Execute();
+        if (!IsDead())
+        {
+            
+            //Look at it's taget if he has one
+            LookAtTarget();
+
+            //If he is not taking damage then he can execute his state. This makes it so that he stands still after taking damage
+            if (!IsTakingDamage)
+            {
+                //Executes the current Ai state5
+                currentAIState.Execute();
+            }
+            
+        }
+        
 	}
+
 
     //Changes the current Ai state
     public void ChangeState(IAIState newState)
@@ -37,10 +61,18 @@ public class Enemy : CombatCharacter {
 
     public void Move()
     {
-        //Tell animator that we are moving
-        ThisAnimator.SetFloat("movementSpeed", 1);
-        //Translate
-        transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+        //Currently can only move if he is not attacking
+        if (!IsAttacking)
+        {
+            //Tell animator that we are moving
+            ThisAnimator.SetFloat("movementSpeed", 1);
+
+            //Translate
+            transform.Translate(new Vector3(1 * (movementSpeed * Time.deltaTime), 0,0));
+        
+           
+        }
+       
 
     }
 
@@ -51,9 +83,72 @@ public class Enemy : CombatCharacter {
     }
 
     //Is called when this object triggers a collision
-    void OnTriggerEnter2D(Collider2D otherObject)
+    public override void OnTriggerEnter2D(Collider2D other)
     {
+        //Tell parent about collision
+        base.OnTriggerEnter2D(other);
+
         //Tells the current state that there was a collision with an object
-        currentAIState.OnTriggerEnter(otherObject);
+        currentAIState.OnTriggerEnter(other);
     }
+
+    public bool InMeleeRange
+    {
+        get
+        {
+            //If you have a target And the distance to it is less then melee range or this character then return true else return false
+            if (Target != null)
+            {
+
+                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+            }
+            else
+                return false;
+        }
+    }
+
+    public bool InProjectileRange
+    {
+        get
+        {
+            //If you have a target And the distance to it is less then projectile range or this character then return true else return false
+            if (Target != null)
+            {
+
+                return Vector2.Distance(transform.position, Target.transform.position) <= projectileRange;
+            }
+            else
+                return false;
+        }
+    }
+
+
+    private void LookAtTarget()
+    {
+      
+        if(Target != null)
+        {
+            //If target has died then remove it
+            if (Target.GetComponent<Character>().IsDead())
+            {
+                Target = null;
+                ChangeState(new IdleState());
+            }
+            else
+            {
+                float distance = Target.transform.position.x - transform.position.x;
+
+                //if distance is negative then the target is to the left else they are to the right
+                //If im already looking there then don't do anything else change direction
+
+                if (distance < 0 && isFacingRight || distance > 0 && !isFacingRight)
+                {
+
+                    ChangeDirection();
+                }
+            }
+
+        }
+    }
+
 }

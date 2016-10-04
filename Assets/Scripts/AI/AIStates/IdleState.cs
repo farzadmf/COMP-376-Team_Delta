@@ -15,24 +15,22 @@ public class IdleState : IAIState {
     //Default idle duration to 5 seconds
     private const float DEFAULT_IDLE_DURATION = 2;
 
-    // Use this for initialization
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
 
     //Runs while in the current State
     public void Execute()
     {
         Idle();
+
+        //If while Idling the enemy finds a target
+        if(thisEnemy.Target != null)
+        {
+            thisEnemy.ChangeState(new PatrolState());
+        }
     }
     //Should be triggered when we enter this state holds a reference to its enemy
     public void Enter(Enemy enemy)
     {
+        Debug.Log("In Idle State");
         thisEnemy = enemy;
         idleDuration = DEFAULT_IDLE_DURATION;
     }
@@ -50,6 +48,7 @@ public class IdleState : IAIState {
     //method that tells this enemy's animator that it is idleing
     private void Idle()
     {
+
         thisEnemy.ThisAnimator.SetFloat("movementSpeed", 0);
 
         idleTimer += Time.deltaTime;

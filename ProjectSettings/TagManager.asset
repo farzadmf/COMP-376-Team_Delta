@@ -9,6 +9,9 @@ TagManager:
   - Fireball
   - Bullet
   - FireBurst
+  - PlatformEdge
+  - Melee
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Enemies
   - 
   - 
   - 

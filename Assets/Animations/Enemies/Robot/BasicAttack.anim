@@ -21,7 +21,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 21300000, guid: 7307708c8ce631140bc571f8c0a73847, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: a9e43753165fd3f43adae7038d428d78, type: 3}
+      value: {fileID: 21300000, guid: 7307708c8ce631140bc571f8c0a73847, type: 3}
     - time: 0.16666667
       value: {fileID: 21300000, guid: c05e0cb5236507f418b359eb059f74fd, type: 3}
     - time: 0.25
@@ -30,6 +30,10 @@ AnimationClip:
       value: {fileID: 21300000, guid: dd780fcbf0500a84d8055f16966350fe, type: 3}
     - time: 0.41666666
       value: {fileID: 21300000, guid: 4d69c80966df7e047ab5bbcb4d9710dd, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: ca2770d141c86f94f92cf0267e045be2, type: 3}
+    - time: 0.5833333
+      value: {fileID: 21300000, guid: 97c26db65e24b6441951db768c03a9ec, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -49,17 +53,19 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 21300000, guid: 7307708c8ce631140bc571f8c0a73847, type: 3}
-    - {fileID: 21300000, guid: a9e43753165fd3f43adae7038d428d78, type: 3}
+    - {fileID: 21300000, guid: 7307708c8ce631140bc571f8c0a73847, type: 3}
     - {fileID: 21300000, guid: c05e0cb5236507f418b359eb059f74fd, type: 3}
     - {fileID: 21300000, guid: a361b2abaa0ce224fabacc4bb6047454, type: 3}
     - {fileID: 21300000, guid: dd780fcbf0500a84d8055f16966350fe, type: 3}
     - {fileID: 21300000, guid: 4d69c80966df7e047ab5bbcb4d9710dd, type: 3}
+    - {fileID: 21300000, guid: ca2770d141c86f94f92cf0267e045be2, type: 3}
+    - {fileID: 21300000, guid: 97c26db65e24b6441951db768c03a9ec, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.6666666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -79,4 +85,11 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.16666667
+    functionName: ChangeMeleeCollider
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

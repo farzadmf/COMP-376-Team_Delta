@@ -8,6 +8,9 @@ public class BasicProjectile : MonoBehaviour {
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private int damage;
+
     private Rigidbody2D thisRigidbody;
 
     private Vector2 direction;
@@ -15,8 +18,6 @@ public class BasicProjectile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         thisRigidbody = GetComponent<Rigidbody2D>();
-        //Default is direction right
-        Initialize(Vector2.right);
     }
 
     //Fixed update is based on a set framerate
@@ -41,5 +42,10 @@ public class BasicProjectile : MonoBehaviour {
     {
         //Destroy itself when out of vision
         Destroy(gameObject);
+    }
+
+    public int GetDamage()
+    {
+        return damage;
     }
 }
