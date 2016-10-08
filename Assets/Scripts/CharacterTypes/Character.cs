@@ -31,7 +31,7 @@ public abstract class Character : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
     public virtual void ChangeDirection()
@@ -53,25 +53,37 @@ public abstract class Character : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         health -= damage;
+		if (gameObject.tag == "Player" && IsDead ())
+			Destroy (gameObject);
+		else {
 
-        if (!IsDead())
-        {
-            if(ThisAnimator!=null)
-            ThisAnimator.SetTrigger("damage");
-        }
-        else
-        {
-            if (ThisAnimator != null)
-            ThisAnimator.SetTrigger("death");
-        }
+			if (!IsDead ()) {
+				if (ThisAnimator != null)
+					ThisAnimator.SetTrigger ("damage");
+			} else {
+			
+				if (ThisAnimator != null)
+					ThisAnimator.SetTrigger ("death");
+				else
+					Destroy (gameObject);
+			}
+		}
     }
-
+	public virtual void OnCollisionEnter2D(Collision2D other) {
+		if(damageSources.Contains(other.gameObject.tag))
+		{
+			TakeDamage(10);
+			//other.gameObject.GetComponent<BasicProjectile>().GetDamage()
+		}
+	}
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
        
         if(damageSources.Contains(other.tag))
         {
             TakeDamage(10);
+			if (other.tag == "Projectile")
+				Destroy (other.gameObject);
             //other.gameObject.GetComponent<BasicProjectile>().GetDamage()
         }
     }

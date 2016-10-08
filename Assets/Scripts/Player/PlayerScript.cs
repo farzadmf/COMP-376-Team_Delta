@@ -31,17 +31,17 @@ public class PlayerScript : MonoBehaviour {
 	void fireBurst() {
 		GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
 		if (transform.eulerAngles.y == 0)
-			g.transform.position = new Vector3 (transform.position.x+5,transform.position.y-1.5f,transform.position.z);
+			g.transform.position = new Vector3 (transform.position.x+7,transform.position.y-1.5f,transform.position.z);
 		else
-			g.transform.position = new Vector3 (transform.position.x-5,transform.position.y-1.5f,transform.position.z);
+			g.transform.position = new Vector3 (transform.position.x-7,transform.position.y-1.5f,transform.position.z);
 	}
 	void shootFireball() {
 		GameObject g = (GameObject)Instantiate(Resources.Load ("Fireball"));
-		g.transform.position = new Vector3 (transform.position.x+1,transform.position.y,transform.position.z);
+		g.transform.position = new Vector3 (transform.position.x+2,transform.position.y,transform.position.z);
 		Vector3 v = new Vector3 (10, 2, 0);
 		if (transform.eulerAngles.y != 0) {
 			v = new Vector3 (-v.x, v.y, 0);
-			g.transform.position = new Vector3 (transform.position.x-1,transform.position.y,transform.position.z);
+			g.transform.position = new Vector3 (transform.position.x-2,transform.position.y,transform.position.z);
 		}
 
 		g.GetComponent<Rigidbody2D> ().velocity = v;

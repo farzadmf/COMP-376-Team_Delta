@@ -10,10 +10,11 @@ public class FireballScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c) {
 		if (c.gameObject.tag == "Enemy") {
-			if (type == "exploding") {
-				GameObject g = (GameObject)Instantiate (Resources.Load ("Boom"));
-				g.transform.position = transform.position;
-			}
+			
+		}
+		if (type == "exploding") {
+			GameObject g = (GameObject)Instantiate (Resources.Load ("Boom"));
+			g.transform.position = transform.position;
 		}
 		Destroy (gameObject);
 	}

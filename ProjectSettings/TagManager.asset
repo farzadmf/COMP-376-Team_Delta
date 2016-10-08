@@ -12,6 +12,7 @@ TagManager:
   - PlatformEdge
   - Melee
   - Projectile
+  - Ground
   layers:
   - Default
   - TransparentFX

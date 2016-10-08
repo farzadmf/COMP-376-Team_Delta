@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour {
     public float smoothTimeY;
     public float smoothTimeX;
 
-    public GameObject player;
+    private GameObject player;
 
     public bool bounds;
     public Vector3 minCameraPos;
