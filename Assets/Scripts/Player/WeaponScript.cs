@@ -10,6 +10,7 @@ public class WeaponScript : MonoBehaviour {
 	private Vector3 originalPos;
 	public GameObject handle;
 	private int attackStyle;
+	public bool onGround;
 	// Use this for initialization
 	void Start () {
 		
@@ -26,6 +27,9 @@ public class WeaponScript : MonoBehaviour {
 		if (animating == true) {
 			if (c.gameObject.tag == "Enemy")
 				Debug.Log ("poke");
+			if (c.gameObject.tag == "TChest") {
+				c.gameObject.GetComponent<TChestScript> ().activatedChest ();
+			}
 		}
 	}
 	void stab() {

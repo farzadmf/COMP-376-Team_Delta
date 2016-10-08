@@ -39,7 +39,7 @@ GameObject:
   - 212: {fileID: 212000012656206370}
   - 60: {fileID: 60000013710787724}
   - 50: {fileID: 50000011067461926}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -294,6 +294,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   weapon: {fileID: 1000013151864648}
+  level: 0
 --- !u!212 &212000011319379678
 SpriteRenderer:
   m_ObjectHideFlags: 1
