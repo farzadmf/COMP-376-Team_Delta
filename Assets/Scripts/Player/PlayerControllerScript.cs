@@ -18,6 +18,7 @@ public class PlayerControllerScript : MonoBehaviour {
 		move ();
 		jump ();
 		attack ();
+		fixTextOrientation ();
 	}
 	void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
@@ -53,7 +54,16 @@ public class PlayerControllerScript : MonoBehaviour {
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x,0,transform.eulerAngles.z);
 		else if (movex < 0)
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x,180,transform.eulerAngles.z);
-	
 	}
+	void fixTextOrientation() {
+		GameObject text = transform.FindChild ("Partner").FindChild("Text").gameObject;
+		Quaternion rot = text.transform.rotation;
+		if (transform.rotation.y == 0) {
+			rot.eulerAngles = new Vector3 (0, 0, 0);
 
+		} else {
+			rot.eulerAngles = new Vector3 (0, -180, 0);
+		}
+		text.transform.localRotation = rot;
+	}
 }

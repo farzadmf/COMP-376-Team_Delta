@@ -16,16 +16,20 @@ public class PartnerScript : MonoBehaviour {
 
 	void showMessage(int i, bool activatedOnce) {
 		string message = "";
-		text.SetActive (true);
-		if (i == 1) {
-			message = "Loler";
-			activateText (message, 4);
-		} else if (i == 2) {
-			message = "Ho Ho Ho, merry Christmas";
-			activateText (message, 8);
+		if (activatedOnce == false) {
+			if (i == 1) {
+				message = "Loler";
+				activateText (message, 4);
+			} else if (i == 2) {
+				message = "Ho Ho Ho, merry Christmas";
+				activateText (message, 8);
+			}
 		}
 	}
 	void activateText(string message, int howLong) {
+		if (IsInvoking ("deleteText")) {
+			CancelInvoke ("deleteText");
+		}
 		text.GetComponent<TextMesh>().text = message;
 		Quaternion rot = text.transform.rotation;
 		Vector3 playerRot = transform.parent.rotation.eulerAngles;
@@ -34,10 +38,10 @@ public class PartnerScript : MonoBehaviour {
 		Invoke ("deleteText",howLong);
 	}
 	void deleteText() {
-		text.SetActive (false);
+		text.GetComponent<TextMesh> ().text = "";
 	}
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }
