@@ -22,7 +22,7 @@ GameObject:
   - 114: {fileID: 114000011897458754}
   - 61: {fileID: 61000010104278928}
   - 114: {fileID: 114000013170074410}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42c21992ac1e2c408fe20996ce7b9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thisEnemy: {fileID: 0}
 --- !u!114 &114000013170074410
 MonoBehaviour:
   m_ObjectHideFlags: 1

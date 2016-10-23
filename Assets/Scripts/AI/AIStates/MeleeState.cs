@@ -32,8 +32,7 @@ public class MeleeState : IAIState {
     }
     //Should be triggered when we enter this state holds a reference to its enemy
     public void Enter(Enemy enemy)
-    {
-        Debug.Log("In Melee State");
+    { 
         thisEnemy = enemy;
         attackCooldown = ATTACK_COOLDOWN;
     }

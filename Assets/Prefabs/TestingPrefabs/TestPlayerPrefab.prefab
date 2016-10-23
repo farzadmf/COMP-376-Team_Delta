@@ -40,7 +40,7 @@ GameObject:
   - 60: {fileID: 60000013710787724}
   - 50: {fileID: 50000011067461926}
   - 95: {fileID: 95000012239040688}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TestPlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -73,6 +73,7 @@ GameObject:
   - 212: {fileID: 212000011319379678}
   - 114: {fileID: 114000012872819354}
   - 60: {fileID: 60000012746225540}
+  - 114: {fileID: 114000012076764776}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Sword
@@ -87,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013127947684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -0.41, z: 0}
+  m_LocalPosition: {x: 0.114, y: -0.474, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -113,8 +114,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012457610790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.28, y: -1.62, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -1.26, y: 0.02, z: 0}
+  m_LocalScale: {x: 3.3455708, y: 3.3455706, z: 3.3455706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010698960486}
@@ -269,6 +270,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000012076764776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013151864648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1248aa597160cfc429818f2ce400e5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack:
+    BaseDamage: 30
+    Cooldown: 0
+    Range: 0
+    Force: 300
+    DamageType: 0
 --- !u!114 &114000012476322998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,11 +298,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ceedcb8129195c428913649fd1f87f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  movementSpeed: 0
+  characterStats:
+    TotalHealth: 500
+    Health: 500
+    TotalStamina: 0
+    Stamina: 0
+    Strength: 0
+    Defense: 2
+    CritChance: 0.3
+    CritMultiplier: 1.5
+    MaxForceResistence: 20
+    MovementSpeed: 0
   damageSources:
-  - Projectile
-  - Melee
+  - EnemyDamage
   Speed: 4
   jumpHeight: 350
   hp: 0
@@ -301,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 5
   handle: {fileID: 1000012069182710}
+  onGround: 0
 --- !u!114 &114000013551243566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -317,7 +344,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   weapon: {fileID: 1000013151864648}
-  level: 0
+  level: 2
 --- !u!212 &212000011319379678
 SpriteRenderer:
   m_ObjectHideFlags: 1

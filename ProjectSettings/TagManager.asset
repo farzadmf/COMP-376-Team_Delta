@@ -14,6 +14,8 @@ TagManager:
   - Projectile
   - Ground
   - TChest
+  - EnemyDamage
+  - UIPopUp
   layers:
   - Default
   - TransparentFX
@@ -24,13 +26,13 @@ TagManager:
   - 
   - 
   - Ground
-  - Enemies
+  - Enemy
   - Weapon
   - Player
   - Ladder
-  - 
-  - 
-  - 
+  - EnemyUtilities
+  - PlayerBody
+  - EnemyBody
   - 
   - 
   - 

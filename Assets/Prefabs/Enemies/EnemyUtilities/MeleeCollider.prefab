@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011832969688}
   - 68: {fileID: 68000013486452680}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: MeleeCollider
   m_TagString: Melee
   m_Icon: {fileID: 0}

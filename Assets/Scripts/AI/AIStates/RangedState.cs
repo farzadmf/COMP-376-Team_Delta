@@ -36,7 +36,6 @@ public class RangedState : IAIState {
     //Should be triggered when we enter this state holds a reference to its enemy
     public void Enter(Enemy enemy)
     {
-        Debug.Log("In Ranged State");
         thisEnemy = enemy;
         throwCooldown = RANGED_COOLDOWN;
     }

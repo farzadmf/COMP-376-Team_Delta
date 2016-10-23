@@ -33,7 +33,7 @@ public class Enemy : CombatCharacter {
 
 			//If he is not taking damage then he can execute his state. This makes it so that he stands still after taking damage
 			if (!IsTakingDamage) {
-				//Executes the current Ai state5
+				//Executes the current Ai state
 				currentAIState.Execute ();
 			}
             
@@ -64,9 +64,8 @@ public class Enemy : CombatCharacter {
             ThisAnimator.SetFloat("movementSpeed", 1);
 
             //Translate
-            transform.Translate(new Vector3(1 * (movementSpeed * Time.deltaTime), 0,0));
+            transform.Translate(new Vector3(1 * (characterStats.MovementSpeed * Time.deltaTime), 0,0));
         
-           
         }
        
 
@@ -81,11 +80,15 @@ public class Enemy : CombatCharacter {
     //Is called when this object triggers a collision
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        //Tell parent about collision
-        base.OnTriggerEnter2D(other);
+        //Enemies Don't take damage from other enemies
+        if(other.tag != "EnemyDamage")
+        {
+            //Tell parent about collision
+            base.OnTriggerEnter2D(other);
 
-        //Tells the current state that there was a collision with an object
-        currentAIState.OnTriggerEnter(other);
+            //Tells the current state that there was a collision with an object
+            currentAIState.OnTriggerEnter(other);
+        }
     }
 
     public bool InMeleeRange

@@ -30,7 +30,6 @@ public class IdleState : IAIState {
     //Should be triggered when we enter this state holds a reference to its enemy
     public void Enter(Enemy enemy)
     {
-        Debug.Log("In Idle State");
         thisEnemy = enemy;
         idleDuration = DEFAULT_IDLE_DURATION;
     }

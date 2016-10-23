@@ -22,10 +22,11 @@ GameObject:
   - 212: {fileID: 212000013961452974}
   - 50: {fileID: 50000012220974284}
   - 114: {fileID: 114000014283065520}
+  - 114: {fileID: 114000013751466122}
   - 61: {fileID: 61000010967409222}
   m_Layer: 0
   m_Name: FireBlast
-  m_TagString: Projectile
+  m_TagString: EnemyDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,6 +75,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.72, y: 1.39}
+--- !u!114 &114000013751466122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013545507736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1248aa597160cfc429818f2ce400e5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack:
+    BaseDamage: 8
+    Cooldown: 0
+    Range: 0
+    Force: 0
+    DamageType: 0
 --- !u!114 &114000014283065520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,7 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 5
+  damageSources:
+  - Player
 --- !u!212 &212000013961452974
 SpriteRenderer:
   m_ObjectHideFlags: 1

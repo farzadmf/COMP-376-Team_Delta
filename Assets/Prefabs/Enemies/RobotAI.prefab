@@ -35,9 +35,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013505678828}
   - 68: {fileID: 68000013305368912}
+  - 114: {fileID: 114000011733139880}
   m_Layer: 9
-  m_Name: MeleeCollider
-  m_TagString: Melee
+  m_Name: BasicAtack
+  m_TagString: EnemyDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +56,7 @@ GameObject:
   - 114: {fileID: 114000010407759100}
   - 50: {fileID: 50000011122126362}
   - 61: {fileID: 61000010346803734}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -88,7 +89,7 @@ GameObject:
   - 114: {fileID: 114000012911218676}
   - 61: {fileID: 61000013105522716}
   - 114: {fileID: 114000011184448446}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,8 +103,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010416845878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.6, y: -1.2, z: 0}
-  m_LocalScale: {x: 0.37207967, y: 0.37207964, z: 0.37207964}
+  m_LocalPosition: {x: 2.46, y: 0, z: 0}
+  m_LocalScale: {x: 0.5098748, y: 0.5098746, z: 0.5098746}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012910859340}
@@ -261,8 +262,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9090226ff4728db418ade1d146266a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
-  movementSpeed: 5
+  characterStats:
+    TotalHealth: 500
+    Health: 500
+    TotalStamina: 20
+    Stamina: 20
+    Strength: 5
+    Defense: 0
+    CritChance: 0
+    CritMultiplier: 0
+    MaxForceResistence: 10
+    MovementSpeed: 7
   damageSources:
   - Sword
   - Fireball
@@ -286,6 +296,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followThisObject: {fileID: 1000012672465098}
+--- !u!114 &114000011733139880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010961658612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1248aa597160cfc429818f2ce400e5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack:
+    BaseDamage: 10
+    Cooldown: 0
+    Range: 0
+    Force: 0
+    DamageType: 0
 --- !u!114 &114000012911218676
 MonoBehaviour:
   m_ObjectHideFlags: 1
