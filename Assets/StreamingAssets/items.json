@@ -1,0 +1,33 @@
+[
+  {
+    "id": 0,
+    "title": "Steel Gloves",
+    "value": 6,
+    "stats": {
+      "power": 1,
+      "defense": 4,
+      "vitality": 2
+    },
+    "type": "Consumable",
+    "description": "Gloves made of steel. Yeah!",
+    "stackable": true,
+    "rarity": 2,
+    "iconIndex": "31"
+  },
+  {
+    "id": 1,
+    "title": "The Great Stick",
+    "value": 543,
+    "type": "Weapon",
+    "stats": {
+      "power": 56,
+      "defense": 2,
+      "vitality": 54
+    },
+    "description": "It's a stick that's pretty great!",
+    "stackable": false,
+    "rarity": 6,
+    "iconIndex": "73"
+  }
+  
+]
