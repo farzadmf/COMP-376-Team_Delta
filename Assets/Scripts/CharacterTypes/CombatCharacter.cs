@@ -33,12 +33,20 @@ public abstract class CombatCharacter : Character {
 	void Update () {
     
     }
-   
 
-    public void ChangeMeleeCollider()
+
+    public void EnableMeleeCollider()
     {
-        if(meleeCollider)
-        meleeCollider.enabled = !meleeCollider.enabled;
+        if (meleeCollider)
+            meleeCollider.enabled = !meleeCollider.enabled;
+        meleeCollider.enabled = true;
+    }
+
+
+    public void DisableMeleeCollider()
+    {
+        if (meleeCollider)
+            meleeCollider.enabled = false;
     }
 
     //Initializes a new projectile prefab into the world 

@@ -26,18 +26,22 @@ public class Enemy : CombatCharacter {
 	// Update is called once per frame
 	void Update ()
     {
-		if (!IsDead ()) {
-            
-			//Look at it's taget if he has one
-			LookAtTarget ();
+        if (!IsDead())
+        {
 
-			//If he is not taking damage then he can execute his state. This makes it so that he stands still after taking damage
-			if (!IsTakingDamage) {
-				//Executes the current Ai state
-				currentAIState.Execute ();
-			}
-            
-		}
+            //Look at it's taget if he has one
+            LookAtTarget();
+
+            //If he is not taking damage then he can execute his state. This makes it so that he stands still after taking damage
+            if (!IsTakingDamage)
+            {
+                //Executes the current Ai state
+                currentAIState.Execute();
+            }
+
+        }
+        else
+            Die();
         
 	}
     //Changes the current Ai state

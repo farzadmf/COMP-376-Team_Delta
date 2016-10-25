@@ -285,7 +285,7 @@ MonoBehaviour:
     BaseDamage: 30
     Cooldown: 0
     Range: 0
-    Force: 300
+    Force: 200
     DamageType: 0
 --- !u!114 &114000012476322998
 MonoBehaviour:

@@ -173,7 +173,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012672465098}
   m_UseAutoMass: 0
-  m_Mass: 29.365583
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!61 &61000010346803734
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -263,8 +263,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats:
-    TotalHealth: 500
-    Health: 500
+    TotalHealth: 400
+    Health: 400
     TotalStamina: 20
     Stamina: 20
     Strength: 5
@@ -282,7 +282,7 @@ MonoBehaviour:
     type: 2}
   projectilePosition: {fileID: 4000013743953590}
   meleeCollider: {fileID: 68000013305368912}
-  meleeRange: 1
+  meleeRange: 2
   projectileRange: 17
 --- !u!114 &114000011184448446
 MonoBehaviour:
@@ -311,7 +311,7 @@ MonoBehaviour:
     BaseDamage: 10
     Cooldown: 0
     Range: 0
-    Force: 0
+    Force: 100
     DamageType: 0
 --- !u!114 &114000012911218676
 MonoBehaviour:

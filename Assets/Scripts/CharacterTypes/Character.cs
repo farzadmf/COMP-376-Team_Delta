@@ -61,20 +61,50 @@ public abstract class Character : MonoBehaviour {
         return characterStats.Health <= 0;
     }
 
-    private void Die()
+    protected void Die()
     {
         if (ThisAnimator != null)
         {
             ThisAnimator.SetTrigger("death");
 
-            DeleteChildren();
+            //Destroy After animation length
+            AnimatorClipInfo[] clipInfo = ThisAnimator.GetCurrentAnimatorClipInfo(0);
+
+            int index = -1;
+
+            for (int i =0; i < clipInfo.Length;i++)
+            {
+               
+                if (clipInfo[i].clip.name == "Death")
+                {
+                    index = i;
+                }
+
+            }
+
+            if(index != -1)
+            {
+                DeleteCharacter(clipInfo[index].clip.length);
+            }
+
         }
+
         else
         {
             //If has no death animation then just destroy the object
-            Destroy(gameObject);
+            DeleteCharacter(0.0f);
         }
 
+    }
+
+
+    private void DeleteCharacter(float delay)
+    {
+        //If it's an enemy then you want to destroy the parent
+        if (gameObject.tag == "Enemy")
+            Destroy(gameObject.transform.parent.gameObject, delay);
+        else
+            Destroy(gameObject, delay);
     }
 
     private void DeleteChildren()
@@ -161,7 +191,7 @@ public abstract class Character : MonoBehaviour {
 
                 //Check Force push values of attack and compare them to our stats
                 //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
-                //AddForce(attack, other);
+                AddForce(attack, other);
             }
         }
 
@@ -190,6 +220,11 @@ public abstract class Character : MonoBehaviour {
                 //Else A character did not do the damage, it was an object or the world so take base damage
                 else
                     TakeDamage(new Damage(attack.BaseDamage - DefenseToReducedDamage()));
+
+
+                //Check Force push values of attack and compare them to our stats
+                //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
+                AddTriggerForce(attack, other);
             }
         }
 
@@ -215,23 +250,46 @@ public abstract class Character : MonoBehaviour {
  
     }
 
+    //Adds force but for triggers
     //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
-    private void AddForce(Attack attack, Collision2D other)
+    private void AddTriggerForce(Attack attack, Collider2D other)
     {
-        
+
         if (attack.Force > characterStats.MaxForceResistence)
         {
-            //Get direction hit was received
-            Vector2 direction = other.contacts[0].point - (new Vector2(transform.position.x,transform.position.y));
+
+            Vector2 direction = -(other.gameObject.transform.position - transform.position);
 
             direction = direction.normalized;
 
+
             if (ThisRigidBody)
             {
-                Debug.Log(direction);
-                ThisRigidBody.AddForce(new Vector2 (direction.x * (attack.Force - characterStats.MaxForceResistence),0.0f));
+                ThisRigidBody.velocity = new Vector2(0.0f, 0.0f);
+                ThisRigidBody.AddForce(new Vector2(direction.x, 0.0f) * (attack.Force - characterStats.MaxForceResistence));
             }
-            
+
+        }
+    }
+
+    //Adds force for collisions
+    //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
+    private void AddForce(Attack attack, Collision2D other)
+    {
+        if (attack.Force > characterStats.MaxForceResistence)
+        {
+
+            Vector2 direction = -(other.gameObject.transform.position - transform.position);
+
+            direction = direction.normalized;
+
+
+            if (ThisRigidBody)
+            {
+                ThisRigidBody.velocity = new Vector2(0.0f, 0.0f);
+                ThisRigidBody.AddForce(new Vector2(direction.x, 0.0f) * (attack.Force - characterStats.MaxForceResistence));
+            }
+
         }
     }
 
