@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
         {
             var newSlot = Instantiate(Slot);
             newSlot.transform.SetParent(SlotPanel.transform);
-            newSlot.name = $"EmptySlot{index + 1}";
+            newSlot.name = $"Slot{index + 1}";
             _slots.Add(newSlot);
         }
 
@@ -93,7 +93,7 @@ public class Inventory : MonoBehaviour
 
             // If amount is zero, remove the item
             _slotItems.Remove(item.Id);
-            _slots[itemObjectData.Slot].name = $"EmptySlot{itemObjectData.Slot + 1}";
+            _slots[itemObjectData.Slot].name = $"Slot{itemObjectData.Slot + 1}";
             Destroy(itemObject);
             return;
         }
