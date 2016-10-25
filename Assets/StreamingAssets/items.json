@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "title": "Steel Gloves",
+    "title": "Red Potion",
     "value": 6,
     "stats": {
       "power": 1,
@@ -9,7 +9,7 @@
       "vitality": 2
     },
     "type": "Consumable",
-    "description": "Gloves made of steel. Yeah!",
+    "description": "A potion that is red. Yeah!",
     "stackable": true,
     "rarity": 2,
     "iconIndex": "31"
