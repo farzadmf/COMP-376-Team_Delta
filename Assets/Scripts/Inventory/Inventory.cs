@@ -23,7 +23,6 @@ public class Inventory : MonoBehaviour
     private readonly List<GameObject     > _slots       = new List<GameObject>();
     private readonly List<GameObject     > _hotKeySlots = new List<GameObject>();
 
-
     // ReSharper disable once UnusedMember.Local
     private void Start()
     {

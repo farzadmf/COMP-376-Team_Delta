@@ -2,7 +2,8 @@
 using UnityEngine.EventSystems;
 
 // ReSharper disable once CheckNamespace
-public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
+    IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item Item;
     public int ItemAmount = 1;
@@ -13,12 +14,16 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private Vector2 _offset;
     private GameObject _parentCanvas;
     private CanvasGroup _canvasGroup;
+    private Tooltip _tooltip;
 
     // ReSharper disable once UnusedMember.Local
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _parentCanvas = GameObject.Find("Canvas");
+
+        // Get the tool-tip from the inventory object
+        _tooltip = Inventory.Instance.GetComponent<Tooltip>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -50,4 +55,14 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     }
 
     private void SetPosition(Vector2 position) => transform.position = position - _offset;
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _tooltip.Activate(Item);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _tooltip.Deactivate();
+    }
 }
