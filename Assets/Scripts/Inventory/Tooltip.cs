@@ -6,7 +6,6 @@ public class Tooltip : MonoBehaviour
 {
     private Item _item;
     private GameObject _tooltip;
-    private string _data;
 
     // ReSharper disable once UnusedMember.Local
     private void Start()
@@ -36,9 +35,9 @@ public class Tooltip : MonoBehaviour
 
     private void ConstructDataString()
     {
-        _data = $"<b><color=yellow><size=20>{_item.Title}</size></color></b>\n\n" +
-                $"<i><color=white>{_item.Description}</color></i>\n\n" +
-                $"<color=red>Power: {_item.Stats.Power}</color>";
-        _tooltip.GetComponentInChildren<Text>().text = _data;
+        var data = $"<b><color=yellow><size=20>{_item.Title}</size></color></b>\n\n" +
+                   $"<i><color=white>{_item.Description}</color></i>\n\n" +
+                   $"<color=red>Power: {_item.Stats.Power}</color>";
+        _tooltip.GetComponentInChildren<Text>().text = data;
     }
 }
