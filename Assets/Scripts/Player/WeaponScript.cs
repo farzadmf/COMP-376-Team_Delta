@@ -25,7 +25,10 @@ public class WeaponScript : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D c) {
 		if (animating == true) {
-			if (c.gameObject.tag == "Enemy")
+			if (c.gameObject.tag == "Enemy") {
+				ParticleSystem par = transform.parent.FindChild ("Lifesteal").GetComponent<ParticleSystem> ();
+				par.Play ();
+			}
 			if (c.gameObject.tag == "TChest") {
 				c.gameObject.GetComponent<TChestScript> ().activatedChest ();
 			}
