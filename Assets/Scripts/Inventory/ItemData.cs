@@ -20,7 +20,7 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
-        _parentCanvas = GameObject.Find("Canvas");
+        _parentCanvas = GameObject.Find("InventoryCanvas");
 
         // Get the tool-tip from the inventory object
         _tooltip = Inventory.Instance.GetComponent<Tooltip>();
