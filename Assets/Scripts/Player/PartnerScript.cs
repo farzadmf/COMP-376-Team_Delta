@@ -9,21 +9,15 @@ public class PartnerScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c) {
 		if (c.tag == "Tip") {
-			showMessage(c.gameObject.GetComponent<TipScript>().tipNumber,c.gameObject.GetComponent<TipScript>().activatedOnce);
+			showMessage(c.gameObject.GetComponent<TipScript>().tipNumber,c.gameObject.GetComponent<TipScript>().activatedOnce
+				,c.gameObject.GetComponent<TipScript>().message,c.gameObject.GetComponent<TipScript>().timeOn);
 			c.GetComponent<TipScript> ().activatedOnce = true;
 		}
 	}
 
-	void showMessage(int i, bool activatedOnce) {
-		string message = "";
+	void showMessage(int i, bool activatedOnce, string message, int howLong) {
 		if (activatedOnce == false) {
-			if (i == 1) {
-				message = "Loler";
-				activateText (message, 4);
-			} else if (i == 2) {
-				message = "Ho Ho Ho, merry Christmas";
-				activateText (message, 8);
-			}
+			activateText (message, howLong);
 		}
 	}
 	void activateText(string message, int howLong) {
