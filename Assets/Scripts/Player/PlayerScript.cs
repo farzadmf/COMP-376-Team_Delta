@@ -10,14 +10,24 @@ public class PlayerScript : MonoBehaviour {
 	private float radius = 0.2f;
 	private bool canMagic;
 	public int level;
+	private Animator anim;
 	void Start() {
 		canMagic = true;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
+		anim = GetComponent<Animator>();
 	}
 	public bool getGrounded() {
 		return grounded;
 	}
-
+	void playerAnimator() {
+		anim.SetBool("Grounded", grounded);
+		Rigidbody2D rig = GetComponent<Rigidbody2D> ();
+		Debug.Log ("grounded: " + grounded + "velocity x : " + rig.velocity.x);
+		if (rig.velocity.x == 0)
+			anim.SetBool("Running", false);
+		else
+			anim.SetBool("Running", true);
+	}
 	void Update() {
 		updateGroundedStatus ();
 		if (Input.GetMouseButtonDown (1)) {
@@ -26,6 +36,7 @@ public class PlayerScript : MonoBehaviour {
 			else if (level == 3)
 				fireBurst ();
 		}
+		playerAnimator ();
 	}
 
 	void fireBurst() {

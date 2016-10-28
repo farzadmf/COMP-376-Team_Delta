@@ -5,24 +5,22 @@ public class PlayerControllerScript : MonoBehaviour {
 	public float Speed = 0f; // 350
 	private float movex = 0f; // 4
 	private float movey = 0f;
-	public bool touchingGround;
 	public float jumpHeight;
 	private Rigidbody2D rigidBody;
 	private bool canDoubleJump;
 	public float hp;
-    private Animator anim;
+    
 	// Use this for initialization
 	void Start () {
 		rigidBody = GetComponent<Rigidbody2D> ();
-        anim = GetComponent<Animator>();
+        
 	}
 	void Update() {
 		move ();
 		jump ();
 		attack ();
 		fixTextOrientation ();
-        anim.SetBool("Grounded", touchingGround);
-        anim.SetFloat("Speed", Speed);
+
 
     }
 
