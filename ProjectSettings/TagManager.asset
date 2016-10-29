@@ -17,6 +17,8 @@ TagManager:
   - EnemyDamage
   - UIPopUp
   - Tip
+  - Cannon
+  - Bat
   layers:
   - Default
   - TransparentFX

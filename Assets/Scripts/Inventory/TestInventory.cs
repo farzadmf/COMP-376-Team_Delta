@@ -16,7 +16,7 @@ public class TestInventory : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.B))
             Inventory.Instance.AddItem(1);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.I))
             InventoryPanel.SetActive(!InventoryPanel.activeSelf);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

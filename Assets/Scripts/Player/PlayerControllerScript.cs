@@ -60,17 +60,19 @@ public class PlayerControllerScript : Character
 		//movey = Input.GetAxis ("Vertical"); we'll use this later for ladders
 		rigidBody.velocity = new Vector2 (movex * Speed,rigidBody.velocity.y);
 
-		if (movex > 0)
-			transform.eulerAngles = new Vector3 (transform.eulerAngles.x,0,transform.eulerAngles.z);
-		else if (movex < 0)
-			transform.eulerAngles = new Vector3 (transform.eulerAngles.x,180,transform.eulerAngles.z);
+		float x = transform.localScale.x;
+		if (movex > 0 && x < 0)
+			transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		else if (movex < 0 && x > 0)
+			transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             
 	}
 
 	void fixTextOrientation() {
 		GameObject text = transform.FindChild ("Partner").FindChild("Text").gameObject;
 		Quaternion rot = text.transform.rotation;
-		if (transform.rotation.y == 0) {
+
+		if (transform.localScale.x > 0) {
 			rot.eulerAngles = new Vector3 (0, 0, 0);
 
 		} else {

@@ -42,8 +42,29 @@ public class SunScript : MonoBehaviour {
 				sun.intensity = -currentTime/(dayLength/4f) + 2;
 			}
 		}
+
+		updateSunPosition ();
+
+	}
+	void updateSunPosition() {
+		
 		float currentTimeF = currentTime;
 		float dayLengthF = dayLength;
+		float yPos = 0;
+		float xPos = -9f;
+		if (currentTime < nightStart) { // day, sun should go up then down halfway through
+			if (currentTime < nightStart / 2) { // sun goes up
+				yPos = currentTimeF / nightStart*40 - 10;
+				xPos = currentTimeF / nightStart * 20 - 9;
+			} else { // sun goes down
+				yPos = -currentTimeF / nightStart * 40 + 30 ;
+				xPos = currentTimeF / nightStart * 20 - 9;
+			}
+		} else { // reset sun pos to right before it rises
+			yPos = -12f;
+		}
+		earth.transform.localPosition = new Vector3 (xPos, yPos, earth.transform.localPosition.z);
+
 		earth.transform.eulerAngles = new Vector3 (0,0,(-(currentTimeF / dayLengthF)*360) + 90);
 	}
 	IEnumerator TimeOfDay() {

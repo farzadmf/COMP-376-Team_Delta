@@ -53,7 +53,8 @@ public abstract class Character : MonoBehaviour {
         isFacingRight = !isFacingRight;
 
         //Rotate 180 to go towards other direction
-        transform.Rotate(new Vector3(transform.rotation.x, 180, transform.rotation.z));
+       // transform.Rotate(new Vector3(transform.rotation.x, 180, transform.rotation.z));
+		transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     public bool IsDead()
@@ -170,7 +171,7 @@ public abstract class Character : MonoBehaviour {
     //For Collisions, Only these kinds of collisions will trigger a Force push if an attack has it
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
-        
+
         if (!IsDead())
         {
             //If character can take damage from this source
@@ -200,7 +201,6 @@ public abstract class Character : MonoBehaviour {
     //For Trigger Collisions
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-       
         if (!IsDead())
         {
             //If character can take damage from this source

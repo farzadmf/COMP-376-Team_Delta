@@ -6,6 +6,8 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 public class ItemDatabase : MonoBehaviour
 {
+    public static ItemDatabase Instance { get; private set; }
+
     private readonly Dictionary<int, Item> _database = new Dictionary<int, Item>();
 
     private readonly Dictionary<Item.ItemType, List<int>> _itemsByType =
@@ -16,6 +18,8 @@ public class ItemDatabase : MonoBehaviour
     // ReSharper disable once UnusedMember.Local
     private void Awake()
     {
+        Instance = this;
+
         var filePath = $"{Application.dataPath}/StreamingAssets/items.json";
         var items = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(filePath));
 
