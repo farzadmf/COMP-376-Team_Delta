@@ -171,7 +171,7 @@ public abstract class Character : MonoBehaviour {
     //For Collisions, Only these kinds of collisions will trigger a Force push if an attack has it
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
-        
+
         if (!IsDead())
         {
             //If character can take damage from this source
@@ -201,7 +201,6 @@ public abstract class Character : MonoBehaviour {
     //For Trigger Collisions
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-       
         if (!IsDead())
         {
             //If character can take damage from this source
