@@ -53,7 +53,8 @@ public abstract class Character : MonoBehaviour {
         isFacingRight = !isFacingRight;
 
         //Rotate 180 to go towards other direction
-        transform.Rotate(new Vector3(transform.rotation.x, 180, transform.rotation.z));
+       // transform.Rotate(new Vector3(transform.rotation.x, 180, transform.rotation.z));
+		transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     public bool IsDead()
