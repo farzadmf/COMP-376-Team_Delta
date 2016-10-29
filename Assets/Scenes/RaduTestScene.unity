@@ -1088,7 +1088,7 @@ Prefab:
         type: 2}
       propertyPath: target
       value: 
-      objectReference: {fileID: 133186893}
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012148793006, guid: 25efac2c3985f284592ff022dd4ea266, type: 2}
       propertyPath: m_LocalScale.x
       value: 1.554167
@@ -1104,30 +1104,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25efac2c3985f284592ff022dd4ea266, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &133186886 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000011926096910, guid: 160ff76841495f1429c935305ca57c83,
-    type: 2}
-  m_PrefabInternal: {fileID: 1762694778}
---- !u!4 &133186893 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4000011142831522, guid: 160ff76841495f1429c935305ca57c83,
-    type: 2}
-  m_PrefabInternal: {fileID: 1762694778}
---- !u!61 &133186894
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 133186886}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.13018155, y: 0.023143321}
-  serializedVersion: 2
-  m_Size: {x: 0.4896366, y: 0.9801377}
 --- !u!4 &133834162 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013808941770, guid: c8d399b2c556e2c4ca358f343947bea8,
@@ -2361,7 +2337,7 @@ Transform:
   m_Children:
   - {fileID: 80132355}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &307210222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4593,6 +4569,16 @@ Prefab:
         type: 2}
       propertyPath: timeOn
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: 0.22189593
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 7.878782
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49e009b4345404940871a1e64fc83934, type: 2}
@@ -9288,6 +9274,16 @@ Prefab:
       propertyPath: message
       value: ho ho ho
       objectReference: {fileID: 0}
+    - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: 1.1279736
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 8.285594
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49e009b4345404940871a1e64fc83934, type: 2}
   m_IsPrefabParent: 0
@@ -11337,6 +11333,11 @@ Prefab:
       propertyPath: damageSources.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013512082674, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: damageSources.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011142831522, guid: 160ff76841495f1429c935305ca57c83, type: 2}
       propertyPath: m_LocalPosition.x
       value: 95.26
@@ -11387,6 +11388,29 @@ Prefab:
         type: 2}
       propertyPath: damageSources.Array.data[2]
       value: Bat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013882122102, guid: 160ff76841495f1429c935305ca57c83, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 94.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013882122102, guid: 160ff76841495f1429c935305ca57c83, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -8.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013512082674, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: damageSources.Array.data[1]
+      value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013512082674, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: damageSources.Array.data[2]
+      value: EnemyDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013512082674, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: damageSources.Array.data[3]
+      value: EnemyDamage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 160ff76841495f1429c935305ca57c83, type: 2}
@@ -11904,6 +11928,21 @@ Prefab:
         type: 2}
       propertyPath: message
       value: wtf is up there
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: 1.0692251
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 7.537548
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49e009b4345404940871a1e64fc83934, type: 2}

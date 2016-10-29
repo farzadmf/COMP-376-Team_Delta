@@ -529,6 +529,7 @@ MonoBehaviour:
     MovementSpeed: 0
   damageSources:
   - EnemyDamage
+  - Bullet
   Speed: 4
   jumpHeight: 350
   hp: 0
