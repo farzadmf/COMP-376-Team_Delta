@@ -13,5 +13,13 @@ public class FollowScript : MonoBehaviour {
 	void Update () {
         transform.position = followThisObject.transform.position;
         transform.rotation = followThisObject.transform.rotation;
+
+        //Switch sprite sides if scale changes to neg or pos
+        if (followThisObject.transform.localScale.x >= 0)
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        else
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+
     }
 }

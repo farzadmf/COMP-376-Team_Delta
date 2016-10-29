@@ -27,8 +27,8 @@ public abstract class Character : MonoBehaviour {
     // Use this for initialization
     public virtual void Start () {
 
-        //By default a character will start by facing right
-        isFacingRight = true;
+        //Get current facing direction
+        SetFacingDirection();
         ThisAnimator = GetComponent<Animator>();
         ThisCollider = GetComponent<Collider2D>();
         ThisRigidBody = GetComponent<Rigidbody2D>();
@@ -55,6 +55,22 @@ public abstract class Character : MonoBehaviour {
         //Rotate 180 to go towards other direction
        // transform.Rotate(new Vector3(transform.rotation.x, 180, transform.rotation.z));
 		transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+
+    public void SetFacingDirection()
+    {
+        //Check which side the sprite is looking at
+        if (transform.localScale.x >= 0)
+            isFacingRight = true;
+        else
+            isFacingRight = false;
+
+        if (transform.parent)
+        {
+            if (transform.parent.gameObject.transform.localScale.x < 0)
+                isFacingRight = false;
+        }
+
     }
 
     public bool IsDead()
@@ -179,11 +195,14 @@ public abstract class Character : MonoBehaviour {
             {
                 Attack attack = other.gameObject.GetComponent<DamageDealer>().Attack;
 
-                CharacterStats enemyStats = other.gameObject.transform.parent.gameObject.GetComponent<Character>().characterStats;
-
-                if (enemyStats != null)
+                //If the damage source was a Character then calculate his stats else do Base damage
+                if (other.gameObject.transform.parent && other.gameObject.transform.parent.gameObject.GetComponent<Character>())
                 {
+
+                    CharacterStats enemyStats = other.gameObject.transform.parent.gameObject.GetComponent<Character>().characterStats;
+
                     TakeDamage(CalculateDamage(attack, enemyStats));
+
                 }
                 //Else A character did not do the damage, it was an object or the world so take base damage
                 else
