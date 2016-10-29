@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 5
   handle: {fileID: 1000010171504938}
+  onGround: 0
 --- !u!212 &212000011760360160
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -153,7 +154,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: edfd3398339d77242abc0a34148f2a46, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}

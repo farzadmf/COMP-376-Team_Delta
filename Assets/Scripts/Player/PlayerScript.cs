@@ -22,7 +22,6 @@ public class PlayerScript : MonoBehaviour {
 	void playerAnimator() {
 		anim.SetBool("Grounded", grounded);
 		Rigidbody2D rig = GetComponent<Rigidbody2D> ();
-		Debug.Log ("grounded: " + grounded + "velocity x : " + rig.velocity.x);
 		if (rig.velocity.x == 0)
 			anim.SetBool("Running", false);
 		else

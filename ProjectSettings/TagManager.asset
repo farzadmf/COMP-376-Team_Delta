@@ -16,6 +16,7 @@ TagManager:
   - TChest
   - EnemyDamage
   - UIPopUp
+  - Tip
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - EnemyUtilities
   - PlayerBody
   - EnemyBody
-  - 
+  - Tip
   - 
   - 
   - 

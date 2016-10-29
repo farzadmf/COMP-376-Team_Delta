@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013645708088}
   - 114: {fileID: 114000010112409072}
   - 61: {fileID: 61000010484149370}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Tip
   m_TagString: Tip
   m_Icon: {fileID: -304785387049774780, guid: 0000000000000000d000000000000000, type: 0}

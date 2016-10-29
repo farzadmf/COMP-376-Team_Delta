@@ -57,28 +57,6 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!114 &114000011160276370
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f1145771900a344b1ff475570c612d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114000012375565134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef28be838ef78a7478c6a3c4e7df0018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000012570013956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,17 +66,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dd52a435d95dbf45bd29d5f2b1b8198, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114000013729547286
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1777f6c23316f764ea78ff744455e95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1101 &1101000010551392132
@@ -392,7 +359,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101000014257100128}
   m_StateMachineBehaviours:
-  - {fileID: 114000013729547286}
+  - {fileID: 0}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -417,7 +384,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101000012314015666}
   m_StateMachineBehaviours:
-  - {fileID: 114000012375565134}
+  - {fileID: 0}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -491,7 +458,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101000010996107618}
   m_StateMachineBehaviours:
-  - {fileID: 114000011160276370}
+  - {fileID: 0}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
