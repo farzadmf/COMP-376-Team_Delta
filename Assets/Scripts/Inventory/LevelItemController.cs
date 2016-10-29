@@ -11,7 +11,6 @@ public class LevelItemController : MonoBehaviour
     private void Start()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        print(Item);
         _spriteRenderer.sprite = Item.Sprite;
     }
 
