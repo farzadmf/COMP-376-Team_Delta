@@ -31,6 +31,7 @@ GameObject:
   - 58: {fileID: 5846286}
   - 82: {fileID: 8218000}
   - 114: {fileID: 114000014226227916}
+  - 58: {fileID: 58000010171801508}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -5486,6 +5487,20 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158322}
   m_IsPrefabParent: 1
+--- !u!58 &58000010171801508
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158322}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1
 --- !u!114 &114000014226227916
 MonoBehaviour:
   m_ObjectHideFlags: 1

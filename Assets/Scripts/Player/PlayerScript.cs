@@ -40,7 +40,7 @@ public class PlayerScript : MonoBehaviour {
 
 	void fireBurst() {
 		GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
-		if (transform.eulerAngles.y == 0)
+		if (transform.localScale.x > 0)
 			g.transform.position = new Vector3 (transform.position.x+7,transform.position.y-1.5f,transform.position.z);
 		else
 			g.transform.position = new Vector3 (transform.position.x-7,transform.position.y-1.5f,transform.position.z);
@@ -49,7 +49,7 @@ public class PlayerScript : MonoBehaviour {
 		GameObject g = (GameObject)Instantiate(Resources.Load ("Fireball"));
 		g.transform.position = new Vector3 (transform.position.x+2,transform.position.y,transform.position.z);
 		Vector3 v = new Vector3 (10, 2, 0);
-		if (transform.eulerAngles.y != 0) {
+		if (transform.localScale.x < 0) {
 			v = new Vector3 (-v.x, v.y, 0);
 			g.transform.position = new Vector3 (transform.position.x-2,transform.position.y,transform.position.z);
 		}

@@ -47,7 +47,7 @@ public class BatScript : Character {
 		
 		yield return new WaitForSeconds (1f);
 		
-		Destroy (this.gameObject);
+		Destroy (transform.parent.gameObject);
 	}
 
 	void activateParticleCollisionEvent(bool a) {
@@ -65,24 +65,19 @@ public class BatScript : Character {
 		//audio1.volume = 0f;
 		//circle.enabled = false;
 	}
-
+	public void trigEnter() {
+		inPursue = true;
+		batHung = false;
+		anim.Play (Animator.StringToHash ("Base Layer.BatFly"));
+	}
+	public void trigExit() {
+		inPursue = false;
+		returnToOriginalPosition();
+	}
 	public override void OnTriggerEnter2D(Collider2D c) {
 		base.OnTriggerEnter2D (c);
-
-		if (c.gameObject.tag == "Player") {
-			inPursue = true;
-			batHung = false;
-			anim.Play (Animator.StringToHash ("Base Layer.BatFly"));
-		} else if ((c.gameObject.tag == "Fire" || c.gameObject.tag == "Smasher") && boxCol.IsTouching (c)) {
-			killMonster();
-		}
 	}
 	void OnTriggerExit2D(Collider2D c) {
-		if (c.gameObject.tag == "Player") {
-			inPursue = false;
-
-			returnToOriginalPosition();
-		}
 
 	}
 	void returnToOriginalPosition() {
@@ -144,9 +139,11 @@ public class BatScript : Character {
 
 			returnToOriginalPosition();
 		}
+
 		if (anim.GetBool ("death") == true && deaad == false) {
 			deaad = true;
 			StartCoroutine (DestroyMonster ());
 		}
+
 	}
 }

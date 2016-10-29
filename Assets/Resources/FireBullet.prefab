@@ -132,6 +132,8 @@ GameObject:
   - 114: {fileID: 11424372}
   - 58: {fileID: 5821718}
   - 82: {fileID: 8211302}
+  - 58: {fileID: 58000014209635660}
+  - 114: {fileID: 114000011540896716}
   m_Layer: 0
   m_Name: FireBullet
   m_TagString: Bullet
@@ -12427,3 +12429,34 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175088}
   m_IsPrefabParent: 1
+--- !u!58 &58000014209635660
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175088}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1
+--- !u!114 &114000011540896716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1248aa597160cfc429818f2ce400e5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack:
+    BaseDamage: 500
+    Cooldown: 0
+    Range: 0
+    Force: 0
+    DamageType: 0
