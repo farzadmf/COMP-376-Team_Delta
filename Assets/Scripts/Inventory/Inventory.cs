@@ -6,6 +6,8 @@ using static Item.ItemType;
 // ReSharper disable once CheckNamespace
 public class Inventory : MonoBehaviour
 {
+    public GameObject InventoryPanel;
+
     public static Inventory Instance { get; private set; }
 
     public GameObject SlotPanel;
@@ -17,7 +19,6 @@ public class Inventory : MonoBehaviour
 
     private const int HOT_KEY_COUNT = 4;
 
-    private ItemDatabase _database;
     private readonly Dictionary<int, Item> _slotItems   = new Dictionary<int, Item>();
     private readonly Dictionary<int, Item> _hotKeyItems = new Dictionary<int, Item>();
     private readonly List<GameObject     > _slots       = new List<GameObject>();
@@ -27,10 +28,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        _database = GetComponent<ItemDatabase>();
+        InventoryPanel.SetActive(false);
+        HotKeyPanel.SetActive(true);
 
         // Initialize inventory slots
-        for (var index = 0; index < _database.TotalItems; index++)
+        for (var index = 0; index < ItemDatabase.Instance.TotalItems; index++)
         {
             var newSlot = Instantiate(Slot);
             newSlot.transform.SetParent(SlotPanel.transform);
@@ -48,6 +50,22 @@ public class Inventory : MonoBehaviour
             newSlot.GetComponent<HotKeySlot>().ItemDropped += OnItemDropped;
             _hotKeySlots.Add(newSlot);
         }
+    }
+
+    // ReSharper disable once UnusedMember.Local
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+            InventoryPanel.SetActive(!InventoryPanel.activeSelf);
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            print(GetHotkeyItem(0));
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            print(GetHotkeyItem(1));
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            print(GetHotkeyItem(2));
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            print(GetHotkeyItem(3));
     }
 
     private void OnItemDropped(int slotIndex, GameObject itemObject)
@@ -105,7 +123,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(int id)
     {
-        var item = _database.GetItem(id);
+        var item = ItemDatabase.Instance.GetItem(id);
         if (item == null)
             return;
 
