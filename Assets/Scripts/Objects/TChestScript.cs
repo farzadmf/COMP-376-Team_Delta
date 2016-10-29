@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 // ReSharper disable once InconsistentNaming
 public class TChestScript : MonoBehaviour
 {
     public GameObject loot;
+    public int ItemId;
+
     private bool droppedOnce;
-    // Use this for initialization
-    void Start()
+
+    // ReSharper disable once UnusedMember.Local
+    private void Start()
     {
         droppedOnce = false;
     }
@@ -29,7 +33,7 @@ public class TChestScript : MonoBehaviour
     private void DropLoot()
     {
         loot = Instantiate(loot);
-        loot.GetComponent<LevelItemController>().Item = ItemDatabase.Instance.GetItem(1);
+        loot.GetComponent<LevelItemController>().Item = ItemDatabase.Instance.GetItem(ItemId);
         loot.transform.position = transform.position;
         var body = loot.GetComponent<Rigidbody2D>();
         body.velocity = new Vector2(0, 6f);
