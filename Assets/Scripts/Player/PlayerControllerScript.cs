@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControllerScript : MonoBehaviour {
+public class PlayerControllerScript : Character
+{
 	public float Speed = 0f; // 350
 	private float movex = 0f; // 4
 	private float movey = 0f;
@@ -9,12 +10,15 @@ public class PlayerControllerScript : MonoBehaviour {
 	private Rigidbody2D rigidBody;
 	private bool canDoubleJump;
 	public float hp;
-    
-	// Use this for initialization
-	void Start () {
-		rigidBody = GetComponent<Rigidbody2D> ();
-        
-	}
+
+    // Use this for initialization
+    public override void Start () {
+
+        rigidBody = GetComponent<Rigidbody2D>();
+        //Call the Parent's class start method
+        base.Start();
+
+    }
 	void Update() {
 		move ();
 		jump ();

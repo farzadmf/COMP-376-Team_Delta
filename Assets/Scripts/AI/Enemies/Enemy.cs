@@ -102,8 +102,8 @@ public class Enemy : CombatCharacter {
             //If you have a target And the distance to it is less then melee range or this character then return true else return false
             if (Target != null)
             {
-
-                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+                //If melee range is 0 then it means that this char is not a melee char
+                return meleeRange == 0? false: Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
             }
             else
                 return false;
@@ -117,8 +117,8 @@ public class Enemy : CombatCharacter {
             //If you have a target And the distance to it is less then projectile range or this character then return true else return false
             if (Target != null)
             {
-
-                return Vector2.Distance(transform.position, Target.transform.position) <= projectileRange;
+                //If projectile range is 0 then it means that this char is not a ranged char
+                return projectileRange == 0 ? false: Vector2.Distance(transform.position, Target.transform.position) <= projectileRange;
             }
             else
                 return false;

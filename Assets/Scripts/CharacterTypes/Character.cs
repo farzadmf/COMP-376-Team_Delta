@@ -75,7 +75,7 @@ public abstract class Character : MonoBehaviour {
             for (int i =0; i < clipInfo.Length;i++)
             {
                
-                if (clipInfo[i].clip.name == "Death")
+                if (clipInfo[i].clip.name == "die")
                 {
                     index = i;
                 }

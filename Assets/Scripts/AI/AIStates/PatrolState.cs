@@ -23,11 +23,16 @@ public class PatrolState : IAIState {
         Patrol();
         thisEnemy.Move();
 
-        //If the enemy finds a target while patroling and he is in range for projectile attack then go into ranged state
-        if(thisEnemy.Target != null && thisEnemy.InProjectileRange)
+        //If the enemy finds a target while patroling
+        if(thisEnemy.Target != null)
         {
-            thisEnemy.ChangeState(new RangedState());
+            //if he is in range for projectile attack then go into ranged state
+            if (thisEnemy.InProjectileRange)
+                thisEnemy.ChangeState(new RangedState());
+            else if(thisEnemy.InMeleeRange)
+                thisEnemy.ChangeState(new MeleeState());
         }
+
     }
     //Should be triggered when we enter this state holds a reference to its enemy
     public void Enter(Enemy enemy)
