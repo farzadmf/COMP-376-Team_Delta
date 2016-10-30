@@ -193,25 +193,37 @@ public abstract class Character : MonoBehaviour {
             //If character can take damage from this source
             if (damageSources.Contains(other.gameObject.tag))
             {
-                Attack attack = other.gameObject.GetComponent<DamageDealer>().Attack;
+                    Attack attack = other.gameObject.GetComponent<DamageDealer>().Attack;
 
-                //If the damage source was a Character then calculate his stats else do Base damage
-                if (other.gameObject.transform.parent && other.gameObject.transform.parent.gameObject.GetComponent<Character>())
+              
+                    //If the damage source was a Character then calculate his stats else do Base damage
+                    if (other.gameObject.transform.parent && other.gameObject.transform.parent.gameObject.GetComponent<Character>())
+                    {
+
+                        CharacterStats enemyStats = other.gameObject.transform.parent.gameObject.GetComponent<Character>().characterStats;
+
+                        TakeDamage(CalculateDamage(attack, enemyStats),true);
+
+                    }
+                    //Else A character did not do the damage, it was an object or the world so take base damage
+                    else
+                        TakeDamage(new Damage(attack.BaseDamage - DefenseToReducedDamage()),true);
+
+
+                  //Check Force push values of attack and compare them to our stats
+                  //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
+                 AddForce(attack, other);
+                
+
+                //Check if this attack apllies damage overtime
+                if ((attack.DamageOvertime.IsDamageOvertime))
                 {
+                    attack.DamageOvertime.Duration += Time.time;
 
-                    CharacterStats enemyStats = other.gameObject.transform.parent.gameObject.GetComponent<Character>().characterStats;
-
-                    TakeDamage(CalculateDamage(attack, enemyStats));
-
+                    //Start coroutine that will damage this character at each interval until duration is over
+                    StartCoroutine(doDamageOverTime(attack));
                 }
-                //Else A character did not do the damage, it was an object or the world so take base damage
-                else
-                    TakeDamage(new Damage(attack.BaseDamage - DefenseToReducedDamage()));
 
-
-                //Check Force push values of attack and compare them to our stats
-                //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
-                AddForce(attack, other);
             }
         }
 
@@ -225,25 +237,37 @@ public abstract class Character : MonoBehaviour {
             //If character can take damage from this source
             if (damageSources.Contains(other.gameObject.tag))
             {
-                Attack attack = other.gameObject.GetComponent<DamageDealer>().Attack;
 
-                //If the damage source was a Character then calculate his stats else do Base damage
-                if (other.gameObject.transform.parent && other.gameObject.transform.parent.gameObject.GetComponent<Character>())
-                {
+                    Attack attack = other.gameObject.GetComponent<DamageDealer>().Attack;
+                  
+                        //If the damage source was a Character then calculate his stats else do Base damage
+                        if (other.gameObject.transform.parent && other.gameObject.transform.parent.gameObject.GetComponent<Character>())
+                        {
 
-                    CharacterStats enemyStats = other.gameObject.transform.parent.gameObject.GetComponent<Character>().characterStats;
+                            CharacterStats enemyStats = other.gameObject.transform.parent.gameObject.GetComponent<Character>().characterStats;
 
-                    TakeDamage(CalculateDamage(attack, enemyStats));
+                            TakeDamage(CalculateDamage(attack, enemyStats),true);
 
-                }
-                //Else A character did not do the damage, it was an object or the world so take base damage
-                else
-                    TakeDamage(new Damage(attack.BaseDamage - DefenseToReducedDamage()));
+                        }
+                        //Else A character did not do the damage, it was an object or the world so take base damage
+                        else
+                            TakeDamage(new Damage(attack.BaseDamage - DefenseToReducedDamage()),true);
 
 
-                //Check Force push values of attack and compare them to our stats
-                //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
-                AddTriggerForce(attack, other);
+                      //Check Force push values of attack and compare them to our stats
+                     //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
+                     AddTriggerForce(attack, other);
+                    
+                    //Check if this attack apllies damage overtime
+                     if ((attack.DamageOvertime.IsDamageOvertime))
+                     {
+                        //Do damage overtime
+                        attack.DamageOvertime.Duration += Time.time;
+
+                        //Start coroutine that will damage this character at each interval until duration is over
+                        StartCoroutine(doDamageOverTime(attack));
+                    }
+
             }
         }
 
@@ -252,21 +276,36 @@ public abstract class Character : MonoBehaviour {
 
 
     //Deals with removing health, activating damage animations, and checking if dead then trigger death
-    private void TakeDamage(Damage damage)
+    private void TakeDamage(Damage damage, bool triggerAnimation)
     {
         characterStats.decreaseHealth(damage.DamageValue);
 
         //Create a UI Damage Pop up
-        DamagePopUpController.CreateDamagePopUp(damage.DamageValue.ToString(), new Vector2(transform.position.x + ThisCollider.bounds.size.x/4.0f, transform.position.y + ThisCollider.bounds.size.y/2.0f), damage.IsCrit);
+        DamagePopUpController.CreateDamagePopUp(damage.DamageValue.ToString(), new Vector2(transform.position.x + ThisCollider.bounds.size.x/4.0f, transform.position.y + ThisCollider.bounds.size.y/2.0f), damage.IsCrit, damage.damageType);
 
-        if(ThisAnimator != null)
-            ThisAnimator.SetTrigger("damage");
-
+        if (triggerAnimation)
+        {
+            if (ThisAnimator != null)
+                ThisAnimator.SetTrigger("damage");
+        }
+      
         if (IsDead())
         {
             Die();
         }
  
+    }
+
+    //Coroutine to take damage from an attack over time damage dealer
+    private IEnumerator doDamageOverTime(Attack attack)
+    {
+
+        while (attack.DamageOvertime.Duration > Time.time)
+        {
+         yield return new WaitForSeconds(attack.DamageOvertime.Intervals);
+            TakeDamage(new Damage(attack.DamageOvertime.Damage,attack.DamageType),false);
+        }
+       
     }
 
     //Adds force but for triggers

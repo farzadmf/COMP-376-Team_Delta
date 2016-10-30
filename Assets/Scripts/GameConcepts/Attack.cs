@@ -21,4 +21,6 @@ public class Attack{
 
     //Used for if we want to add elemental types of damage or Armor piercing,Pure Attacks etc.
     public DamageType DamageType;
+
+    public DamageOverTime DamageOvertime;
 }
