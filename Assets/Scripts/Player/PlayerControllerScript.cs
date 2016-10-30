@@ -100,4 +100,21 @@ public class PlayerControllerScript : Character
 		string s = levelString + latestCheckpoint;
 		return s;
 	}
+	void smoothTerrain(Collision2D coll) {
+		for ( int i = 0; i < coll.contacts.Length; ++i) {
+			ContactPoint2D p = coll.contacts[i];
+
+			Vector3 pos = transform.position;
+			if (p.normal.x <= -0.9f && p.normal.x >= -1.0f && p.normal.y == 0f)
+				pos.x += 0.08f;
+			else if (p.normal.x <= 1.0f && p.normal.x >= 0.9f && p.normal.y == 0f)
+				pos.x -= 0.08f;
+			transform.position = pos;
+		}
+	}
+	void OnCollisionEnter2D(Collision2D coll) {
+		
+		if (coll.gameObject.tag == "Ground")
+			smoothTerrain (coll);
+	}
 }

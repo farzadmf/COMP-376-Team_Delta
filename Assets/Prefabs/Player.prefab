@@ -25,6 +25,7 @@ GameObject:
   - 60: {fileID: 60000012855295970}
   - 50: {fileID: 50000011563594018}
   - 95: {fileID: 95000012648333320}
+  - 61: {fileID: 61000013845784990}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -283,7 +284,7 @@ PolygonCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010750226958}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -391,6 +392,20 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.4599998, y: 1.84}
+--- !u!61 &61000013845784990
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010750226958}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.118, y: 0.022}
+  serializedVersion: 2
+  m_Size: {x: 0.42, y: 0.97}
 --- !u!95 &95000010507063604
 Animator:
   serializedVersion: 3
