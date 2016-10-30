@@ -9,7 +9,7 @@ public class BatVisionScript : MonoBehaviour {
 	}
 	void OnTriggerExit2D(Collider2D c) {
 		if (c.gameObject.tag == "Player")
-			transform.parent.GetChild(0).GetComponent<BatScript> ().trigEnter ();
+			transform.parent.GetChild(0).GetComponent<BatScript> ().trigExit ();
 	}
 	// Use this for initialization
 	void Start () {

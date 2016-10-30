@@ -36,7 +36,7 @@ public class BatScript : Character {
 		//specialWalkingEffect.enableEmission = false;
 		GetComponent<Rigidbody2D> ().gravityScale = 0;
 		GetComponent<BoxCollider2D> ().enabled = false;
-		anim.SetBool ("dead", dead);
+		anim.SetBool ("death", dead);
 		StartCoroutine (DestroyMonster());
 		
 	}
@@ -112,6 +112,7 @@ public class BatScript : Character {
 			Mathf.Abs (originalPosition.y - transform.position.y) < 0.05) {
 			if (!inPursue) {
 				batHung = true;
+				anim.SetBool("batInPursue",inPursue);
 				if (transform.position != originalPosition ||transform.rotation != originalRotation) {
 					transform.rotation = originalRotation;
 					transform.position = originalPosition;
