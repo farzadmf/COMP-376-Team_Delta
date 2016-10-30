@@ -22,7 +22,6 @@ GameObject:
   - 114: {fileID: 114000013512082674}
   - 114: {fileID: 114000012159574806}
   - 212: {fileID: 212000012416193902}
-  - 60: {fileID: 60000012855295970}
   - 50: {fileID: 50000011563594018}
   - 95: {fileID: 95000012648333320}
   - 61: {fileID: 61000013845784990}
@@ -278,50 +277,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &60000012855295970
-PolygonCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010750226958}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: 0.13499999, y: -0.45}
-      - {x: 0.16499999, y: -0.48999998}
-      - {x: 0.305, y: -0.48999998}
-      - {x: 0.315, y: -0.47}
-      - {x: 0.315, y: -0.42}
-      - {x: 0.265, y: -0.35999998}
-      - {x: 0.295, y: 0.02}
-      - {x: 0.255, y: 0.099999994}
-      - {x: 0.315, y: 0.19999999}
-      - {x: 0.315, y: 0.24}
-      - {x: 0.285, y: 0.35}
-      - {x: 0.225, y: 0.42}
-      - {x: 0.16499999, y: 0.48}
-      - {x: 0.074999996, y: 0.51}
-      - {x: 0.015, y: 0.51}
-      - {x: -0.005, y: 0.5}
-      - {x: 0.005, y: 0.47}
-      - {x: -0.065, y: 0.41}
-      - {x: -0.114999995, y: 0.28}
-      - {x: -0.125, y: 0.22}
-      - {x: -0.125, y: 0.17}
-      - {x: -0.074999996, y: 0.08}
-      - {x: -0.074999996, y: -0.07}
-      - {x: -0.125, y: -0.42}
-      - {x: -0.125, y: -0.44}
-      - {x: -0.055, y: -0.48999998}
-      - {x: 0.035, y: -0.48999998}
-      - {x: 0.074999996, y: -0.48}
-      - {x: 0.055, y: -0.39999998}
-      - {x: 0.114999995, y: -0.25}
 --- !u!60 &60000013695306204
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -557,7 +512,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010999564094}
-  serializedVersion: 4
+  serializedVersion: 2
   lengthInSec: 0.5
   startDelay:
     scalar: 0
@@ -595,13 +550,12 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
+  randomSeed: 2946986203
   looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
-  autoRandomSeed: 0
   scalingMode: 2
-  randomSeed: -1347981093
   InitialModule:
     serializedVersion: 2
     enabled: 1
