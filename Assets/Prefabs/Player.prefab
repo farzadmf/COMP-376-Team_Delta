@@ -530,9 +530,12 @@ MonoBehaviour:
   damageSources:
   - EnemyDamage
   - Bullet
+  - Bat
   Speed: 4
   jumpHeight: 350
   hp: 0
+  checkpoints: []
+  levelString: 
 --- !u!198 &198000012849884308
 ParticleSystem:
   m_ObjectHideFlags: 1

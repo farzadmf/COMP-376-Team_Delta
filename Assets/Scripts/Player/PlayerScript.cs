@@ -37,7 +37,6 @@ public class PlayerScript : MonoBehaviour {
 		}
 		playerAnimator ();
 	}
-
 	void fireBurst() {
 		GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
 		if (transform.localScale.x > 0)
@@ -70,4 +69,7 @@ public class PlayerScript : MonoBehaviour {
 			grounded = false;
 
 	}
+
+
+
 }

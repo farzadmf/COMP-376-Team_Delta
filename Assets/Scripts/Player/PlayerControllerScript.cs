@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class PlayerControllerScript : Character
 {
 	public float Speed = 0f; // 350
@@ -10,7 +10,8 @@ public class PlayerControllerScript : Character
 	private Rigidbody2D rigidBody;
 	private bool canDoubleJump;
 	public float hp;
-
+	public CheckpointScript[] checkpoints;
+	public string levelString;
     // Use this for initialization
     public override void Start () {
 
@@ -24,10 +25,16 @@ public class PlayerControllerScript : Character
 		jump ();
 		attack ();
 		fixTextOrientation ();
-
+		checkDeathAndRestart ();
 
     }
-
+	void checkDeathAndRestart() {
+		bool dead = false;
+		if (base.characterStats.Health <= 0)
+			dead = true;
+		if (dead)
+			SceneManager.LoadScene (getWholeLevelSceneString());
+	}
 	void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
 			
@@ -80,5 +87,17 @@ public class PlayerControllerScript : Character
 		}
 		text.transform.localRotation = rot;
         
+	}
+	string getWholeLevelSceneString() {
+		int latestCheckpoint = 0;
+		for (int i = 0; i < checkpoints.Length; ++i) {
+			int t = checkpoints[i].numberTag;
+			if (t > latestCheckpoint && checkpoints[i].activated == true) {
+				latestCheckpoint = t;
+			}
+
+		}
+		string s = levelString + latestCheckpoint;
+		return s;
 	}
 }
