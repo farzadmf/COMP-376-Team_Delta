@@ -5,7 +5,8 @@ public class TipScript : MonoBehaviour {
 	public int tipNumber;
 	public bool activatedOnce;
 	public int timeOn;
-	public string message;
+    [TextArea(7, 10)]
+    public string message;
 
 	// Use this for initialization
 	void Start () {
