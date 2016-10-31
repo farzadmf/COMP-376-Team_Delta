@@ -7,7 +7,9 @@ public class DamagePopUpController : MonoBehaviour {
     private static GameObject canvas;
     private static float minRandomValue = -.5f, maxRandomValue = .5f;
     private static int critFontsize = 30;
+    private static int effectsFontsize = 15;
     private static Color critColor = new Color(255, 0, 0, 255);
+    private static Color fireColor = new Color(255, 69, 0, 255);
 
     public static void Initialize()
     {
@@ -18,7 +20,7 @@ public class DamagePopUpController : MonoBehaviour {
 
     }
 
-    public static void CreateDamagePopUp(string text, Vector2 location, bool IsCrit)
+    public static void CreateDamagePopUp(string text, Vector2 location, bool IsCrit, DamageType damageType)
     {
       
         PopUpText instance = Instantiate(popUpText);
@@ -34,6 +36,12 @@ public class DamagePopUpController : MonoBehaviour {
         {
             instance.SetFontSize(critFontsize);
             instance.SetColor(critColor);
+        }
+
+        if (damageType == DamageType.Fire)
+        {
+            instance.SetFontSize(effectsFontsize);
+            instance.SetColor(fireColor);
         }
     }
 

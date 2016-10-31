@@ -6,6 +6,7 @@ public class Damage {
 
     public int DamageValue { get; set; }
     public bool IsCrit { get; set; }
+    public DamageType damageType { get; set; }
 
 
     //Constructor
@@ -27,6 +28,14 @@ public class Damage {
     {
         DamageValue = damage;
         IsCrit = isCrit;
+    }
+
+    //Constructor
+    public Damage(int damage, DamageType type)
+    {
+        DamageValue = damage;
+        IsCrit = false;
+        damageType = type;
     }
 
 }
