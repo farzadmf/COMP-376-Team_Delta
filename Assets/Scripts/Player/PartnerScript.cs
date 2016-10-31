@@ -5,14 +5,15 @@ public class PartnerScript : MonoBehaviour {
     [SerializeField]
 	private Text text;
     private Canvas bubble;
-    [SerializeField]
-    private bool once;
+
+    private Vector3 rot;
 
 	// Use this for initialization
 	void Start () {
         bubble = text.GetComponentInParent<Canvas>();
-
         bubble.enabled = false;
+
+        rot = text.transform.rotation.eulerAngles;
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {
@@ -71,11 +72,6 @@ public class PartnerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-            bubble.enabled = true;
-        if (once)
-        {
-            setPosition(0);
-            once = false;
-        }
+        
 	}
 }

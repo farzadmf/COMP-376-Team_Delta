@@ -76,7 +76,7 @@ public class PlayerControllerScript : Character
 	}
 
 	void fixTextOrientation() {
-		GameObject text = transform.FindChild ("Partner").FindChild("Text").gameObject;
+		GameObject text = transform.FindChild ("Partner").FindChild("Canvas").FindChild("Text").gameObject;
 		Quaternion rot = text.transform.rotation;
 
 		if (transform.localScale.x > 0) {
