@@ -21,9 +21,9 @@ GameObject:
   - 4: {fileID: 4000011815710688}
   - 212: {fileID: 212000012064521910}
   - 61: {fileID: 61000011149329510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: innerGround
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
