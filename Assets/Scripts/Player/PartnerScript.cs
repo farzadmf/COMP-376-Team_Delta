@@ -6,14 +6,10 @@ public class PartnerScript : MonoBehaviour {
 	private Text text;
     private Canvas bubble;
 
-    private Vector3 rot;
-
 	// Use this for initialization
 	void Start () {
         bubble = text.GetComponentInParent<Canvas>();
         bubble.enabled = false;
-
-        rot = text.transform.rotation.eulerAngles;
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {
