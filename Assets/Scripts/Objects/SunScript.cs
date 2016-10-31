@@ -11,18 +11,30 @@ public class SunScript : MonoBehaviour {
 	private Vector3 sunPosition;
 	public Light sun;
 	public GameObject earth;
+	public GameObject[] weatherEffects;
 	// Use this for initialization
 	void Start () {
-		dayLength = 1440;
+		dayLength = 1440*10;
 		dayStart = 0;
-		nightStart = 720;
+		nightStart = 720*10;
 		currentTime = 0;
 		StartCoroutine (TimeOfDay());
 		earth = gameObject.transform.parent.gameObject;
 	}
-	
+	void adjustWeatherBasedOnTimeOfDay () {
+		if (currentTime < nightStart) {
+			for (int i = 0; i < weatherEffects.Length; ++i) {
+				weatherEffects [i].SetActive (false);
+			}
+		} else {
+			for (int i = 0; i < weatherEffects.Length; ++i) {
+				weatherEffects [i].SetActive (true);
+			}
+		}
+	}
 	// Update is called once per frame
 	void Update () {
+		adjustWeatherBasedOnTimeOfDay ();
 		if (currentTime > 0 && currentTime < dayStart) {
 			isDay = false;
 			sun.intensity = 0;
