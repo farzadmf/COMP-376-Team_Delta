@@ -24,7 +24,16 @@ public class IdleState : IAIState {
         //If while Idling the enemy finds a target
         if(thisEnemy.Target != null)
         {
-            thisEnemy.ChangeState(new PatrolState());
+            if(!thisEnemy.cantMove)
+               thisEnemy.ChangeState(new PatrolState());
+            else
+            {
+                //if he is in range for projectile attack then go into ranged state
+                if (thisEnemy.InProjectileRange)
+                    thisEnemy.ChangeState(new RangedState());
+                else if (thisEnemy.InMeleeRange)
+                    thisEnemy.ChangeState(new MeleeState());
+            }
         }
     }
     //Should be triggered when we enter this state holds a reference to its enemy
@@ -50,12 +59,16 @@ public class IdleState : IAIState {
 
         thisEnemy.ThisAnimator.SetFloat("movementSpeed", 0);
 
-        idleTimer += Time.deltaTime;
-
-        if (idleTimer >= idleDuration)
+        if (!thisEnemy.cantMove)
         {
-            thisEnemy.ChangeState(new PatrolState());
+            idleTimer += Time.deltaTime;
+
+            if (idleTimer >= idleDuration)
+            {
+                thisEnemy.ChangeState(new PatrolState());
+            }
         }
+      
         
     }
 }

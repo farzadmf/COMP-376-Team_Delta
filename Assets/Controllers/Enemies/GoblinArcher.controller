@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Goblin
+  m_Name: GoblinArcher
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: movementSpeed
@@ -400,7 +400,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 085e4c53bc5621b47a2e4466b9f43188, type: 2}
+  m_Motion: {fileID: 7400000, guid: b80453bc78ca5384ab7356cb94630b77, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -474,7 +474,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a12fe323aaffd9e4fa4b626b965d6f75, type: 2}
+  m_Motion: {fileID: 7400000, guid: 45691cb6035a07b4d83d3c905ac1860a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -499,7 +499,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 703a4b358e34c0a4ea5595b0ba3c867e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 89dbb438562c016479cd5d2bbcbe27fe, type: 2}
   m_Tag: BasicAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -525,7 +525,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a3dee22ce9281b54e9b88972ae51823e, type: 2}
+  m_Motion: {fileID: 7400000, guid: b008beb5c5c348a478233e0a03fbcc06, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

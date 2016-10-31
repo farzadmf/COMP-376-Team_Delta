@@ -13,7 +13,10 @@ public class Enemy : CombatCharacter {
 
     [SerializeField]
     private float projectileRange;
-    
+
+    [SerializeField]
+    public bool cantMove;
+
 
     // Use this for initialization
     public override void Start()

@@ -27,6 +27,7 @@ public class BasicProjectile : MonoBehaviour {
     void FixedUpdate()
     {
         thisRigidbody.velocity = direction * speed;
+ 
     }
 	
 	// Update is called once per frame

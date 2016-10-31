@@ -9,7 +9,7 @@ public class RangedState : IAIState {
     private float throwCooldown;
     private bool canThrow;
 
-    private const float RANGED_COOLDOWN = 4;
+    private const float RANGED_COOLDOWN = 3;
 
     //Runs while in the current State
     public void Execute()
@@ -24,11 +24,11 @@ public class RangedState : IAIState {
         }
 
         //If there is a target then move towards him
-        else if (thisEnemy.Target != null)
+        else if (thisEnemy.Target != null && !thisEnemy.cantMove)
         {
             thisEnemy.Move();
         }
-        else
+        else if(thisEnemy.cantMove && thisEnemy.Target == null)
         {
             thisEnemy.ChangeState(new IdleState());
         }
@@ -38,6 +38,7 @@ public class RangedState : IAIState {
     {
         thisEnemy = enemy;
         throwCooldown = RANGED_COOLDOWN;
+        nextThrowTimer = 0;
     }
     //Should be triggered when we exit this state
     public void Exit()
@@ -52,7 +53,7 @@ public class RangedState : IAIState {
 
     private void ThrowProjectile()
     {
-
+        Debug.Log(nextThrowTimer + "Current " + Time.time  );
         //Check the current time has exceeded the next throw timer
         if (nextThrowTimer < Time.time)
         {
