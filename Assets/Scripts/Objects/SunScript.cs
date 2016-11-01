@@ -24,11 +24,11 @@ public class SunScript : MonoBehaviour {
 	void adjustWeatherBasedOnTimeOfDay () {
 		if (currentTime < nightStart) {
 			for (int i = 0; i < weatherEffects.Length; ++i) {
-				weatherEffects [i].SetActive (false);
+				weatherEffects [i].transform.GetChild(0).GetComponent<ParticleSystem> ().Stop ();
 			}
 		} else {
 			for (int i = 0; i < weatherEffects.Length; ++i) {
-				weatherEffects [i].SetActive (true);
+				weatherEffects [i].transform.GetChild (0).GetComponent<ParticleSystem> ().Play ();
 			}
 		}
 	}
@@ -67,10 +67,10 @@ public class SunScript : MonoBehaviour {
 		if (currentTime < nightStart) { // day, sun should go up then down halfway through
 			if (currentTime < nightStart / 2) { // sun goes up
 				yPos = currentTimeF / nightStart*40 - 10;
-				xPos = currentTimeF / nightStart * 20 - 9;
+				xPos = currentTimeF / nightStart * 30 - 14;
 			} else { // sun goes down
 				yPos = -currentTimeF / nightStart * 40 + 30 ;
-				xPos = currentTimeF / nightStart * 20 - 9;
+				xPos = currentTimeF / nightStart * 30 - 14;
 			}
 		} else { // reset sun pos to right before it rises
 			yPos = -12f;
