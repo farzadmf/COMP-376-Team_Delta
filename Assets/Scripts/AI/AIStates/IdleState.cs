@@ -12,8 +12,9 @@ public class IdleState : IAIState {
     //Duraction of idle time
     private float idleDuration;
 
-    //Default idle duration to 5 seconds
-    private const float DEFAULT_IDLE_DURATION = 2;
+    //Default idle duration
+    private const float DEFAULT_IDLE_MIN = 1;
+    private const float DEFAULT_IDLE_MAX = 5;
 
 
     //Runs while in the current State
@@ -40,7 +41,7 @@ public class IdleState : IAIState {
     public void Enter(Enemy enemy)
     {
         thisEnemy = enemy;
-        idleDuration = DEFAULT_IDLE_DURATION;
+        idleDuration = Random.Range(DEFAULT_IDLE_MIN, DEFAULT_IDLE_MAX);
     }
     //Should be triggered when we exit this state
     public void Exit()

@@ -12,8 +12,9 @@ public class PatrolState : IAIState {
     //Max Duraction of idle time
     private float patrolDuration;
 
-    //Default idle duration to 5 seconds
-    private const float DEFAULT_PATROL_DURATION = 5;
+    //Default idle duration to
+    private const float DEFAULT_PATROL_MIN = 2;
+    private const float DEFAULT_PATROL_MAX = 6;
 
 
 
@@ -38,7 +39,7 @@ public class PatrolState : IAIState {
     public void Enter(Enemy enemy)
     {
           thisEnemy = enemy;
-        patrolDuration = DEFAULT_PATROL_DURATION;
+        patrolDuration = Random.Range(DEFAULT_PATROL_MIN, DEFAULT_PATROL_MAX);
 
     }
     //Should be triggered when we exit this state

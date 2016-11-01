@@ -119,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 1000012987628622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.64547443, y: -1.2960972, z: 0}
-  m_LocalScale: {x: 0.6375011, y: 0.2125006, z: 1}
+  m_LocalScale: {x: 1.3013983, y: 0.2125006, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000011764777814}
@@ -241,7 +241,7 @@ Animator:
   m_GameObject: {fileID: 1000012672465098}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e90ea1e7cf82c1743addf2e0ae863878, type: 2}
+  m_Controller: {fileID: 9100000, guid: ee3d7e52248b3124f8f828d063dcf266, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -261,8 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats:
-    TotalHealth: 400
-    Health: 400
+    TotalHealth: 150
+    Health: 150
     TotalStamina: 20
     Stamina: 20
     Strength: 5
@@ -276,7 +276,7 @@ MonoBehaviour:
   - Fireball
   - Bullet
   - FireBurst
-  projectilePrefab: {fileID: 1000013545507736, guid: a7e2b409a7f5e9b47bb8c09c06aac57a,
+  projectilePrefab: {fileID: 1000013545507736, guid: 947c1324aaf16484a8d119bc603f4df6,
     type: 2}
   projectilePosition: {fileID: 4000013743953590}
   meleeCollider: {fileID: 68000013305368912}

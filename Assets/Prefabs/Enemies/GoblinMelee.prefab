@@ -261,8 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats:
-    TotalHealth: 400
-    Health: 400
+    TotalHealth: 200
+    Health: 200
     TotalStamina: 20
     Stamina: 20
     Strength: 5
@@ -282,6 +282,7 @@ MonoBehaviour:
   meleeCollider: {fileID: 68000013305368912}
   meleeRange: 1
   projectileRange: 0
+  cantMove: 0
 --- !u!114 &114000011184448446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,6 +312,11 @@ MonoBehaviour:
     Range: 0
     Force: 100
     DamageType: 0
+    DamageOvertime:
+      IsDamageOvertime: 0
+      Damage: 0
+      Duration: 0
+      Intervals: 0
 --- !u!114 &114000012911218676
 MonoBehaviour:
   m_ObjectHideFlags: 1
