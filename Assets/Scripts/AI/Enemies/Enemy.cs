@@ -128,6 +128,27 @@ public class Enemy : CombatCharacter {
         }
     }
 
+    public bool InRange(float range)
+    {
+            //If you have a target And the distance to it is less then projectile range or this character then return true else return false
+            if (Target != null)
+            {
+                //If projectile range is 0 then it means that this char is not a ranged char
+                return range == 0 ? false : Vector2.Distance(transform.position, Target.transform.position) <= range;
+            }
+            else
+                return false;
+
+    }
+
+    public float targetDistance()
+    {
+
+        return Vector2.Distance(transform.position, Target.transform.position);
+
+
+    }
+
 
     private void LookAtTarget()
     {

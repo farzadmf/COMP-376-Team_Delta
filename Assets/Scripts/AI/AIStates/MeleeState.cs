@@ -62,7 +62,27 @@ public class MeleeState : IAIState {
         if (canAttack)
         {
             canAttack = false;
-            thisEnemy.ThisAnimator.SetTrigger("basicAttack");
+            if (thisEnemy.gameObject.tag != "Boss")
+                thisEnemy.ThisAnimator.SetTrigger("basicAttack");
+            else
+            {
+                attackCooldown = 2;
+                if (thisEnemy.targetDistance() <= 3)
+                {
+                    thisEnemy.ThisAnimator.SetTrigger("closeRangeAttack");
+                }
+                   
+                else if (thisEnemy.targetDistance() < 5 && thisEnemy.targetDistance() > 3)
+                {
+                    thisEnemy.ThisAnimator.SetTrigger("mediumRangeAttack");
+                }
+
+                else if(thisEnemy.targetDistance() < 10)
+                {
+                    thisEnemy.ThisAnimator.SetTrigger("longRangeAttack");
+                }
+                    
+            }
         }
 
     }

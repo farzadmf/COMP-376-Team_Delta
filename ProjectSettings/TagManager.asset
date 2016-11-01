@@ -19,6 +19,8 @@ TagManager:
   - Tip
   - Cannon
   - Bat
+  - 2
+  - Boss
   layers:
   - Default
   - TransparentFX

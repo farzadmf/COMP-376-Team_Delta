@@ -21,6 +21,9 @@ public class MeleeBehavior : StateMachineBehaviour {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("basicAttack");
+        animator.ResetTrigger("closeRangeAttack");
+        animator.ResetTrigger("mediumRangeAttack");
+        animator.ResetTrigger("longRangeAttack");
         animator.GetComponent<CombatCharacter>().IsAttacking = false;
 
         //Disable melee collider
