@@ -53,7 +53,7 @@ public class RangedState : IAIState {
 
     private void ThrowProjectile()
     {
-        Debug.Log(nextThrowTimer + "Current " + Time.time  );
+
         //Check the current time has exceeded the next throw timer
         if (nextThrowTimer < Time.time)
         {
