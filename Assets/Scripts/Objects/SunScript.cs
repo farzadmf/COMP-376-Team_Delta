@@ -17,7 +17,7 @@ public class SunScript : MonoBehaviour {
 		dayLength = 1440*10;
 		dayStart = 0;
 		nightStart = 720*10;
-		currentTime = 0;
+		currentTime = 2000;
 		StartCoroutine (TimeOfDay());
 		earth = gameObject.transform.parent.gameObject;
 	}

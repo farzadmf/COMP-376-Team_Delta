@@ -117,4 +117,11 @@ public class PlayerControllerScript : Character
 		if (coll.gameObject.tag == "Ground")
 			smoothTerrain (coll);
 	}
+
+    public override void OnTriggerEnter2D(Collider2D other)
+    {
+        base.OnTriggerEnter2D(other);
+        if (other.gameObject.CompareTag("temp"))
+            SceneManager.LoadScene (getWholeLevelSceneString());
+    }
 }

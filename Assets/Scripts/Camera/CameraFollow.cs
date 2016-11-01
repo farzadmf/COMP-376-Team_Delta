@@ -52,7 +52,7 @@ public class CameraFollow : MonoBehaviour {
                 }
                 break;
             default:
-                transform.position = new Vector3(posX, posY+2.5f, transform.position.z);
+                transform.position = new Vector3(posX + 2.5f, posY+1, transform.position.z);
 
                 if (bounds)
                 {

@@ -21,6 +21,8 @@ TagManager:
   - Bat
   - 2
   - Boss
+  - Fire
+  - temp
   layers:
   - Default
   - TransparentFX

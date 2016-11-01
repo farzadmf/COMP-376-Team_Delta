@@ -10,6 +10,7 @@ public class DamagePopUpController : MonoBehaviour {
     private static int effectsFontsize = 15;
     private static Color critColor = new Color(255, 0, 0, 255);
     private static Color fireColor = new Color(255, 69, 0, 255);
+    private static Color bleedColor = new Color(255, 0, 0, 255);
 
     public static void Initialize()
     {
@@ -42,6 +43,12 @@ public class DamagePopUpController : MonoBehaviour {
         {
             instance.SetFontSize(effectsFontsize);
             instance.SetColor(fireColor);
+        }
+
+        if (damageType == DamageType.Bleeding)
+        {
+            instance.SetFontSize(effectsFontsize);
+            instance.SetColor(bleedColor);
         }
     }
 

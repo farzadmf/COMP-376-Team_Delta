@@ -5438,7 +5438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attack:
-    BaseDamage: 500
+    BaseDamage: 100
     Cooldown: 0
     Range: 0
     Force: 0
