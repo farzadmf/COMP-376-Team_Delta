@@ -76,6 +76,7 @@ public class PlayerScript : MonoBehaviour {
 
 
 	void updateGroundedStatus() {
+		
 		if (Physics2D.OverlapCircle (groundCheckTransform.position, radius, groundCheckLayerMask)) {
 			grounded = true;
 		} else

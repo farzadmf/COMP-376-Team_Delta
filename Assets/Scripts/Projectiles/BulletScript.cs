@@ -14,7 +14,7 @@ public class BulletScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 	//	if (kindOfBullet == 1)
 			//explodeParticle ();
-		body.velocity = Vector2.zero;
+		//body.velocity = Vector2.zero;
 		StartCoroutine(destroy ());
 		//Debug.Log (mouse.transform.position.x);
 		float distanceX = Mathf.Abs (transform.position.x - mouse.transform.position.x);

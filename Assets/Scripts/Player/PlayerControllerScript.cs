@@ -15,13 +15,14 @@ public class PlayerControllerScript : Character
 	public BoxCollider2D rightCollider;
 	public BoxCollider2D leftCollider;
 	private bool canMoveX;
+	private LayerMask groundCheckLayerMask;
     // Use this for initialization
     public override void Start () {
 		canMoveX = true;
         rigidBody = GetComponent<Rigidbody2D>();
         //Call the Parent's class start method
         base.Start();
-
+		groundCheckLayerMask = LayerMask.GetMask ("Ground", "UndergroundGround");
     }
 	void Update() {
 		checkMoveX ();
@@ -127,8 +128,8 @@ public class PlayerControllerScript : Character
 		}
 	}
 	void checkMoveX() {
-		if (!rightCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && 
-			!leftCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {
+		if (!rightCollider.IsTouchingLayers(groundCheckLayerMask) && 
+			!leftCollider.IsTouchingLayers(groundCheckLayerMask)) {
 			canMoveX = true;
 		}
 	}

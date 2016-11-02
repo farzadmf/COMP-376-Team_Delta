@@ -60,7 +60,7 @@ public class CannonScript : MonoBehaviour {
 			bullet.GetComponent<Rigidbody2D> ().velocity = newVelocity;
 
 	
-			bullet.transform.rotation = Quaternion.Euler (Vector3.forward * rotationOfBullet);
+			//bullet.transform.rotation = Quaternion.Euler (Vector3.forward * rotationOfBullet);
 			float distanceX = Mathf.Abs (transform.position.x - mouse.transform.position.x);
 			float distanceY = Mathf.Abs (transform.position.y - mouse.transform.position.y);
 			/*

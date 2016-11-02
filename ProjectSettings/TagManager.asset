@@ -21,6 +21,7 @@ TagManager:
   - Bat
   - 2
   - Boss
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -39,8 +40,8 @@ TagManager:
   - PlayerBody
   - EnemyBody
   - Tip
-  - 
-  - 
+  - UndergroundBackground
+  - UndergroundGround
   - 
   - 
   - 
