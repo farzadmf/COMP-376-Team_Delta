@@ -12,15 +12,19 @@ public class PlayerControllerScript : Character
 	public float hp;
 	public CheckpointScript[] checkpoints;
 	public string levelString;
+	public BoxCollider2D rightCollider;
+	public BoxCollider2D leftCollider;
+	private bool canMoveX;
     // Use this for initialization
     public override void Start () {
-
+		canMoveX = true;
         rigidBody = GetComponent<Rigidbody2D>();
         //Call the Parent's class start method
         base.Start();
 
     }
 	void Update() {
+		checkMoveX ();
 		move ();
 		jump ();
 		attack ();
@@ -65,7 +69,8 @@ public class PlayerControllerScript : Character
 
 		movex = Input.GetAxis ("Horizontal");
 		//movey = Input.GetAxis ("Vertical"); we'll use this later for ladders
-		rigidBody.velocity = new Vector2 (movex * Speed,rigidBody.velocity.y);
+		if (canMoveX)
+			rigidBody.velocity = new Vector2 (movex * Speed,rigidBody.velocity.y);
 
 		float x = transform.localScale.x;
 		if (movex > 0 && x < 0)
@@ -112,6 +117,22 @@ public class PlayerControllerScript : Character
 			transform.position = pos;
 		}
 	}
+	public override void OnTriggerEnter2D(Collider2D c) {
+		if (!rightCollider.IsTouching (c) && !leftCollider.IsTouching (c))
+			base.OnTriggerEnter2D (c);
+		
+		if (c.gameObject.tag == "Ground" && (rightCollider.IsTouching (c) || (leftCollider.IsTouching (c)))) {
+			rigidBody.velocity = new Vector2 (0, rigidBody.velocity.y);
+			canMoveX = false;
+		}
+	}
+	void checkMoveX() {
+		if (!rightCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && 
+			!leftCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {
+			canMoveX = true;
+		}
+	}
+
 	void OnCollisionEnter2D(Collision2D coll) {
 		
 		if (coll.gameObject.tag == "Ground")
