@@ -4,6 +4,7 @@ using System.Collections;
 public class TipScript : MonoBehaviour {
 	public int tipNumber;
 	public bool activatedOnce;
+	public bool activateAtNight;
 	public int timeOn;
     [TextArea(7, 10)]
     public string message;

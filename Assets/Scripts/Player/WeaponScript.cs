@@ -20,9 +20,6 @@ public class WeaponScript : MonoBehaviour {
 		animating = false;
 		finishedAnimation = true;
 	}
-	void OnCollisionEnter2D() {
-		Debug.Log ("collision");
-	}
 	void OnTriggerEnter2D(Collider2D c) {
 		if (animating == true) {
 			if (c.gameObject.tag == "Enemy") {

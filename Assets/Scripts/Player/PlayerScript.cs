@@ -9,12 +9,23 @@ public class PlayerScript : MonoBehaviour {
 	private float dmg;
 	private float radius = 0.2f;
 	private bool canMagic;
+	private bool canLifeSteal;
 	public int level;
 	private Animator anim;
 	void Start() {
-		canMagic = true;
+		canMagic = false;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
 		anim = GetComponent<Animator>();
+	}
+	public void goDemonMode() {
+		canMagic = true;
+		canLifeSteal = true;
+		transform.FindChild ("Weapon").gameObject.SetActive (false);
+	}
+	public void goDayMode() {
+		canMagic = false;
+		canLifeSteal = false;
+		transform.FindChild ("Weapon").gameObject.SetActive (true);
 	}
 	public bool getGrounded() {
 		return grounded;
@@ -30,10 +41,12 @@ public class PlayerScript : MonoBehaviour {
 	void Update() {
 		updateGroundedStatus ();
 		if (Input.GetMouseButtonDown (1)) {
-			if (level == 1 || level == 2)
-				shootFireball ();
-			else if (level == 3)
-				fireBurst ();
+			if (canMagic == true) {
+				if (level == 1 || level == 2)
+					shootFireball ();
+				else if (level == 3)
+					fireBurst ();
+			}
 		}
 		playerAnimator ();
 	}
@@ -46,11 +59,11 @@ public class PlayerScript : MonoBehaviour {
 	}
 	void shootFireball() {
 		GameObject g = (GameObject)Instantiate(Resources.Load ("Fireball"));
-		g.transform.position = new Vector3 (transform.position.x+2,transform.position.y,transform.position.z);
+		g.transform.position = new Vector3 (transform.position.x+1,transform.position.y,transform.position.z);
 		Vector3 v = new Vector3 (10, 2, 0);
 		if (transform.localScale.x < 0) {
 			v = new Vector3 (-v.x, v.y, 0);
-			g.transform.position = new Vector3 (transform.position.x-2,transform.position.y,transform.position.z);
+			g.transform.position = new Vector3 (transform.position.x-1,transform.position.y,transform.position.z);
 		}
 
 		g.GetComponent<Rigidbody2D> ().velocity = v;

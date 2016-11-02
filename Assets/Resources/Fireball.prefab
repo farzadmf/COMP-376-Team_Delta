@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attack:
-    BaseDamage: 10
+    BaseDamage: 50
     Cooldown: 0
     Range: 0
     Force: 0
@@ -206,8 +206,8 @@ MonoBehaviour:
     DamageOvertime:
       IsDamageOvertime: 1
       Damage: 2
-      Duration: 3
-      Intervals: 1
+      Duration: 10
+      Intervals: 0.5
 --- !u!114 &114000013518027004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,7 +226,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010540907052}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -264,12 +264,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 3440302986
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 2
+  randomSeed: -854664310
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -1919,7 +1920,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013646955702}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 3
   startDelay:
     scalar: 0
@@ -1957,12 +1958,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 2040329194
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 2
+  randomSeed: 2040329194
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -3567,7 +3569,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010443744548}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -3605,12 +3607,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 3596545485
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 2
+  randomSeed: -698421811
   InitialModule:
     serializedVersion: 2
     enabled: 1

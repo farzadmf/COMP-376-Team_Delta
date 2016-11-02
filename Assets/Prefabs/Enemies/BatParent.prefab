@@ -28,7 +28,7 @@ GameObject:
   - 61: {fileID: 61000012554295474}
   - 114: {fileID: 114000010037778816}
   m_Layer: 15
-  m_Name: Bat
+  m_Name: Enemy
   m_TagString: Bat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,6 +257,11 @@ MonoBehaviour:
     Range: 0
     Force: 0
     DamageType: 0
+    DamageOvertime:
+      IsDamageOvertime: 0
+      Damage: 0
+      Duration: 0
+      Intervals: 0
 --- !u!114 &114000010674624630
 MonoBehaviour:
   m_ObjectHideFlags: 1

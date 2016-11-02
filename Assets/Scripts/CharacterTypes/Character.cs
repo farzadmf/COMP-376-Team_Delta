@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour {
 
     //Character Stats Class, Serializable so that can view in Editor, Can be inherited
     [SerializeField]
-    protected CharacterStats characterStats;
+    public CharacterStats characterStats;
 
     //If not faceing right then facing left
     protected bool isFacingRight;

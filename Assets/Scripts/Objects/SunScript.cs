@@ -4,19 +4,21 @@ using System.Collections;
 public class SunScript : MonoBehaviour {
 	private int dayLength;
 	private int dayStart;
-	private int nightStart;
-	private int currentTime;
+	public int nightStart;
+	public int currentTime;
 	public float cycleSpeed;
-	private bool isDay;
+	public bool isDay;
 	private Vector3 sunPosition;
 	public Light sun;
 	public GameObject earth;
 	public GameObject[] weatherEffects;
+	private float nightLuminosityThreshold;
 	// Use this for initialization
 	void Start () {
-		dayLength = 1440*10;
+		nightLuminosityThreshold = 0.2f;
+		dayLength = 1440;
 		dayStart = 0;
-		nightStart = 720*10;
+		nightStart = 720;
 		currentTime = 0;
 		StartCoroutine (TimeOfDay());
 		earth = gameObject.transform.parent.gameObject;
@@ -24,11 +26,15 @@ public class SunScript : MonoBehaviour {
 	void adjustWeatherBasedOnTimeOfDay () {
 		if (currentTime < nightStart) {
 			for (int i = 0; i < weatherEffects.Length; ++i) {
-				weatherEffects [i].transform.GetChild(0).GetComponent<ParticleSystem> ().Stop ();
+				if(weatherEffects[i].name == "Rain")
+					for (int j = 0; j < weatherEffects[i].transform.childCount; ++j)
+						weatherEffects [i].transform.GetChild(j).GetChild(0).GetComponent<ParticleSystem> ().Stop ();
 			}
 		} else {
 			for (int i = 0; i < weatherEffects.Length; ++i) {
-				weatherEffects [i].transform.GetChild (0).GetComponent<ParticleSystem> ().Play ();
+				if(weatherEffects[i].name == "Rain")
+					for (int j = 0; j < weatherEffects[i].transform.childCount; ++j)
+						weatherEffects [i].transform.GetChild(j).GetChild(0).GetComponent<ParticleSystem> ().Play ();
 			}
 		}
 	}
@@ -37,21 +43,21 @@ public class SunScript : MonoBehaviour {
 		adjustWeatherBasedOnTimeOfDay ();
 		if (currentTime > 0 && currentTime < dayStart) {
 			isDay = false;
-			sun.intensity = 0;
+			sun.intensity = nightLuminosityThreshold;
 		} else if (currentTime >= dayStart && currentTime < nightStart) {
 			isDay = true;
 			//sun.intensity = 1;
 		} else if (currentTime >= nightStart && currentTime < dayLength) {
 			isDay = false;
-			sun.intensity = 0;
+			sun.intensity = nightLuminosityThreshold;
 		} else if (currentTime >= dayLength) {
 			currentTime = 0;
 		}
 		if (isDay) {
 			if (currentTime < dayLength/4) {// morning
-				sun.intensity = currentTime/(dayLength/4f);
+				sun.intensity = currentTime/(dayLength/4f) + nightLuminosityThreshold;
 			} else if (currentTime < nightStart) { // afternoon
-				sun.intensity = -currentTime/(dayLength/4f) + 2;
+				sun.intensity = -currentTime/(dayLength/4f) + 2 + nightLuminosityThreshold;
 			}
 		}
 
@@ -66,7 +72,7 @@ public class SunScript : MonoBehaviour {
 		float xPos = -9f;
 		if (currentTime < nightStart) { // day, sun should go up then down halfway through
 			if (currentTime < nightStart / 2) { // sun goes up
-				yPos = currentTimeF / nightStart*40 - 10;
+				yPos = currentTimeF / nightStart*40 - 11;
 				xPos = currentTimeF / nightStart * 30 - 14;
 			} else { // sun goes down
 				yPos = -currentTimeF / nightStart * 40 + 30 ;

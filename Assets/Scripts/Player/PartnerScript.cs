@@ -22,9 +22,15 @@ public class PartnerScript : MonoBehaviour
     {
         if (c.tag == "Tip")
         {
-            showMessage(c.gameObject.GetComponent<TipScript>().tipNumber, c.gameObject.GetComponent<TipScript>().activatedOnce
-                , c.gameObject.GetComponent<TipScript>().message, c.gameObject.GetComponent<TipScript>().timeOn);
-            c.GetComponent<TipScript>().activatedOnce = true;
+			bool isDay = GameObject.Find ("Sun").transform.GetChild(0).GetComponent<SunScript>().isDay;
+			if ((isDay == false && c.gameObject.GetComponent<TipScript> ().activateAtNight == true) ||
+				(c.gameObject.GetComponent<TipScript> ().activateAtNight == false)) {
+				showMessage (c.gameObject.GetComponent<TipScript> ().tipNumber,
+					c.gameObject.GetComponent<TipScript> ().activatedOnce,
+					c.gameObject.GetComponent<TipScript> ().message,
+					c.gameObject.GetComponent<TipScript> ().timeOn);
+				c.GetComponent<TipScript> ().activatedOnce = true;
+			}
         }
     }
 
