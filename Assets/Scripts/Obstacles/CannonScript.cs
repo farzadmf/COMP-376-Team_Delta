@@ -29,6 +29,7 @@ public class CannonScript : MonoBehaviour {
 }
 	void addBullet() {
 		if (active) {
+			Debug.Log ("firing ");
 			currentSpriteRenderer.sprite = cannonAfterFiring;
 
 
@@ -42,22 +43,24 @@ public class CannonScript : MonoBehaviour {
 					bullet = (GameObject)Instantiate (Resources.Load ("Circle"));
 			} else {
 
-				bullet = (GameObject)Instantiate (Resources.Load ("Bullet"));
+				bullet = (GameObject)Instantiate (Resources.Load ("Bullet 1"));
 			}
 			//5
 			bullet.transform.position = tun.transform.position;
 
-
+			/*
 			if (gravity) {
-				bullet.GetComponent<Rigidbody2D> ().gravityScale = 0.5f;
+				bullet.transform.FindChild("Bullet").GetComponent<Rigidbody2D> ().gravityScale = 0.5f;
 			} else {
-				bullet.GetComponent<Rigidbody2D> ().gravityScale = 0;
-			}
-			Vector2 newVelocity = bullet.GetComponent<Rigidbody2D> ().velocity;
+				bullet.transform.FindChild("Bullet").GetComponent<Rigidbody2D> ().gravityScale = 0;
+			}*/
+			Vector2 newVelocity = bullet.transform.FindChild("Bullet").GetComponent<Rigidbody2D> ().velocity;
 			newVelocity.y = velocityY;
 			newVelocity.x = velocityX;
-
-			bullet.GetComponent<Rigidbody2D> ().velocity = newVelocity;
+			bullet.transform.FindChild ("Fireball").GetComponent<ParticleSystem> ().startSpeed = -newVelocity.y;
+			bullet.transform.FindChild ("Fireball2").GetComponent<ParticleSystem> ().startSpeed = -newVelocity.y;
+			bullet.transform.FindChild ("Fireball3").GetComponent<ParticleSystem> ().startSpeed = -newVelocity.y;
+			bullet.transform.FindChild("Bullet").GetComponent<Rigidbody2D> ().velocity = newVelocity;
 
 	
 			//bullet.transform.rotation = Quaternion.Euler (Vector3.forward * rotationOfBullet);

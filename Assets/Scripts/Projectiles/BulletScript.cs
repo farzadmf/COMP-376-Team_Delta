@@ -31,7 +31,7 @@ public class BulletScript : MonoBehaviour {
 	IEnumerator destroy() {
 		yield return new WaitForSeconds (0.01f);
 
-		Transform t = transform.GetChild (0);
+		Transform t = transform.parent.FindChild ("Fireball");
 		t.gameObject.SetActive(false);
 
 		GetComponent<CircleCollider2D> ().enabled = false;
@@ -50,7 +50,7 @@ public class BulletScript : MonoBehaviour {
 
 		yield return new WaitForSeconds (2f);
 		//nothing ();
-		Destroy (this.gameObject);
+		Destroy (transform.parent.gameObject);
 
 	}
 	void terminate() {
