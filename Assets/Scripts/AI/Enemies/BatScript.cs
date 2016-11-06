@@ -25,7 +25,17 @@ public class BatScript : Character {
 			killMonster ();
 			Physics2D.GetIgnoreCollision (c.collider, GetComponent<BoxCollider2D> ());
 
+		} else if (c.gameObject.tag == "Player") {
+			inPursue = false;
 		}
+	}
+	void OnCollisionExit2D(Collision2D c) {
+		if (c.gameObject.tag == "Player") {
+			Invoke ("attack",0.15f);
+		}
+	}
+	void attack() {
+		inPursue = true;
 	}
 	void killMonster() {
 		/*
@@ -89,7 +99,6 @@ public class BatScript : Character {
 		transform.LookAt(target.position);
 		transform.Rotate(new Vector3(0,90,0),Space.Self);//correcting the original rotation
 		
-		
 		//move towards the player
 		//if (Vector3.Distance(transform.position,target.position)>1f){//move if distance from target is greater than 1
 			transform.Translate(new Vector3(-moveSpeed* Time.deltaTime,0,0) );
@@ -127,7 +136,7 @@ public class BatScript : Character {
 */
 
 	}
-	void FixedUpdate () {
+	void Update () {
 
 		checkAndSetHung ();
 		if (batHung)
@@ -145,6 +154,12 @@ public class BatScript : Character {
 			deaad = true;
 			StartCoroutine (DestroyMonster ());
 		}
-
+		fixYRotation ();
+	}
+	void fixYRotation() {
+		float y = 0;
+		if (target.position.x > transform.position.x)
+			y = 180;
+		transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, y, transform.rotation.eulerAngles.z);
 	}
 }
