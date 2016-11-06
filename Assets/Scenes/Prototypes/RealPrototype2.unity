@@ -1868,6 +1868,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011370095368, guid: 160ff76841495f1429c935305ca57c83,
     type: 2}
   m_PrefabInternal: {fileID: 1512855722}
+--- !u!61 &115535853 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61000010332581584, guid: 160ff76841495f1429c935305ca57c83,
+    type: 2}
+  m_PrefabInternal: {fileID: 1512855722}
 --- !u!1001 &115627876
 Prefab:
   m_ObjectHideFlags: 0
@@ -25095,7 +25100,7 @@ Prefab:
     - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 142
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
@@ -25120,7 +25125,7 @@ Prefab:
     - target: {fileID: 224000012968676808, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 211
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000011370095368, guid: 160ff76841495f1429c935305ca57c83, type: 2}
       propertyPath: m_IsActive
@@ -25136,6 +25141,11 @@ Prefab:
       propertyPath: groundCheckLayerMask.m_Bits
       value: 262400
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013208819646, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: bodyCollider
+      value: 
+      objectReference: {fileID: 115535853}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 160ff76841495f1429c935305ca57c83, type: 2}
   m_IsPrefabParent: 0

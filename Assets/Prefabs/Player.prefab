@@ -593,6 +593,7 @@ MonoBehaviour:
   levelString: RealPrototype
   rightCollider: {fileID: 61000013276628036}
   leftCollider: {fileID: 61000011330396302}
+  bodyCollider: {fileID: 61000010332581584}
 --- !u!114 &114000013506348358
 MonoBehaviour:
   m_ObjectHideFlags: 1

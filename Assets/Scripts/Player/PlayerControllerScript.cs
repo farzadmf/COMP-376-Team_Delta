@@ -14,6 +14,7 @@ public class PlayerControllerScript : Character
 	public string levelString;
 	public BoxCollider2D rightCollider;
 	public BoxCollider2D leftCollider;
+    public BoxCollider2D bodyCollider;
 	private bool canMoveX;
 	private LayerMask groundCheckLayerMask;
     // Use this for initialization
@@ -119,14 +120,18 @@ public class PlayerControllerScript : Character
 		}
 	}
 	public override void OnTriggerEnter2D(Collider2D c) {
-		if (!rightCollider.IsTouching (c) && !leftCollider.IsTouching (c))
-			base.OnTriggerEnter2D (c);
+		
+        if (bodyCollider.IsTouching(c))
+        {
+            base.OnTriggerEnter2D(c);
+        }
 		
 		if (c.gameObject.tag == "Ground" && (rightCollider.IsTouching (c) || (leftCollider.IsTouching (c)))) {
 			rigidBody.velocity = new Vector2 (0, rigidBody.velocity.y);
 			canMoveX = false;
 		}
 	}
+
 	void checkMoveX() {
 		if (!rightCollider.IsTouchingLayers(groundCheckLayerMask) && 
 			!leftCollider.IsTouchingLayers(groundCheckLayerMask)) {
