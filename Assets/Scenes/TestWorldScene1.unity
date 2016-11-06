@@ -405,6 +405,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 136
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -90.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 103
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 51
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 160ff76841495f1429c935305ca57c83, type: 2}
   m_IsPrefabParent: 0
@@ -1777,6 +1807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7e31cc3079aab4486bf9880eb6dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   smoothTimeY: 0
   smoothTimeX: 0
   bounds: 0
