@@ -116,9 +116,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35a7f47aebb4374f832e0e762b7b6cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nightStart: 0
+  currentTime: 0
   cycleSpeed: 500
+  isDay: 0
   sun: {fileID: 108000013480061932}
   earth: {fileID: 1000012658556956}
+  weatherEffects: []
 --- !u!212 &212000012387595576
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -148,7 +152,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 48369e47ad0b19b4eb5bdebc0f4b14dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a3d2c4a4f6e4654a9f1755f3c4d9a1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
