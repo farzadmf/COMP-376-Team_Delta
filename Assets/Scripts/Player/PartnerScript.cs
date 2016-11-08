@@ -15,6 +15,9 @@ public class PartnerScript : MonoBehaviour
         bubble = text.GetComponentInParent<Canvas>();
         bubble.enabled = false;
 
+        text.GetComponent<ContentSizeFitter>().enabled = true;
+        bubble.GetComponent<ContentSizeFitter>().enabled = true;
+
         moved = false;
     }
 

@@ -24949,7 +24949,7 @@ Prefab:
     - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 142
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 224000012706258812, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
@@ -24989,6 +24989,16 @@ Prefab:
         type: 2}
       propertyPath: groundCheckLayerMask.m_Bits
       value: 262400
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010406555770, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014268858578, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 160ff76841495f1429c935305ca57c83, type: 2}
