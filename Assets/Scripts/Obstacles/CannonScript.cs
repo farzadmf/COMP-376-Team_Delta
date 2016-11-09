@@ -29,7 +29,6 @@ public class CannonScript : MonoBehaviour {
 }
 	void addBullet() {
 		if (active) {
-			Debug.Log ("firing ");
 			currentSpriteRenderer.sprite = cannonAfterFiring;
 
 
