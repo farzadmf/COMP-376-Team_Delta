@@ -24,6 +24,7 @@ public class GameStateScript : MonoBehaviour {
 	public GameObject nightTimeEnemies;
 	private Light sfxNightTime;
 	private float rangeChange;
+	private bool paused;
 	// Use this for initialization
 	void Start () {
 		rangeChange = 25f;
@@ -55,10 +56,16 @@ public class GameStateScript : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		checkUserInput ();
 		updateDayStatus ();
 		checkTransitionState ();
 		if (transitionStart == true)
 			updateGameState ();
+	}
+	void checkUserInput() {
+		if (Input.GetKeyDown("p")) {
+			pauseGame();
+		}
 	}
 	void changePlayer() {
 		if (toState == "Night") {
@@ -207,6 +214,38 @@ public class GameStateScript : MonoBehaviour {
 			}
 		}
 
+	}
+	void OnGUI() {
+		DisplayConfirmationButton ();
+	}
+
+	void pauseGame() {
+		if (!paused)
+			Time.timeScale = 0;
+		else
+			Time.timeScale = 1;
+		paused = !paused;
+	}
+	void resumeGame() {
+		Time.timeScale = 1;
+	}
+
+	void DisplayConfirmationButton() {
+		if (paused) {
+			Rect buttonRect = new Rect (Screen.width * 0.15f, Screen.height * 0.45f, 
+				Screen.width * 0.30f, Screen.height * 0.1f);
+			Rect buttonRect2 = buttonRect;
+			buttonRect2.x = buttonRect.x + buttonRect.width + 20;
+
+			if (GUI.Button (buttonRect, "Yes")) {
+				resumeGame();
+				//SceneManager.LoadScene("EleChoiceScene");
+			} else if (GUI.Button (buttonRect2, "No")) {
+
+				resumeGame();
+				paused = false;
+			}
+		}
 	}
 }
 

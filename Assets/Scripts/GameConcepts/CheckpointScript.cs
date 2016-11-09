@@ -14,21 +14,15 @@ public class CheckpointScript : MonoBehaviour {
 			var em = ps.emission;
 			em.enabled = true;
 			ray = ps;
-
-			//ray.enableEmission = true;
-			//Debug.Log ("ray: " + ray);
-			//SaveLoadScript.tempCoins = mouse.getCoins ();
-			//SaveLoadScript.SaveTempCoins ();
+			saveGame ();
 
 		}
 	}
-	// Use this for initialization
+	void saveGame() {
+		SaveLoadScript.SaveGame (player.GetComponent<PlayerControllerScript> ().characterStats);
+	}
 	void Start () {
 		player = GameObject.Find ("Player");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

@@ -19,6 +19,13 @@ public class PlayerControllerScript : Character
 	private LayerMask groundCheckLayerMask;
     // Use this for initialization
     public override void Start () {
+		SaveLoadScript.LoadGame ();
+		CharacterStats stats = SaveLoadScript.playerStats;
+		// check if game was saved at least once, otherwise we put the player stats to null
+		if (SaveLoadScript.saved == true) {
+			base.characterStats = stats;
+}
+
 		canMoveX = true;
         rigidBody = GetComponent<Rigidbody2D>();
         //Call the Parent's class start method
@@ -38,8 +45,9 @@ public class PlayerControllerScript : Character
 		bool dead = false;
 		if (base.characterStats.Health <= 0)
 			dead = true;
-		if (dead)
-			SceneManager.LoadScene (getWholeLevelSceneString());
+		if (dead) {
+			SceneManager.LoadScene (getWholeLevelSceneString ());
+		}
 	}
 	void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
