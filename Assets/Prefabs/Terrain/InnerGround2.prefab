@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000010759974820}
   - 212: {fileID: 212000010103199108}
   - 61: {fileID: 61000012533815182}
+  - 114: {fileID: 114000011217889274}
   m_Layer: 8
   m_Name: InnerGround2
   m_TagString: Ground
@@ -55,6 +56,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.029571056}
   serializedVersion: 2
   m_Size: {x: 3.45, y: 6.6408577}
+--- !u!114 &114000011217889274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011281748512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b2bcac762570d46a47b8ca2db7f58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010103199108
 SpriteRenderer:
   m_ObjectHideFlags: 1
