@@ -58,11 +58,19 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        // If the item is in a hot-key slot, don't bother with the tool-tip
+        if (HotKeySlot != -1)
+            return;
+
         _tooltip.Activate(Item);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        // If the item is in a hot-key slot, don't bother with the tool-tip
+        if (HotKeySlot != -1)
+            return;
+
         _tooltip.Deactivate();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Item.ItemType;
@@ -24,12 +25,24 @@ public class Inventory : MonoBehaviour
     private readonly List<GameObject     > _slots       = new List<GameObject>();
     private readonly List<GameObject     > _hotKeySlots = new List<GameObject>();
 
+    private GameObject _player;
+    private Tooltip _tooltip;
+
     // ReSharper disable once UnusedMember.Local
     private void Start()
     {
         Instance = this;
         InventoryPanel.SetActive(false);
         HotKeyPanel.SetActive(true);
+
+        // Get the player object
+        _player = GameObject.Find("Player");
+
+        if (_player == null)
+            Debug.LogError($"[{GetType().Name}] --> Player game object is null");
+
+        // Store a reference to the tooltip
+        _tooltip = GetComponent<Tooltip>();
 
         // Initialize inventory slots
         for (var index = 0; index < ItemDatabase.Instance.TotalItems; index++)
@@ -50,22 +63,32 @@ public class Inventory : MonoBehaviour
             newSlot.GetComponent<HotKeySlot>().ItemDropped += OnItemDropped;
             _hotKeySlots.Add(newSlot);
         }
+        
+        // After initialization, we add a weapon to the inventory and equip the player with it
+        const int itemId = 1;
+        AddItem(itemId);
+        UpdatePlayerWithItem(ItemDatabase.Instance.GetItem(itemId));
     }
 
     // ReSharper disable once UnusedMember.Local
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
+        {
             InventoryPanel.SetActive(!InventoryPanel.activeSelf);
+            
+            if (!InventoryPanel.activeSelf)
+                _tooltip.Deactivate();
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            print(GetHotkeyItem(0));
+            UpdatePlayerWithItem(GetHotkeyItem(0));
         else if (Input.GetKeyDown(KeyCode.Alpha2))
-            print(GetHotkeyItem(1));
+            UpdatePlayerWithItem(GetHotkeyItem(1));
         else if (Input.GetKeyDown(KeyCode.Alpha3))
-            print(GetHotkeyItem(2));
+            UpdatePlayerWithItem(GetHotkeyItem(2));
         else if (Input.GetKeyDown(KeyCode.Alpha4))
-            print(GetHotkeyItem(3));
+            UpdatePlayerWithItem(GetHotkeyItem(3));
     }
 
     private void OnItemDropped(int slotIndex, GameObject itemObject)
@@ -175,5 +198,50 @@ public class Inventory : MonoBehaviour
         // Set the item data
         itemObject.GetComponent<ItemData>().Item = item;
         itemObject.GetComponent<ItemData>().Slot = slotIndex;
+    }
+
+    private void UpdatePlayerWithItem(Item item)
+    {
+        if (item == null)
+            return;
+
+        switch (item.Type)
+        {
+            case Consumable:
+                UpdatePlayerWithConsumable(item);
+                break;
+            case Weapon:
+                UpdatePlayerWithWeapon(item);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private void UpdatePlayerWithWeapon(Item item)
+    {
+        var playerScript = _player.GetComponent<PlayerScript>();
+        var weaponPosition = playerScript.weapon.transform.position;
+
+        // Delete the old weapon object
+        Destroy(playerScript.weapon.gameObject);
+
+        // Instantiate weapon prefab at weapon's location and set the parent
+        var newWeapon = (GameObject) Instantiate(item.Prefab, weaponPosition, Quaternion.identity);
+        newWeapon.transform.SetParent(_player.transform);
+        newWeapon.transform.localScale = Vector3.one * 1.5f;
+
+        // Adjust weapon properties
+        newWeapon.name = "Weapon";
+        var damageDealerScript = newWeapon.GetComponent<DamageDealer>();
+        damageDealerScript.Attack = item.Attack;
+
+        // Set this weapon as player's weapon
+        playerScript.weapon = newWeapon;
+    }
+
+    private void UpdatePlayerWithConsumable(Item item)
+    {
+        
     }
 }

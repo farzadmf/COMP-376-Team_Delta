@@ -37,7 +37,7 @@ public class Tooltip : MonoBehaviour
     {
         var data = $"<b><color=yellow><size=20>{_item.Title}</size></color></b>\n\n" +
                    $"<i><color=white>{_item.Description}</color></i>\n\n" +
-                   $"<color=red>Power: {_item.Stats.Power}</color>";
+                   $"<color=red>Type: {_item.Type}</color>";
         TooltipImage.GetComponentInChildren<Text>().text = data;
     }
 }

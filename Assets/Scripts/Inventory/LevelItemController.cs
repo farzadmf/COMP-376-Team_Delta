@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static Item.ItemType;
 
 // ReSharper disable once CheckNamespace
 public class LevelItemController : MonoBehaviour

@@ -20,12 +20,12 @@ public class PlayerScript : MonoBehaviour {
 	public void goDemonMode() {
 		canMagic = true;
 		canLifeSteal = true;
-		transform.FindChild ("Weapon").gameObject.SetActive (false);
+		weapon.SetActive (false);
 	}
 	public void goDayMode() {
 		canMagic = false;
 		canLifeSteal = false;
-		transform.FindChild ("Weapon").gameObject.SetActive (true);
+		weapon.SetActive (true);
 	}
 	public bool getGrounded() {
 		return grounded;

@@ -2,32 +2,51 @@
   {
     "id": 0,
     "title": "Red Potion",
-    "value": 6,
-    "stats": {
-      "power": 1,
-      "defense": 4,
-      "vitality": 2
-    },
     "type": "Consumable",
     "description": "A potion that is red. Yeah!",
-    "stackable": true,
-    "rarity": 2,
-    "iconIndex": "31"
+    "iconIndex": "31",
+    "stackable": true
   },
   {
     "id": 1,
     "title": "The Great Stick",
-    "value": 543,
     "type": "Weapon",
-    "stats": {
-      "power": 56,
-      "defense": 2,
-      "vitality": 54
+    "attack": {
+      "baseDamage": 30,
+      "coolDown": 0,
+      "range": 0,
+      "force": 200,
+      "damageType": "normal",
+      "damageOverTime": {
+        "isDamageOvertime": false,
+        "damage": 0,
+        "duration": 0,
+        "intervals": 0
+      }
     },
     "description": "It's a stick that's pretty great!",
-    "stackable": false,
-    "rarity": 6,
-    "iconIndex": "73"
+    "iconIndex": "73",
+    "stackable": false
+  },
+  {
+    "id": 2,
+    "title": "The Dangerous Axe",
+    "type": "Weapon",
+    "attack": {
+      "baseDamage": 30,
+      "coolDown": 0,
+      "range": 0,
+      "force": 200,
+      "damageType": "normal",
+      "damageOverTime": {
+        "isDamageOvertime": false,
+        "damage": 0,
+        "duration": 0,
+        "intervals": 0
+      }
+    },
+    "description": "It's a powerful axe, be careful!",
+    "iconIndex": "110",
+    "stackable": false
   }
-  
 ]
