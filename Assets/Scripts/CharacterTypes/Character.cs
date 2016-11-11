@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour {
 
@@ -10,6 +11,9 @@ public abstract class Character : MonoBehaviour {
     public Collider2D ThisCollider { get; private set; }
 
     public Rigidbody2D ThisRigidBody { get; private set; }
+
+    public Slider HealthSlider;
+    public Slider StaminaSlider;
 
     public bool IsTakingDamage { get;  set; }
 
@@ -32,12 +36,45 @@ public abstract class Character : MonoBehaviour {
         ThisAnimator = GetComponent<Animator>();
         ThisCollider = GetComponent<Collider2D>();
         ThisRigidBody = GetComponent<Rigidbody2D>();
+
+        // Initialize sliders' values
+        if (HealthSlider == null || StaminaSlider == null)
+            return;
+
+        HealthSlider.minValue = 0;
+        HealthSlider.maxValue = characterStats.TotalHealth;
+        StaminaSlider.minValue = 0;
+        StaminaSlider.maxValue = characterStats.TotalStamina;
+        UpdateUi();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void UpdateUi()
+    {
+        if (HealthSlider == null || StaminaSlider == null)
+            return;
+
+        UpdateSlider(HealthSlider, characterStats.Health);
+        UpdateSlider(StaminaSlider, characterStats.Stamina);
+    }
+
+    private static void UpdateSlider(Slider slider, int value)
+    {
+        slider.value = value;
+        var sliderImage = slider.transform.FindChild("Fill Area/Fill").GetComponent<Image>();
+        
+        if (slider.value <= slider.maxValue / 3)
+            sliderImage.color = Color.red;
+        else if (slider.value <= slider.maxValue * 2 / 3)
+            sliderImage.color = Color.yellow;
+        else
+            sliderImage.color = Color.green;
+    }
+
+    // ReSharper disable once UnusedMember.Local
+    protected virtual void Update ()
+    {
+        UpdateUi();
+    }
 
     //Called only after all objects are loaded, called only once
     public void Awake()
@@ -54,7 +91,7 @@ public abstract class Character : MonoBehaviour {
 
         //Rotate 180 to go towards other direction
        // transform.Rotate(new Vector3(transform.rotation.x, 180, transform.rotation.z));
-		transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     public void SetFacingDirection()

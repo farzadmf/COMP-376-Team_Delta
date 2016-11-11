@@ -28,12 +28,15 @@ public class PlayerControllerScript : Character
 
 		canMoveX = true;
         rigidBody = GetComponent<Rigidbody2D>();
-        print(rigidBody);
         //Call the Parent's class start method
         base.Start();
 		groundCheckLayerMask = LayerMask.GetMask ("Ground", "UndergroundGround");
     }
-	void Update() {
+
+    protected override void Update()
+    {
+        base.Update();
+
 		checkMoveX ();
 		move ();
 		jump ();
