@@ -28,6 +28,7 @@ public class PlayerControllerScript : Character
 
 		canMoveX = true;
         rigidBody = GetComponent<Rigidbody2D>();
+        print(rigidBody);
         //Call the Parent's class start method
         base.Start();
 		groundCheckLayerMask = LayerMask.GetMask ("Ground", "UndergroundGround");

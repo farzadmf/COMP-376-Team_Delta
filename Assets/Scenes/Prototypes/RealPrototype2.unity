@@ -23306,43 +23306,102 @@ Prefab:
       propertyPath: checkpoints.Array.data[1]
       value: 
       objectReference: {fileID: 1156491832}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: checkpoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 323509612}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: checkpoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1156491832}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.TotalHealth
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.Health
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.TotalStamina
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.Stamina
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.Strength
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.Defense
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.CritChance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.CritMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013317790162, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: characterStats.MaxForceResistence
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 136
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -90.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 142
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011940346110, guid: 160ff76841495f1429c935305ca57c83, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 83.85
+      value: 84.1367
       objectReference: {fileID: 0}
     - target: {fileID: 4000011940346110, guid: 160ff76841495f1429c935305ca57c83, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.09
+      value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011940346110, guid: 160ff76841495f1429c935305ca57c83, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 160ff76841495f1429c935305ca57c83, type: 2}

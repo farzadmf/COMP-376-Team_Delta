@@ -270,7 +270,7 @@ MonoBehaviour:
     CritChance: 0
     CritMultiplier: 0
     MaxForceResistence: 10
-    MovementSpeed: 6
+    MovementSpeed: 0
   damageSources:
   - Sword
   - Fireball
