@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using static Item.ItemType;
@@ -18,14 +19,23 @@ public class Inventory : MonoBehaviour
     public GameObject Item;
     public GameObject HotkeyItem;
 
+    public Text HealthText;
+    public Text StaminaText;
+    public Text DefenseText;
+    public Text CritChanceText;
+    public Text CritMultiplierText;
+    public Text MaxForceResistText;
+
     private const int HOT_KEY_COUNT = 4;
 
-    private readonly Dictionary<int, Item> _slotItems   = new Dictionary<int, Item>();
+    private readonly Dictionary<int, Item> _slotItems = new Dictionary<int, Item>();
     private readonly Dictionary<int, Item> _hotKeyItems = new Dictionary<int, Item>();
-    private readonly List<GameObject     > _slots       = new List<GameObject>();
-    private readonly List<GameObject     > _hotKeySlots = new List<GameObject>();
+    private readonly List<GameObject> _slots = new List<GameObject>();
+    private readonly List<GameObject> _hotKeySlots = new List<GameObject>();
 
     private GameObject _player;
+    private PlayerScript _playerScript;
+    private PlayerControllerScript _playerControllerScript;
     private Tooltip _tooltip;
 
     // ReSharper disable once UnusedMember.Local
@@ -37,6 +47,8 @@ public class Inventory : MonoBehaviour
 
         // Get the player object
         _player = GameObject.Find("Player");
+        _playerScript = _player.GetComponent<PlayerScript>();
+        _playerControllerScript = _player.GetComponent<PlayerControllerScript>();
 
         if (_player == null)
             Debug.LogError($"[{GetType().Name}] --> Player game object is null");
@@ -63,7 +75,7 @@ public class Inventory : MonoBehaviour
             newSlot.GetComponent<HotKeySlot>().ItemDropped += OnItemDropped;
             _hotKeySlots.Add(newSlot);
         }
-        
+
         // After initialization, we add a weapon to the inventory and equip the player with it
         const int itemId = 1;
         AddItem(itemId);
@@ -73,10 +85,20 @@ public class Inventory : MonoBehaviour
     // ReSharper disable once UnusedMember.Local
     private void Update()
     {
+        // Update player stats
+        var playerStats = _playerControllerScript.characterStats;
+        HealthText.text = playerStats.Health.ToString();
+        StaminaText.text = playerStats.Stamina.ToString();
+        DefenseText.text = playerStats.Defense.ToString();
+        CritChanceText.text = playerStats.CritChance.ToString(CultureInfo.InvariantCulture);
+        CritMultiplierText.text = playerStats.CritMultiplier.ToString(CultureInfo.InvariantCulture);
+        MaxForceResistText.text =
+                playerStats.MaxForceResistence.ToString(CultureInfo.InvariantCulture);
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             InventoryPanel.SetActive(!InventoryPanel.activeSelf);
-            
+
             if (!InventoryPanel.activeSelf)
                 _tooltip.Deactivate();
         }
@@ -220,11 +242,10 @@ public class Inventory : MonoBehaviour
 
     private void UpdatePlayerWithWeapon(Item item)
     {
-        var playerScript = _player.GetComponent<PlayerScript>();
-        var weaponPosition = playerScript.weapon.transform.position;
+        var weaponPosition = _playerScript.weapon.transform.position;
 
         // Delete the old weapon object
-        Destroy(playerScript.weapon.gameObject);
+        Destroy(_playerScript.weapon.gameObject);
 
         // Instantiate weapon prefab at weapon's location and set the parent
         var newWeapon = (GameObject) Instantiate(item.Prefab, weaponPosition, Quaternion.identity);
@@ -237,11 +258,8 @@ public class Inventory : MonoBehaviour
         damageDealerScript.Attack = item.Attack;
 
         // Set this weapon as player's weapon
-        playerScript.weapon = newWeapon;
+        _playerScript.weapon = newWeapon;
     }
 
-    private void UpdatePlayerWithConsumable(Item item)
-    {
-        
-    }
+    private void UpdatePlayerWithConsumable(Item item) { }
 }
