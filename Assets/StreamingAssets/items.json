@@ -5,7 +5,13 @@
     "type": "Consumable",
     "description": "A potion that is red. Yeah!",
     "iconIndex": "31",
-    "stackable": true
+    "stackable": true,
+    "stats": {
+      "health": 50,
+      "stamina": 30,
+      "strength": 1,
+      "defense": 1
+    }
   },
   {
     "id": 1,

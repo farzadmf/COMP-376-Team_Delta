@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
+using static Item.ItemType;
 
 // ReSharper disable once CheckNamespace
 public class Tooltip : MonoBehaviour
@@ -36,8 +38,24 @@ public class Tooltip : MonoBehaviour
     private void ConstructDataString()
     {
         var data = $"<b><color=yellow><size=20>{_item.Title}</size></color></b>\n\n" +
-                   $"<i><color=white>{_item.Description}</color></i>\n\n" +
-                   $"<color=red>Type: {_item.Type}</color>";
+                   $"<i><color=white>{_item.Description}</color></i>\n\n";
+
+        switch (_item.Type)
+        {
+            case Consumable:
+                data += $"<color=red>Health: </color><b><color=cyan>{_item.Stats.Health}</color></b>\n" +
+                        $"<color=red>Stamina: </color><b><color=cyan>{_item.Stats.Stamina}</color></b>\n" +
+                        $"<color=red>Strength: </color><b><color=cyan>{_item.Stats.Strength}</color></b>\n" +
+                        $"<color=red>Defense: </color><b><color=cyan>{_item.Stats.Defense}</color></b>";
+                break;
+            case Weapon:
+                data += $"<color=red>Base Damage: </color><b><color=cyan>{_item.Attack.BaseDamage}</color></b>\n" +
+                        $"<color=red>Force: </color><b><color=cyan>{_item.Attack.Force}</color></b>";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
         TooltipImage.GetComponentInChildren<Text>().text = data;
     }
 }

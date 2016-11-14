@@ -12,6 +12,19 @@ public class Item
         Consumable,
         Weapon
     }
+
+    public class HealingStats
+    {
+        public int Health { get; set; }
+
+        public int Stamina { get; set; }
+
+        public int Strength { get; set; }
+
+        public int Defense { get; set; }
+    }
+
+    public HealingStats Stats { get; set; }
     
     public GameObject Prefab { get; set; }
 
