@@ -56,7 +56,7 @@ public class SkipStoryScript : MonoBehaviour {
 
         if (mTime > 24 && !shown[2])
         {
-            storyText.text = "The progress he made came at a price, each failed experiment would lose it's mind and start attacking those around it. In order to get rid of them, he killed them and dumped their bodies anywhere he could, not realizing that they were actually still alive.";
+            storyText.text = "The progress he made came at a price, each failed experiment would lose its mind and start attacking those around it. In order to get rid of them, he killed them and dumped their bodies anywhere he could, not realizing that they were actually still alive.";
             mFadeIn = true;
             shown[2] = true;
         }
