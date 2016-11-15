@@ -272,6 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9090226ff4728db418ade1d146266a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthSlider: {fileID: 0}
+  StaminaSlider: {fileID: 0}
   characterStats:
     TotalHealth: 800
     Health: 800
@@ -292,7 +294,7 @@ MonoBehaviour:
     type: 2}
   projectilePosition: {fileID: 4000011436396058}
   meleeCollider: {fileID: 68000012996675214}
-  meleeRange: 1
+  meleeRange: 2
   projectileRange: 0
   cantMove: 0
 --- !u!114 &114000014198110282

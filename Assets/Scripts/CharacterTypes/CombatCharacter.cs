@@ -32,8 +32,8 @@ public abstract class CombatCharacter : Character {
     public void EnableMeleeCollider()
     {
         if (meleeCollider)
-            meleeCollider.enabled = !meleeCollider.enabled;
-        meleeCollider.enabled = true;
+            meleeCollider.enabled = true;
+
     }
 
 
@@ -41,6 +41,8 @@ public abstract class CombatCharacter : Character {
     {
         if (meleeCollider)
             meleeCollider.enabled = false;
+
+            
     }
 
     //Initializes a new projectile prefab into the world 

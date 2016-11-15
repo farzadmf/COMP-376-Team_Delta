@@ -15,12 +15,19 @@ public class Shield : MonoBehaviour {
         //If it hit a shield then nulify this attack the collider will be reenabled when he does next attack
         if (other.tag == "EnemyDamage")
         {
-            if (other.gameObject.transform.parent.gameObject.GetComponent<CombatCharacter>())
+            if (other.gameObject.transform.parent)
             {
-                other.gameObject.transform.parent.gameObject.GetComponent<CombatCharacter>().DisableMeleeCollider();
-                Instantiate(blockPrefab, blockPrefabLocation.position, Quaternion.identity);
+                if (other.gameObject.transform.parent.gameObject.GetComponent<CombatCharacter>())
+                {
+                    other.gameObject.transform.parent.gameObject.GetComponent<CombatCharacter>().DisableMeleeCollider();
+                    Instantiate(blockPrefab, blockPrefabLocation.position, Quaternion.identity);
+                }
             }
+             else
+                 Destroy(other.gameObject);
+
         }
+
     
     }
 

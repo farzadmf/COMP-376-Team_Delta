@@ -271,6 +271,11 @@ public abstract class Character : MonoBehaviour {
     {
         if (!IsDead())
         {
+            if (gameObject.tag == "Player")
+            {
+                if (gameObject.GetComponent<PlayerControllerScript>().IsBlocking)
+                    return;
+            }
             //If character can take damage from this source
             if (damageSources.Contains(other.gameObject.tag))
             {
