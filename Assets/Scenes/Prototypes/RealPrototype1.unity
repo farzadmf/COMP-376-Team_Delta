@@ -8690,6 +8690,11 @@ Prefab:
       propertyPath: activateAtNight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010112409072, guid: 49e009b4345404940871a1e64fc83934,
+        type: 2}
+      propertyPath: tipNumber
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49e009b4345404940871a1e64fc83934, type: 2}
   m_IsPrefabParent: 0
@@ -25072,12 +25077,42 @@ Prefab:
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 142
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013593239980, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 272
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013593239980, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013593239980, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.5399923
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013593239980, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 211
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010792044808, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011000396226, guid: 160ff76841495f1429c935305ca57c83,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 160ff76841495f1429c935305ca57c83, type: 2}
@@ -27285,12 +27320,20 @@ Prefab:
     - target: {fileID: 114000010112409072, guid: 49e009b4345404940871a1e64fc83934,
         type: 2}
       propertyPath: timeOn
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114000010112409072, guid: 49e009b4345404940871a1e64fc83934,
         type: 2}
       propertyPath: message
-      value: omfg a chest gimme lewts
+      value: 'Ohhhhh~ Chests! What do
+
+        you mean why am I excited?
+
+        Chests give us loot, all you have
+
+        to do is hit them and walk over
+
+        the item to pick it up.'
       objectReference: {fileID: 0}
     - target: {fileID: 61000010484149370, guid: 49e009b4345404940871a1e64fc83934,
         type: 2}
