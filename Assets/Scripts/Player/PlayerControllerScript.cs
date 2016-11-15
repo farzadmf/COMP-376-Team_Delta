@@ -239,16 +239,23 @@ public class PlayerControllerScript : Character
 		}
 	}
 	public override void OnTriggerEnter2D(Collider2D c) {
-		
-        if (bodyCollider.IsTouching(c))
+
+        if (c.gameObject.tag == "DeathZone")
+            characterStats.Health = 0;
+        else
         {
-            base.OnTriggerEnter2D(c);
+            if (bodyCollider.IsTouching(c))
+            {
+                base.OnTriggerEnter2D(c);
+            }
+
+            if (c.gameObject.tag == "Ground" && (rightCollider.IsTouching(c) || (leftCollider.IsTouching(c))))
+            {
+                rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
+                canMoveX = false;
+            }
         }
-		
-		if (c.gameObject.tag == "Ground" && (rightCollider.IsTouching (c) || (leftCollider.IsTouching (c)))) {
-			rigidBody.velocity = new Vector2 (0, rigidBody.velocity.y);
-			canMoveX = false;
-		}
+     
 	}
 
 	void checkMoveX() {

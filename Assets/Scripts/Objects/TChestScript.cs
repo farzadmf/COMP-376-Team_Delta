@@ -30,6 +30,14 @@ public class TChestScript : MonoBehaviour
             goMimic();
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Sword" || other.gameObject.tag == "FireBlast")
+        {
+            activatedChest();
+        }
+    }
+
     private void DropLoot()
     {
         loot = Instantiate(loot);

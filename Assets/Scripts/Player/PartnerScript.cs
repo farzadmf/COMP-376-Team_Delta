@@ -101,10 +101,10 @@ public class PartnerScript : MonoBehaviour
                 bubble.transform.localPosition = new Vector3(7.17f, 5.95f, 0.0f);
                 break;
             case 4:
-                bubble.transform.localPosition = new Vector3(5.67f, 4.42f, 0.0f);
+                bubble.transform.localPosition = new Vector3(8.3f, 8.9f, 0.0f);
                 break;
             case 5:
-                bubble.transform.localPosition = new Vector3(7.73f, 9.07f, 0.0f);
+                bubble.transform.localPosition = new Vector3(6.4f, 4.42f, 0.0f);
                 break;
             case 6:
                 bubble.transform.localPosition = new Vector3(7.73f, 9.07f, 0.0f);
