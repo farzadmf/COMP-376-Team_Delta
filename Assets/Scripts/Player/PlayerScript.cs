@@ -58,10 +58,14 @@ public class PlayerScript : MonoBehaviour {
 	}
 	void fireBurst() {
 		GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
+		Vector3 cursorPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		g.transform.position = new Vector3 (cursorPos.x, transform.position.y - 1.5f, transform.position.z);
+		/*
 		if (transform.localScale.x > 0)
-			g.transform.position = new Vector3 (transform.position.x+7,transform.position.y-1.5f,transform.position.z);
+			//g.transform.position = new Vector3 (transform.position.x+7,transform.position.y-1.5f,transform.position.z);
 		else
 			g.transform.position = new Vector3 (transform.position.x-7,transform.position.y-1.5f,transform.position.z);
+		*/
 	}
 	void shootFireball() {
 		GameObject g = (GameObject)Instantiate(Resources.Load ("Fireball"));
