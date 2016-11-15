@@ -136,7 +136,10 @@ public class Inventory : MonoBehaviour
         hotkeyItem.name = $"{item.Title} Image";
 
         hotkeyItem.transform.SetParent(slot.transform);
-        hotkeyItem.GetComponent<Image>().sprite = item.Sprite;
+        var hotKeyItemImage = hotkeyItem.GetComponent<Image>();
+        hotKeyItemImage.sprite = item.Sprite;
+        hotKeyItemImage.type = Image.Type.Filled;
+        hotKeyItemImage.preserveAspect = true;
         hotkeyItem.transform.position = _hotKeySlots[slotIndex].transform.position;
 
         // If item has not been dragged from another hot-key slot, update amount
@@ -213,7 +216,10 @@ public class Inventory : MonoBehaviour
         itemObject.transform.SetParent(slot.transform);
         itemObject.transform.position = slot.transform.position;
         // Set the image
-        itemObject.GetComponent<Image>().sprite = item.Sprite;
+        var itemObjectImage = itemObject.GetComponent<Image>();
+        itemObjectImage.sprite = item.Sprite;
+        itemObjectImage.type = Image.Type.Filled;
+        itemObjectImage.preserveAspect = true;
         // Set the name for 'slot' and 'item'
         itemObject.name = $"{item.Title} Image";
         slot.name = $"{item.Title} Slot";
