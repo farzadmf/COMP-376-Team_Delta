@@ -22,6 +22,7 @@ TagManager:
   - 2
   - Boss
   - Fire
+  - Shield
   layers:
   - Default
   - TransparentFX

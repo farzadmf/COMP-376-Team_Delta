@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour {
 	private bool canLifeSteal;
 	public int level;
 	private Animator anim;
+
 	void Start() {
 		canMagic = false;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
@@ -20,28 +21,33 @@ public class PlayerScript : MonoBehaviour {
 	public void goDemonMode() {
 		canMagic = true;
 		canLifeSteal = true;
-		weapon.SetActive (false);
-	}
+        //Replace with bool Can Use Sword in player Controller
+        //weapon.SetActive (false);
+        GetComponent<PlayerControllerScript>().CanUseSword = false;
+
+    }
 	public void goDayMode() {
 		canMagic = false;
 		canLifeSteal = false;
-		weapon.SetActive (true);
+
+        //Replace with bool Can Use Sword in player Controller
+        //weapon.SetActive (false);
+        GetComponent<PlayerControllerScript>().CanUseSword = true;
+        //weapon.SetActive (true);
 	}
 	public bool getGrounded() {
 		return grounded;
 	}
+
 	void playerAnimator() {
-		anim.SetBool("Grounded", grounded);
-		Rigidbody2D rig = GetComponent<Rigidbody2D> ();
-		if (rig.velocity.x == 0)
-			anim.SetBool("Running", false);
-		else
-			anim.SetBool("Running", true);
+		anim.SetBool("grounded", grounded);
+        //Removed running set boolean you should just set it in the player move method based on it's input
 	}
+
 	void Update() {
 		updateGroundedStatus ();
 		if (Input.GetMouseButtonDown (1)) {
-			if (canMagic == true) {
+			if (canMagic == true && !GetComponent<PlayerControllerScript>().IsBlocking) {
 				if (level == 1 || level == 2)
 					shootFireball ();
 				else if (level == 3)

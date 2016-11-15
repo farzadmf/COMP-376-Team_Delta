@@ -79,7 +79,10 @@ public class Inventory : MonoBehaviour
         // After initialization, we add a weapon to the inventory and equip the player with it
         const int itemId = 1;
         AddItem(itemId);
-        UpdatePlayerWithItem(ItemDatabase.Instance.GetItem(itemId));
+
+        //Sorry Disabled For Now Since Attacks are weapon dependent 
+        //UpdatePlayerWithItem(ItemDatabase.Instance.GetItem(itemId));
+
     }
 
     // ReSharper disable once UnusedMember.Local

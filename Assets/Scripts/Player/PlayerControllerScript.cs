@@ -3,49 +3,109 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 public class PlayerControllerScript : Character
 {
-	public float Speed = 0f; // 350
-	private float movex = 0f; // 4
-	private float movey = 0f;
-	public float jumpHeight;
-	private Rigidbody2D rigidBody;
-	private bool canDoubleJump;
-	public float hp;
-	public CheckpointScript[] checkpoints;
-	public string levelString;
-	public BoxCollider2D rightCollider;
-	public BoxCollider2D leftCollider;
+    private float movex = 0f; // 4
+    private float movey = 0f;
+    public float jumpHeight;
+    private Rigidbody2D rigidBody;
+    private bool canDoubleJump;
+    public float hp;
+    public CheckpointScript[] checkpoints;
+    public string levelString;
+    public BoxCollider2D rightCollider;
+    public BoxCollider2D leftCollider;
     public BoxCollider2D bodyCollider;
-	private bool canMoveX;
-	private LayerMask groundCheckLayerMask;
-    // Use this for initialization
-    public override void Start () {
-		SaveLoadScript.LoadGame ();
-		CharacterStats stats = SaveLoadScript.playerStats;
-		// check if game was saved at least once, otherwise we put the player stats to null
-		if (SaveLoadScript.saved == true) {
-			base.characterStats = stats;
-}
+    private bool canMoveX;
+    private LayerMask groundCheckLayerMask;
 
-		canMoveX = true;
+
+    //State Variables
+    public bool IsAttacking { get; set; }
+    public bool CanUseSword { get; set; }
+    public bool IsDodging { get; set; }
+    public bool IsBlocking { get; set; }
+    
+  
+
+    //Attack variables
+    [SerializeField]
+    private float delayForCombo;
+    private bool firstAttack;
+
+    private float nextAttackTimer;
+
+    //Constants For Animations
+    private const int NUM_ATTACKS = 3;
+    private string[] ATTACKS = new string[] { "attack1", "attack2", "attack3" };
+
+    private int attackCounter;
+
+    //Dodge variables
+    [SerializeField]
+    private float dodgeForce;
+
+    [SerializeField]
+    private float blockSpeed;
+
+    [SerializeField]
+    private GameObject  shield;
+
+
+    // Use this for initialization
+    public override void Start() {
+        SaveLoadScript.LoadGame();
+        CharacterStats stats = SaveLoadScript.playerStats;
+        // check if game was saved at least once, otherwise we put the player stats to null
+        if (SaveLoadScript.saved == true) {
+            base.characterStats = stats;
+        }
+
+        canMoveX = true;
         rigidBody = GetComponent<Rigidbody2D>();
         //Call the Parent's class start method
         base.Start();
-		groundCheckLayerMask = LayerMask.GetMask ("Ground", "UndergroundGround");
+        groundCheckLayerMask = LayerMask.GetMask("Ground", "UndergroundGround");
+
+        //initial set of state variables
+        IsAttacking = false;
+        IsDodging = false;
+        CanUseSword = true;
+        attackCounter = 0;
+        firstAttack = true;
+        setIsBlocking(false);
     }
 
     protected override void Update()
     {
         base.Update();
 
-		checkMoveX ();
-		move ();
-		jump ();
-		attack ();
+        //Player can't move,jump or attack if he is taking damage
+        if (!base.IsTakingDamage)
+        {
+            //Player can't move while attacking
+            if (!IsAttacking && !IsDodging)
+            {
+                move();
+                jump();
+                dodge();
+                block();
+                if (CanUseSword)
+                attack();
+            }
+        }
+     
+
+        checkMoveX ();
 		fixTextOrientation ();
 		checkDeathAndRestart ();
 
     }
-	void checkDeathAndRestart() {
+
+    //Added a fixed update, Physics calls should be in a fixed update
+     void FixedUpdate()
+    {
+    }
+
+    void checkDeathAndRestart() {
 		bool dead = false;
 		if (base.characterStats.Health <= 0)
 			dead = true;
@@ -55,23 +115,63 @@ public class PlayerControllerScript : Character
 	}
 	void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
-			
-			if (GetComponent<PlayerScript> ().weapon.GetComponent<WeaponScript>().getAnimating() == false)
-				GetComponent<PlayerScript> ().weapon.GetComponent<WeaponScript>().attack ();
-		}
+
+            ThisAnimator.SetTrigger(getNextAttack());
+            IsAttacking = true;
+        }
 	}
-		
-	
-	void jump() {
+
+    void dodge()
+    {
+        if(GetComponent<PlayerScript>().getGrounded() == true)
+        {
+            if (Input.GetKey(KeyCode.LeftAlt))
+            {
+                ThisAnimator.SetTrigger("dodge");
+
+                rigidBody.velocity = new Vector2(0,0);
+                SetFacingDirection();
+                if (isFacingRight)
+                    rigidBody.AddForce(new Vector2(dodgeForce, 0));
+                else
+                    rigidBody.AddForce(new Vector2(-dodgeForce, 0));
+                IsDodging = true;
+            }
+        }
+    }
+
+    void block()
+    {
+        if (GetComponent<PlayerScript>().getGrounded() == true)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                ThisAnimator.SetTrigger("initialBlock");
+                setIsBlocking(true);
+                shield.GetComponent<BoxCollider2D>().enabled = true;
+            }
+            if(Input.GetKeyUp(KeyCode.LeftShift) || !Input.GetKey(KeyCode.LeftShift))
+            {
+                setIsBlocking(false);
+                shield.GetComponent<BoxCollider2D>().enabled = false;
+            }
+               
+        }
+    }
+
+
+    void jump() {
 		if (Input.GetKeyDown("space")) {
 			if (GetComponent<PlayerScript> ().getGrounded () == true) {
 				rigidBody.velocity = new Vector2 (rigidBody.velocity.x,0);
 				rigidBody.AddForce (new Vector2 (0, jumpHeight));
 				canDoubleJump = true;
-			} else {
+                doubleJumpState();
+            } else {
 				if (canDoubleJump == true) {
 					canDoubleJump = false;
-					rigidBody.velocity = new Vector2(rigidBody.velocity.x,0);
+                    doubleJumpState();
+                    rigidBody.velocity = new Vector2(rigidBody.velocity.x,0);
 					rigidBody.AddForce (new Vector2 (0, jumpHeight));
 				}
 			}
@@ -82,9 +182,16 @@ public class PlayerControllerScript : Character
 	void move() {
 
 		movex = Input.GetAxis ("Horizontal");
-		//movey = Input.GetAxis ("Vertical"); we'll use this later for ladders
-		if (canMoveX)
-			rigidBody.velocity = new Vector2 (movex * Speed,rigidBody.velocity.y);
+        //movey = Input.GetAxis ("Vertical"); we'll use this later for ladders
+
+        //Set run animation based on input
+        ThisAnimator.SetFloat("speed", Mathf.Abs(movex));
+
+        //Tell animator the Y velocity
+        ThisAnimator.SetFloat("ySpeed", rigidBody.velocity.y);
+
+        if (canMoveX)
+			rigidBody.velocity = new Vector2 (IsBlocking? movex * blockSpeed : movex * characterStats.MovementSpeed,rigidBody.velocity.y);
 
 		float x = transform.localScale.x;
 		if (movex > 0 && x < 0)
@@ -156,4 +263,51 @@ public class PlayerControllerScript : Character
 		if (coll.gameObject.tag == "Ground")
 			smoothTerrain (coll);
 	}
+
+    //Tell the animator the current state of the double jump
+    private void doubleJumpState()
+    {
+        //If he can double jump then tell animator that he currently isn't double jumping
+        ThisAnimator.SetBool("inDoubleJump", !canDoubleJump);
+    }
+
+    //Gets next attack string for animator based on if the player is fast enough for a combo or it returns to first attack
+    private string getNextAttack()
+    {
+        if (firstAttack)
+        {
+
+            nextAttackTimer = delayForCombo + Time.time;
+
+            firstAttack = false;
+
+            return ATTACKS[attackCounter];
+        }
+        else
+        {
+
+            if (nextAttackTimer > Time.time)
+            {
+                attackCounter++;
+
+                if (attackCounter >= ATTACKS.Length)
+                    attackCounter = 0;
+            }
+            else
+                attackCounter = 0;
+
+
+            nextAttackTimer = delayForCombo + Time.time;
+            return ATTACKS[attackCounter];
+        }
+   
+
+    }
+
+    private void setIsBlocking(bool value)
+    {
+        IsBlocking = value;
+        ThisAnimator.SetBool("block", IsBlocking);
+    }
+
 }

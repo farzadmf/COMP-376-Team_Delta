@@ -26,12 +26,6 @@ public abstract class CombatCharacter : Character {
     public override  void Start () {
         //Call the start method of the parent class
         base.Start();
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-    
     }
 
 

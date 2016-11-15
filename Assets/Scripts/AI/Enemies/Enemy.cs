@@ -88,7 +88,7 @@ public class Enemy : CombatCharacter {
     public override void OnTriggerEnter2D(Collider2D other)
     {
         //Enemies Don't take damage from other enemies
-        if(other.tag != "EnemyDamage")
+        if (other.tag != "EnemyDamage")
         {
             //Tell parent about collision
             base.OnTriggerEnter2D(other);
@@ -96,6 +96,7 @@ public class Enemy : CombatCharacter {
             //Tells the current state that there was a collision with an object
             currentAIState.OnTriggerEnter(other);
         }
+        
     }
 
     public bool InMeleeRange
@@ -177,5 +178,6 @@ public class Enemy : CombatCharacter {
 
         }
     }
+
 
 }
