@@ -65,7 +65,6 @@ public class BatScript : Character {
 	}
 	public override void Start () {
 		base.Start ();
-		target = GameObject.Find ("Player").transform;
 		//circle = GetComponent<CircleCollider2D> ();
 		anim = GetComponent<Animator> ();
 		target = GameObject.FindWithTag ("Player").transform;
