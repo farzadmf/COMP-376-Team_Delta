@@ -8,7 +8,6 @@ public class PlayerControllerScript : Character
     public float jumpHeight;
     private Rigidbody2D rigidBody;
     private bool canDoubleJump;
-    public float hp;
     public CheckpointScript[] checkpoints;
     public string levelString;
     public BoxCollider2D rightCollider;
@@ -48,7 +47,8 @@ public class PlayerControllerScript : Character
 
     [SerializeField]
     private GameObject  shield;
-
+	public int staminaRegen;
+	public int hpRegen;
 
     // Use this for initialization
     public override void Start() {
@@ -72,6 +72,8 @@ public class PlayerControllerScript : Character
         attackCounter = 0;
         firstAttack = true;
         setIsBlocking(false);
+		InvokeRepeating ("staminaRegeneration", 0, 0.1f);
+		InvokeRepeating ("hpRegeneration", 0, 0.1f);
     }
 
     protected override void Update()
@@ -132,7 +134,7 @@ public class PlayerControllerScript : Character
             if (Input.GetKey(KeyCode.LeftAlt))
             {
                 ThisAnimator.SetTrigger("dodge");
-
+				base.characterStats.decreaseStamina (10);
                 rigidBody.velocity = new Vector2(0,0);
                 SetFacingDirection();
                 if (isFacingRight)
@@ -143,7 +145,18 @@ public class PlayerControllerScript : Character
             }
         }
     }
+	void staminaRegeneration() {
+		
+		if (base.characterStats.Stamina < base.characterStats.TotalStamina) {
+			GetComponent<PlayerControllerScript> ().characterStats.increaseStamina (staminaRegen);
+		}
+	}
+	void hpRegeneration() {
 
+		if (base.characterStats.Health < base.characterStats.TotalHealth) {
+			GetComponent<PlayerControllerScript> ().characterStats.increaseHealth (hpRegen);
+		}
+	}
     void block()
     {
         if (GetComponent<PlayerScript>().getGrounded() == true)

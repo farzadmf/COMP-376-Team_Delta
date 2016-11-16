@@ -2,12 +2,20 @@
 using System.Collections;
 
 public class FireballScript : MonoBehaviour {
-	public string type; // "normal" or "exploding"
+	private string type; // "normal" or "exploding"
+	private GameObject fireTrail;
 	// Use this for initialization
 	void Start () {
-	
-	}
+		fireTrail = transform.GetChild (0).GetChild (0).gameObject;
 
+	}
+	public void fireBallType(string t) {
+		type = t;
+		if (t == "normal") {
+			GetComponent<DamageDealer> ().Attack.BaseDamage -= 15;
+			GetComponent<DamageDealer> ().Attack.DamageOvertime.Damage = 1;
+		}
+	}
 	void OnCollisionEnter2D(Collision2D c) {
 		Debug.Log (c.gameObject.tag);
 		if (c.gameObject.tag == "Enemy") {

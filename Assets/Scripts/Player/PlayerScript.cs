@@ -12,11 +12,13 @@ public class PlayerScript : MonoBehaviour {
 	private bool canLifeSteal;
 	public int level;
 	private Animator anim;
+	private int currentStamina;
 
 	void Start() {
 		canMagic = false;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
 		anim = GetComponent<Animator>();
+
 	}
 	public void goDemonMode() {
 		canMagic = true;
@@ -54,12 +56,17 @@ public class PlayerScript : MonoBehaviour {
 					fireBurst ();
 			}
 		}
+		currentStamina = GetComponent<PlayerControllerScript> ().characterStats.Stamina;
 		playerAnimator ();
 	}
+
 	void fireBurst() {
-		GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
-		Vector3 cursorPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		g.transform.position = new Vector3 (cursorPos.x, transform.position.y - 1.5f, transform.position.z);
+		if (currentStamina > 50) {
+			GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
+			Vector3 cursorPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			g.transform.position = new Vector3 (cursorPos.x, transform.position.y - 1.5f, transform.position.z);
+			GetComponent<PlayerControllerScript> ().characterStats.decreaseStamina (50);
+		}
 		/*
 		if (transform.localScale.x > 0)
 			//g.transform.position = new Vector3 (transform.position.x+7,transform.position.y-1.5f,transform.position.z);
@@ -68,19 +75,29 @@ public class PlayerScript : MonoBehaviour {
 		*/
 	}
 	void shootFireball() {
-		GameObject g = (GameObject)Instantiate(Resources.Load ("Fireball"));
-		g.transform.position = new Vector3 (transform.position.x+1,transform.position.y,transform.position.z);
-		Vector3 v = new Vector3 (10, 2, 0);
-		if (transform.localScale.x < 0) {
-			v = new Vector3 (-v.x, v.y, 0);
-			g.transform.position = new Vector3 (transform.position.x-1,transform.position.y,transform.position.z);
-		}
+		if (currentStamina > 30) {
+			GameObject g = (GameObject)Instantiate (Resources.Load ("Fireball"));
+			g.transform.position = new Vector3 (transform.position.x + 1, transform.position.y, g.transform.position.z);
+			Vector3 cursorPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			float ballSpeed = 20f;
+			Vector3 v = ((cursorPos - g.transform.position).normalized * ballSpeed);
+			v.z = 0;
+			//Vector3 v = new Vector3 (10, 2, 0);
+			if (transform.localScale.x < 0) {
+				v = new Vector3 (-v.x, v.y, 0);
+				g.transform.position = new Vector3 (transform.position.x - 1, transform.position.y, transform.position.z);
+			}
 
-		g.GetComponent<Rigidbody2D> ().velocity = v;
-		if (level == 1)
-			g.GetComponent<FireballScript>().type = "normal";
-		else if (level == 2)
-			g.GetComponent<FireballScript>().type = "exploding";
+			g.GetComponent<Rigidbody2D> ().velocity = v;
+			if (level == 1) {
+				g.GetComponent<FireballScript> ().fireBallType ("normal");
+				GetComponent<PlayerControllerScript> ().characterStats.decreaseStamina (20);
+			} else if (level == 2) {
+				g.GetComponent<FireballScript> ().fireBallType ("exploding");
+				GetComponent<PlayerControllerScript> ().characterStats.decreaseStamina (30);
+			}
+			g.transform.GetChild (0).GetChild (0).parent = null;
+		}
 		//g.transform.GetChild (0).GetChild (0).GetComponent<Rigidbody2D> ().velocity = -v;
 	}
 
