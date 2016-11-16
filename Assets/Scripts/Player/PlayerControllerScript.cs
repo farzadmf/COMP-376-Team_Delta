@@ -85,11 +85,15 @@ public class PlayerControllerScript : Character
             if (!IsAttacking && !IsDodging)
             {
                 move();
-                jump();
-                dodge();
                 block();
-                if (CanUseSword)
-                attack();
+                if (!IsBlocking)
+                {
+                    jump();
+                    dodge();
+                    if (CanUseSword)
+                        attack();
+                }
+
             }
         }
      
