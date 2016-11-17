@@ -18,16 +18,18 @@ public class BatScript : Character {
 	private bool deaad;
 //	private CircleCollider2D circle;
 
-	// Use this for initialization
 	public override void OnCollisionEnter2D(Collision2D c) {
+		Debug.Log ("wtf");
 		base.OnCollisionEnter2D (c);
 		if (c.gameObject.tag == "Bullet") {
 			killMonster ();
 			Physics2D.GetIgnoreCollision (c.collider, GetComponent<BoxCollider2D> ());
 
 		} else if (c.gameObject.tag == "Player") {
+			Debug.Log ("sigh");
 			inPursue = false;
 		}
+		Debug.Log (c.gameObject.tag);
 	}
 	void OnCollisionExit2D(Collision2D c) {
 		if (c.gameObject.tag == "Player") {

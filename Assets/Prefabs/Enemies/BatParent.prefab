@@ -27,7 +27,7 @@ GameObject:
   - 58: {fileID: 58000013375500892}
   - 61: {fileID: 61000012554295474}
   - 114: {fileID: 114000010037778816}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: Enemy
   m_TagString: Bat
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - 58: {fileID: 58000012958054962}
   - 114: {fileID: 114000010674624630}
   - 114: {fileID: 114000011278894654}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,6 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a33a2a7b594a34b9017144757224ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthSlider: {fileID: 0}
+  StaminaSlider: {fileID: 0}
   characterStats:
     TotalHealth: 200
     Health: 200
@@ -312,7 +314,6 @@ MonoBehaviour:
   - Fireball
   - Bullet
   - FireBurst
-  target: {fileID: 0}
   audio1: {fileID: 0}
   audio2: {fileID: 0}
 --- !u!212 &212000010744808316
