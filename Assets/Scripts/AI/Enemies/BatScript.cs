@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BatScript : Character {
-	public Transform target;
+	private Transform target;
 	private float moveSpeed = 1.5f; //move speed 
 	//private float rotationSpeed = 0.5f; //speed of turning
 	private bool inPursue;
