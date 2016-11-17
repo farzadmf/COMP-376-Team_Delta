@@ -75,7 +75,6 @@ public class PlayerControllerScript : Character
 		InvokeRepeating ("staminaRegeneration", 0, 0.1f);
 		InvokeRepeating ("hpRegeneration", 0, 0.1f);
     }
-
     protected override void Update()
     {
         base.Update();
@@ -137,7 +136,7 @@ public class PlayerControllerScript : Character
 				base.characterStats.decreaseStamina (10);
                 rigidBody.velocity = new Vector2(0,0);
                 SetFacingDirection();
-                if (isFacingRight)
+				if (isFacingRight)
                     rigidBody.AddForce(new Vector2(dodgeForce, 0));
                 else
                     rigidBody.AddForce(new Vector2(-dodgeForce, 0));
