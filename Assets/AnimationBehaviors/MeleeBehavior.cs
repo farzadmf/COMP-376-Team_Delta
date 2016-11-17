@@ -26,8 +26,6 @@ public class MeleeBehavior : StateMachineBehaviour {
         animator.ResetTrigger("longRangeAttack");
         animator.GetComponent<CombatCharacter>().IsAttacking = false;
 
-        //Disable melee collider
-        animator.GetComponent<CombatCharacter>().DisableMeleeCollider();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
