@@ -12,7 +12,6 @@ public class FireBurstScript : MonoBehaviour {
 		Invoke ("destroy",4f);
 	}
 	void destroy() {
-		Debug.Log ("destroying fire burst");
 		Destroy (gameObject);
 	}
 	void thriceHit() {

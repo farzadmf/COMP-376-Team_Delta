@@ -13,12 +13,21 @@ public class PlayerScript : MonoBehaviour {
 	public int level;
 	private Animator anim;
 	private int currentStamina;
-
+	private float cooldown;
 	void Start() {
+		cooldown = 0;
 		canMagic = false;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
 		anim = GetComponent<Animator>();
 
+	}
+	void coolTheDown() {
+		if (cooldown > 0)
+			cooldown -= 0.1f;
+		else {
+			cooldown = 0;
+			CancelInvoke ("coolTheDown");
+		}
 	}
 	public void goDemonMode() {
 		canMagic = true;
@@ -59,44 +68,54 @@ public class PlayerScript : MonoBehaviour {
 		currentStamina = GetComponent<PlayerControllerScript> ().characterStats.Stamina;
 		playerAnimator ();
 	}
-
+	void manageCooldown(float cd) {
+		cooldown = cd;
+		InvokeRepeating ("coolTheDown",0,0.1f);
+	}
 	void fireBurst() {
-		if (currentStamina > 50) {
-			GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
+		if (cooldown == 0) {
+			
+
 			Vector3 cursorPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			g.transform.position = new Vector3 (cursorPos.x, transform.position.y - 1.5f, transform.position.z);
-			GetComponent<PlayerControllerScript> ().characterStats.decreaseStamina (50);
+			bool cursorRight = false;
+			if (cursorPos.x > transform.position.x)
+				cursorRight = true;
+			if ((cursorRight && transform.localScale.x > 0)
+				|| (transform.localScale.x < 0 && !cursorRight)) {
+				GameObject g = (GameObject)Instantiate (Resources.Load ("FireBurst"));
+				g.transform.position = new Vector3 (cursorPos.x, transform.position.y - 1.5f, transform.position.z);
+				manageCooldown (1.5f);
+			}
 		}
-		/*
-		if (transform.localScale.x > 0)
-			//g.transform.position = new Vector3 (transform.position.x+7,transform.position.y-1.5f,transform.position.z);
-		else
-			g.transform.position = new Vector3 (transform.position.x-7,transform.position.y-1.5f,transform.position.z);
-		*/
 	}
 	void shootFireball() {
-		if (currentStamina > 30) {
-			GameObject g = (GameObject)Instantiate (Resources.Load ("Fireball"));
-			g.transform.position = new Vector3 (transform.position.x + 1, transform.position.y, g.transform.position.z);
+		if (cooldown == 0) {
 			Vector3 cursorPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			float ballSpeed = 20f;
-			Vector3 v = ((cursorPos - g.transform.position).normalized * ballSpeed);
-			v.z = 0;
-			//Vector3 v = new Vector3 (10, 2, 0);
-			if (transform.localScale.x < 0) {
-				v = new Vector3 (-v.x, v.y, 0);
-				g.transform.position = new Vector3 (transform.position.x - 1, transform.position.y, transform.position.z);
-			}
+			bool cursorRight = false;
+			if (cursorPos.x > transform.position.x)
+				cursorRight = true;
+			if ((cursorRight && transform.localScale.x > 0)
+				|| (transform.localScale.x < 0 && !cursorRight)) {
+				GameObject g = (GameObject)Instantiate (Resources.Load ("Fireball"));
+				g.transform.position = new Vector3 (transform.position.x + 1, transform.position.y, g.transform.position.z);
+			
+				float ballSpeed = 20f;
+				Vector3 v = ((cursorPos - g.transform.position).normalized * ballSpeed);
+				v.z = 0;
+				if (transform.localScale.x < 0) {
+					g.transform.position = new Vector3 (transform.position.x - 1, transform.position.y, transform.position.z);
+				}
 
-			g.GetComponent<Rigidbody2D> ().velocity = v;
-			if (level == 1) {
-				g.GetComponent<FireballScript> ().fireBallType ("normal");
-				GetComponent<PlayerControllerScript> ().characterStats.decreaseStamina (20);
-			} else if (level == 2) {
-				g.GetComponent<FireballScript> ().fireBallType ("exploding");
-				GetComponent<PlayerControllerScript> ().characterStats.decreaseStamina (30);
+				g.GetComponent<Rigidbody2D> ().velocity = v;
+				if (level == 1) {
+					g.GetComponent<FireballScript> ().fireBallType ("normal");
+					manageCooldown (0.5f);
+				} else if (level == 2) {
+					manageCooldown (0.7f);
+					g.GetComponent<FireballScript> ().fireBallType ("exploding");
+				}
+				g.transform.GetChild (0).GetChild (0).parent = null;
 			}
-			g.transform.GetChild (0).GetChild (0).parent = null;
 		}
 		//g.transform.GetChild (0).GetChild (0).GetComponent<Rigidbody2D> ().velocity = -v;
 	}
