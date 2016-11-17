@@ -77,11 +77,13 @@ public class MeleeState : IAIState {
                     thisEnemy.ThisAnimator.SetTrigger("mediumRangeAttack");
                 }
 
-                else if(thisEnemy.targetDistance() < 10)
+                else if(thisEnemy.targetDistance() < 10 & thisEnemy.targetDistance() > 8)
                 {
                     thisEnemy.ThisAnimator.SetTrigger("longRangeAttack");
                 }
-                    
+                else
+                    thisEnemy.ChangeState(new PatrolState());
+
             }
         }
 
