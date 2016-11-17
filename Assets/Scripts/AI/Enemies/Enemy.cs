@@ -169,7 +169,7 @@ public class Enemy : CombatCharacter {
                 //if distance is negative then the target is to the left else they are to the right
                 //If im already looking there then don't do anything else change direction
 
-                if (distance < 0 && isFacingRight || distance > 0 && !isFacingRight)
+                if (distance < 0 && isFacingRight || distance > 0 && !isFacingRight && !IsAttacking)
                 {
 
                     ChangeDirection();

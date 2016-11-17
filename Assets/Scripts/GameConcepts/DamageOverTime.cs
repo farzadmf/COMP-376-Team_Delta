@@ -16,4 +16,8 @@ public class DamageOverTime{
     //Damage intervals
     public float Intervals;
 
+    public int DamageInstances { get; set; }
+
+    public float totalDuration { get; set; }
+
 }

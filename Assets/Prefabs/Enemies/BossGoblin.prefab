@@ -103,8 +103,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010416845878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 403.2, y: 6.69, z: 0}
-  m_LocalScale: {x: 1.9073353, y: 1.9073335, z: 1.9073335}
+  m_LocalPosition: {x: 403.2, y: 8.3, z: 0}
+  m_LocalScale: {x: 3.71403, y: 3.7140265, z: 3.7140265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012910859340}
@@ -118,8 +118,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012987628622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.64547443, y: -1.2960972, z: 0}
-  m_LocalScale: {x: 0.6375011, y: 0.2125006, z: 1}
+  m_LocalPosition: {x: 5.33, y: -1.2960972, z: 0}
+  m_LocalScale: {x: 0.2806783, y: 0.17716938, z: 0.6645718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000011764777814}
@@ -193,9 +193,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.3095312, y: 0.020130038}
+  m_Offset: {x: 0, y: 0.18046379}
   serializedVersion: 2
-  m_Size: {x: 1.822303, y: 4.372261}
+  m_Size: {x: 0.9504281, y: 2.190448}
 --- !u!61 &61000013105522716
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -221,17 +221,18 @@ EdgeCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 2.6, y: 0}
+  m_Offset: {x: 2.15, y: 1.08}
   m_Points:
-  - {x: -2.1830976, y: 1.7112392}
-  - {x: -0.76520824, y: 0.101846695}
+  - {x: -1.6833248, y: 1.8744453}
+  - {x: -0.8702278, y: -0.6597593}
   - {x: -0.69170475, y: -1.1018896}
   - {x: -0.062000275, y: -1.1188639}
-  - {x: 2.3, y: -1.1306857}
-  - {x: 2.11, y: 1.0063305}
-  - {x: 1.17, y: 3.0396948}
-  - {x: -1.8102174, y: 3.9149237}
-  - {x: -2.1651373, y: 1.7236235}
+  - {x: 0.7844615, y: -1.1455444}
+  - {x: 0.95977545, y: 0.04239416}
+  - {x: 0.9213376, y: 0.9320396}
+  - {x: 0.32308626, y: 1.9996256}
+  - {x: -0.67322063, y: 2.503862}
+  - {x: -1.683136, y: 1.8748115}
 --- !u!95 &95000012002885294
 Animator:
   serializedVersion: 3
@@ -260,6 +261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9090226ff4728db418ade1d146266a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthSlider: {fileID: 0}
+  StaminaSlider: {fileID: 0}
   characterStats:
     TotalHealth: 1000
     Health: 1000
@@ -307,16 +310,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attack:
-    BaseDamage: 20
+    BaseDamage: 50
     Cooldown: 0
     Range: 0
     Force: 500
-    DamageType: 0
+    DamageType: 7
     DamageOvertime:
-      IsDamageOvertime: 0
-      Damage: 0
-      Duration: 0
-      Intervals: 0
+      IsDamageOvertime: 1
+      Damage: 15
+      Duration: 1
+      Intervals: 1
 --- !u!114 &114000012911218676
 MonoBehaviour:
   m_ObjectHideFlags: 1

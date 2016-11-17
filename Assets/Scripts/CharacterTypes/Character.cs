@@ -155,7 +155,7 @@ public abstract class Character : MonoBehaviour {
     private void DeleteCharacter(float delay)
     {
         //If it's an enemy then you want to destroy the parent
-        if (gameObject.tag == "Enemy")
+        if (gameObject.tag == "Enemy" || gameObject.tag == "Boss")
             Destroy(gameObject.transform.parent.gameObject, delay);
         else
             Destroy(gameObject, delay);
@@ -250,15 +250,23 @@ public abstract class Character : MonoBehaviour {
                   //Check Force push values of attack and compare them to our stats
                   //Adds a force based on collision direction but only if Character didn't resits it then applies the remainder of force after resistence
                  AddForce(attack, other);
-                
+
 
                 //Check if this attack apllies damage overtime
                 if ((attack.DamageOvertime.IsDamageOvertime))
                 {
-                    attack.DamageOvertime.Duration += Time.time;
+                    if (attack.DamageOvertime.DamageInstances > 0)
+                    {
+                        attack.DamageOvertime.totalDuration = attack.DamageOvertime.Duration;
+                    }
+                    else
+                        attack.DamageOvertime.totalDuration = attack.DamageOvertime.Duration + Time.time;
 
+
+                    attack.DamageOvertime.DamageInstances++;
                     //Start coroutine that will damage this character at each interval until duration is over
                     StartCoroutine(doDamageOverTime(attack));
+
                 }
 
             }
@@ -303,11 +311,18 @@ public abstract class Character : MonoBehaviour {
                     //Check if this attack apllies damage overtime
                      if ((attack.DamageOvertime.IsDamageOvertime))
                      {
-                        //Do damage overtime
-                        attack.DamageOvertime.Duration += Time.time;
+                        if (attack.DamageOvertime.DamageInstances > 0)
+                        {
+                            attack.DamageOvertime.totalDuration = attack.DamageOvertime.Duration;
+                        }
+                        else
+                            attack.DamageOvertime.totalDuration = attack.DamageOvertime.Duration + Time.time;
 
+
+                        attack.DamageOvertime.DamageInstances ++;
                         //Start coroutine that will damage this character at each interval until duration is over
                         StartCoroutine(doDamageOverTime(attack));
+                    
                     }
 
             }
@@ -342,12 +357,14 @@ public abstract class Character : MonoBehaviour {
     private IEnumerator doDamageOverTime(Attack attack)
     {
 
-        while (attack.DamageOvertime.Duration > Time.time)
+        while (attack.DamageOvertime.totalDuration > Time.time)
         {
          yield return new WaitForSeconds(attack.DamageOvertime.Intervals);
             TakeDamage(new Damage(attack.DamageOvertime.Damage,attack.DamageType),false);
         }
-       
+
+        attack.DamageOvertime.DamageInstances--;
+
     }
 
     //Adds force but for triggers
