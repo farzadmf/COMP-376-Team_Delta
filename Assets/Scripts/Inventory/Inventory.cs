@@ -107,13 +107,13 @@ public class Inventory : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            UpdatePlayerWithItem(GetHotkeyItem(0));
+            UseHotKeyItem(0);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
-            UpdatePlayerWithItem(GetHotkeyItem(1));
+            UseHotKeyItem(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
-            UpdatePlayerWithItem(GetHotkeyItem(2));
+            UseHotKeyItem(3);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
-            UpdatePlayerWithItem(GetHotkeyItem(3));
+            UseHotKeyItem(4);
     }
 
     private void OnItemDropped(int slotIndex, GameObject itemObject)
@@ -121,10 +121,11 @@ public class Inventory : MonoBehaviour
         var itemObjectData = itemObject.GetComponent<ItemData>();
         var item = itemObjectData.Item;
 
+        // Avoid adding the item to a hot-key that slot already contains an item
         if (_hotKeyItems.ContainsKey(slotIndex))
-            _hotKeyItems[slotIndex] = item;
-        else
-            _hotKeyItems.Add(slotIndex, item);
+            return;
+
+        _hotKeyItems.Add(slotIndex, item);
 
         var hotkeyItem = Instantiate(HotkeyItem);
 
@@ -140,9 +141,7 @@ public class Inventory : MonoBehaviour
 
         hotkeyItem.transform.SetParent(slot.transform);
         var hotKeyItemImage = hotkeyItem.GetComponent<Image>();
-        hotKeyItemImage.sprite = item.Sprite;
-        hotKeyItemImage.type = Image.Type.Filled;
-        hotKeyItemImage.preserveAspect = true;
+        SetItemImage(hotKeyItemImage, item);
         hotkeyItem.transform.position = _hotKeySlots[slotIndex].transform.position;
 
         // If item has not been dragged from another hot-key slot, update amount
@@ -172,6 +171,20 @@ public class Inventory : MonoBehaviour
         Destroy(itemObject);
     }
 
+    private static void SetItemImage(Image itemImageObject, Item item)
+    {
+        itemImageObject.sprite = item.Sprite;
+        itemImageObject.type = Image.Type.Filled;
+        itemImageObject.preserveAspect = true;
+
+        if (!item.FlipIcon)
+            return;
+
+        var imageScale = itemImageObject.transform.localScale;
+        imageScale.x = -imageScale.x;
+        itemImageObject.transform.localScale = imageScale;
+    }
+
     public void AddItem(int id)
     {
         var item = ItemDatabase.Instance.GetItem(id);
@@ -194,20 +207,9 @@ public class Inventory : MonoBehaviour
         AddItemToSlot(item.Id, item);
     }
 
-    public Item GetHotkeyItem(int hotkeyIndex)
+    private Item GetHotkeyItem(int hotkeyIndex)
     {
         var item = _hotKeyItems.ContainsKey(hotkeyIndex) ? _hotKeyItems[hotkeyIndex] : null;
-        if (item == null)
-            return null;
-
-        if (item.Type != Consumable)
-            return item;
-
-        // Remove the item from hot-keys (we know that the slot has only a single child)
-        // Also, change the name to be the default
-        Destroy(_hotKeySlots[hotkeyIndex].transform.GetChild(0).gameObject);
-        _hotKeySlots[hotkeyIndex].name = $"HotKeySlot{hotkeyIndex + 1}";
-        _hotKeyItems.Remove(hotkeyIndex);
         return item;
     }
 
@@ -220,9 +222,7 @@ public class Inventory : MonoBehaviour
         itemObject.transform.position = slot.transform.position;
         // Set the image
         var itemObjectImage = itemObject.GetComponent<Image>();
-        itemObjectImage.sprite = item.Sprite;
-        itemObjectImage.type = Image.Type.Filled;
-        itemObjectImage.preserveAspect = true;
+        SetItemImage(itemObjectImage, item);
         // Set the name for 'slot' and 'item'
         itemObject.name = $"{item.Title} Image";
         slot.name = $"{item.Title} Slot";
@@ -231,8 +231,31 @@ public class Inventory : MonoBehaviour
         itemObject.GetComponent<ItemData>().Slot = slotIndex;
     }
 
-    private void UpdatePlayerWithItem(Item item)
+    private void UseHotKeyItem(int hotKeyIndex)
     {
+        if (!_hotKeyItems.ContainsKey(hotKeyIndex))
+            return;
+
+        var hotKeyObject = _hotKeySlots[hotKeyIndex];
+        Transform hotKeyImage;
+
+        if (_hotKeyItems[hotKeyIndex].Type == Weapon)
+        {
+            var originalImage = hotKeyObject.transform.GetChild(0);
+            hotKeyImage = Instantiate(originalImage);
+            hotKeyImage.transform.position = originalImage.transform.position;
+            hotKeyImage.transform.SetParent(hotKeyObject.transform);
+        }
+        else
+            hotKeyImage = hotKeyObject.transform.GetChild(0);
+            
+        var controller = hotKeyImage.GetComponent<HotKeyItemController>();
+        controller.MoveToPlayer();
+    }
+
+    public void UpdatePlayerWithHotKeyItem(int hotKeyIndex)
+    {
+        var item = GetHotkeyItem(hotKeyIndex);
         if (item == null)
             return;
 
@@ -240,6 +263,13 @@ public class Inventory : MonoBehaviour
         {
             case Consumable:
                 UpdatePlayerWithConsumable(item);
+
+                // Remove the item from hot-keys (we know that the slot has only a single child)
+                // Also, change the name to be the default
+                Destroy(_hotKeySlots[hotKeyIndex].transform.GetChild(0).gameObject);
+                _hotKeySlots[hotKeyIndex].name = $"hotKeySlot{hotKeyIndex + 1}";
+                _hotKeyItems.Remove(hotKeyIndex);
+
                 break;
             case Weapon:
                 UpdatePlayerWithWeapon(item);

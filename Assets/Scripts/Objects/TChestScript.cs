@@ -15,6 +15,17 @@ public class TChestScript : MonoBehaviour
         droppedOnce = false;
     }
 
+    // ReSharper disable once UnusedMember.Local
+    private void Update()
+    {
+        if (loot == null)
+            return;
+
+        var velocity = loot.GetComponent<Rigidbody2D>().velocity;
+        var colliderComponent = loot.GetComponent<Collider2D>();
+        colliderComponent.isTrigger = velocity.y > 0;
+    }
+
     public void activatedChest()
     {
         int random = Random.Range(0, 1);

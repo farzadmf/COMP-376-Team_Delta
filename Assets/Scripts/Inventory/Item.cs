@@ -38,6 +38,8 @@ public class Item
 
     public bool Stackable { get; set; }
 
+    public bool FlipIcon { get; set; }
+
     private int _iconIndex;
     public int IconIndex
     {

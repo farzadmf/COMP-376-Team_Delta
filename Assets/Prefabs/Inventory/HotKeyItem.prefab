@@ -24,6 +24,7 @@ GameObject:
   - 114: {fileID: 114000011981541296}
   - 114: {fileID: 114000010996586790}
   - 225: {fileID: 225000012557849584}
+  - 114: {fileID: 114000011690711886}
   m_Layer: 5
   m_Name: HotKeyItem
   m_TagString: Untagged
@@ -76,6 +77,22 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+--- !u!114 &114000011690711886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011084587428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656dd8a29f4f3874e83458aad4b17a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveToPlayerSpeed: 3
+  MinDistance: 10
+  MaxScale: 3
+  MinScale: 0.2
+  ScaleMargin: 0.5
 --- !u!114 &114000011981541296
 MonoBehaviour:
   m_ObjectHideFlags: 1

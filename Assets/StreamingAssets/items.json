@@ -4,6 +4,7 @@
     "title": "Red Potion",
     "type": "Consumable",
     "description": "A potion that is red. Yeah!",
+    "flipIcon": false,
     "iconIndex": "31",
     "stackable": true,
     "stats": {
@@ -31,6 +32,7 @@
       }
     },
     "description": "It's a stick that's pretty great!",
+    "flipIcon": true,
     "iconIndex": "73",
     "stackable": false
   },
@@ -52,6 +54,7 @@
       }
     },
     "description": "It's a powerful axe, be careful!",
+    "flipIcon": true,
     "iconIndex": "110",
     "stackable": false
   }

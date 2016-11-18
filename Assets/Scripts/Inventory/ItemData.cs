@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.EventSystems.PointerEventData;
 
 // ReSharper disable once CheckNamespace
 public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
@@ -28,7 +29,7 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Item == null)
+        if (Item == null || eventData.button != InputButton.Right)
             return;
 
         _offset = eventData.position - (Vector2) transform.position;
@@ -37,11 +38,16 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
         SetPosition(eventData.position);
     }
 
-    public void OnPointerDown(PointerEventData eventData) => _originalParent = transform.parent;
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button != InputButton.Right)
+            return;
 
+        _originalParent = transform.parent;
+    }
     public void OnDrag(PointerEventData eventData)
     {
-        if (Item == null)
+        if (Item == null || eventData.button != InputButton.Right)
             return;
 
         SetPosition(eventData.position);
@@ -49,6 +55,9 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (eventData.button != InputButton.Right)
+            return;
+
         transform.SetParent(_originalParent);
         GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _canvasGroup.blocksRaycasts = true;
