@@ -78,7 +78,15 @@ public class GameStateScript : MonoBehaviour {
 	void addSpecialEnemies() {
 		if (toState == "Night") {
 			nightTimeEnemies.SetActive (true);
-
+			for (int i = 0; i < nightTimeEnemies.transform.childCount; ++i) {
+				Transform enemy = nightTimeEnemies.transform.GetChild (i).FindChild("Enemy");
+				for (int j = 0; j < enemy.childCount; ++j) {
+					Transform fireEffect = enemy.GetChild (j);
+					if (fireEffect.tag == "Fire") {
+						Destroy (fireEffect.gameObject);
+					}
+				}
+			}
 		} else if (toState == "Day") {
 			nightTimeEnemies.SetActive (false);
 		}

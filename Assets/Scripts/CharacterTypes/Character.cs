@@ -365,6 +365,10 @@ public abstract class Character : MonoBehaviour {
 
         attack.DamageOvertime.DamageInstances--;
 
+		Transform fireEffect = transform.FindChild ("Fire1(Clone)");
+		if (fireEffect) {
+			Destroy (fireEffect.gameObject);
+		}
     }
 
     //Adds force but for triggers
