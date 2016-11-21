@@ -300,5 +300,25 @@ public class Inventory : MonoBehaviour
         _playerScript.weapon = newWeapon;
     }
 
-    private void UpdatePlayerWithConsumable(Item item) { }
+    private void UpdatePlayerWithConsumable(Item item)
+    {
+        var currentHealth   = _playerControllerScript.characterStats.Health;
+        var currentStamina  = _playerControllerScript.characterStats.Stamina;
+        var currentStrength = _playerControllerScript.characterStats.Strength;
+        var currentDefense  = _playerControllerScript.characterStats.Strength;
+
+        var newHealth   = currentHealth + item.Stats.Health;
+        var newStamina  = currentStamina + item.Stats.Stamina;
+        var newStrength = currentStrength + item.Stats.Strength;
+        var newDefense  = currentDefense + item.Stats.Defense;
+
+        _playerControllerScript.characterStats.Health =
+                Mathf.Min(newHealth, _playerControllerScript.characterStats.TotalHealth);
+
+        _playerControllerScript.characterStats.Stamina =
+                Mathf.Min(newStamina, _playerControllerScript.characterStats.TotalStamina);
+
+        _playerControllerScript.characterStats.Strength = newStrength;
+        _playerControllerScript.characterStats.Defense = newDefense;
+    }
 }
