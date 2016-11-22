@@ -1284,7 +1284,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0.32825089, y: 0.2371893}
+  m_Offset: {x: 0.92, y: 0.2371893}
   serializedVersion: 2
   m_Size: {x: 1.2108123, y: 2.3115287}
 --- !u!114 &78353549
@@ -1301,6 +1301,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 1000012238222458, guid: f4638d58daf03f242b01521346ad0f42,
     type: 2}
   blockPrefabLocation: {fileID: 223221352}
+  parent: {fileID: 486215587}
 --- !u!114 &78353550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8658,9 +8659,11 @@ MonoBehaviour:
   delayForCombo: 2
   dodgeForce: 850
   blockSpeed: 2
+  dodgeCost: 50
   shield: {fileID: 78353546}
   staminaRegen: 1
   hpRegen: 2
+  delayAfterDeath: 0
 --- !u!4 &486215596
 Transform:
   m_ObjectHideFlags: 0
@@ -9572,7 +9575,7 @@ ParticleSystem:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 512964249}
-  serializedVersion: 4
+  serializedVersion: 2
   lengthInSec: 0.5
   startDelay:
     scalar: 0
@@ -9610,13 +9613,12 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
+  randomSeed: 2946986240
   looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
-  autoRandomSeed: 0
   scalingMode: 2
-  randomSeed: -1347981056
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -35274,7 +35276,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011764777814, guid: 4c9ecf995a8fcea469db89e478739e14, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 8.3
+      value: 10.18
       objectReference: {fileID: 0}
     - target: {fileID: 4000011764777814, guid: 4c9ecf995a8fcea469db89e478739e14, type: 2}
       propertyPath: m_LocalPosition.z

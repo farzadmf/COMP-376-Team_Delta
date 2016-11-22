@@ -24,12 +24,12 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 0.6
+      - time: 0.48
         value: 1
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 0.7
+      - time: 0.56
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -45,33 +45,33 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: 6061871c7c0f9224ea67bc5274bba089, type: 3}
-    - time: 0.05
+    - time: 0.04
       value: {fileID: 21300000, guid: 7ae1f6c1e53499943a645530f61e7c8d, type: 3}
-    - time: 0.1
+    - time: 0.08
       value: {fileID: 21300000, guid: bb46cf6ec31dceb45aa9998d11e1f6c8, type: 3}
-    - time: 0.15
+    - time: 0.12
       value: {fileID: 21300000, guid: ca84c3ca77df92e4bb00b73a8699e193, type: 3}
-    - time: 0.2
+    - time: 0.16
       value: {fileID: 21300000, guid: 84c7ed400617a4c4aa87b2ff4e539309, type: 3}
-    - time: 0.25
+    - time: 0.2
       value: {fileID: 21300000, guid: c800ae66fe0321d43a2ccae2ce2f0193, type: 3}
-    - time: 0.3
+    - time: 0.24
       value: {fileID: 21300000, guid: 476eb3da8cbfe5c4b859caf1d7990104, type: 3}
-    - time: 0.35
+    - time: 0.28
       value: {fileID: 21300000, guid: 54bc3af3af6203b48a6780d5af1d089c, type: 3}
-    - time: 0.5
+    - time: 0.4
       value: {fileID: 21300000, guid: 3c77cd40006f8b34e9407a1aab6bdf30, type: 3}
-    - time: 0.6
+    - time: 0.48
       value: {fileID: 21300000, guid: f33e18802fcc17a4f9077c62a894b978, type: 3}
-    - time: 0.65
+    - time: 0.52
       value: {fileID: 21300000, guid: c277429af5e07944998eb42d8b75f22b, type: 3}
-    - time: 0.7
+    - time: 0.56
       value: {fileID: 21300000, guid: a65bbcde9664f974db6267f4c95b31c6, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 20
+  m_SampleRate: 25
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -108,7 +108,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.75
+    m_StopTime: 0.6
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -132,12 +132,12 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 0.6
+      - time: 0.48
         value: 1
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 0.7
+      - time: 0.56
         value: 0
         inSlope: Infinity
         outSlope: Infinity

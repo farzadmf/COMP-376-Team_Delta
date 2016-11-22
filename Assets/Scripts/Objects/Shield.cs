@@ -9,6 +9,10 @@ public class Shield : MonoBehaviour {
     [SerializeField]
     Transform blockPrefabLocation;
 
+    [SerializeField]
+    GameObject parent;
+
+
     //Is called when this object triggers a collision
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,6 +29,11 @@ public class Shield : MonoBehaviour {
             }
              else
                  Destroy(other.gameObject);
+
+            if (parent.gameObject.GetComponent<Character>())
+            {
+                parent.GetComponent<Character>().characterStats.decreaseStamina(other.gameObject.GetComponent<DamageDealer>().Attack.BaseDamage/4);
+            }
 
         }
 

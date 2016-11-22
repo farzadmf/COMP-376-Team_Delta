@@ -26,7 +26,7 @@ public class IdleState : IAIState {
         if(thisEnemy.Target != null)
         {
             if(!thisEnemy.cantMove)
-               thisEnemy.ChangeState(new PatrolState());
+               thisEnemy.ChangeState(new ChasingState());
             else
             {
                 //if he is in range for projectile attack then go into ranged state

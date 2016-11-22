@@ -121,6 +121,10 @@ public abstract class Character : MonoBehaviour {
         {
             ThisAnimator.SetTrigger("death");
 
+            if (gameObject.tag == "Player")
+            {
+                gameObject.GetComponent<PlayerControllerScript>().Restart();
+            }
             //Destroy After animation length
             AnimatorClipInfo[] clipInfo = ThisAnimator.GetCurrentAnimatorClipInfo(0);
 
@@ -128,7 +132,6 @@ public abstract class Character : MonoBehaviour {
 
             for (int i =0; i < clipInfo.Length;i++)
             {
-               
                 if (clipInfo[i].clip.name == "die")
                 {
                     index = i;
@@ -136,7 +139,7 @@ public abstract class Character : MonoBehaviour {
 
             }
 
-            if(index != -1)
+            if (index != -1)
             {
                 DeleteCharacter(clipInfo[index].clip.length);
             }
@@ -169,11 +172,13 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+
+
     /* ---------------------------------------------Combat--------------------------------------------*/
 
-    /* ----------------Give Damage----------------*/
+        /* ----------------Give Damage----------------*/
 
-    //Calculates damage based on Character Stats And An Attack
+        //Calculates damage based on Character Stats And An Attack
     private Damage CalculateDamage(Attack attack, CharacterStats stats)
     {
         Damage damage = new Damage();
@@ -279,14 +284,15 @@ public abstract class Character : MonoBehaviour {
     {
         if (!IsDead())
         {
-            if (gameObject.tag == "Player")
-            {
-                if (gameObject.GetComponent<PlayerControllerScript>().IsBlocking)
-                    return;
-            }
+       
             //If character can take damage from this source
             if (damageSources.Contains(other.gameObject.tag))
             {
+                if (gameObject.tag == "Player")
+                {
+                    if (gameObject.GetComponent<PlayerControllerScript>().IsBlocking)
+                        return;
+                }
 
                     Attack attack = other.gameObject.GetComponent<DamageDealer>().Attack;
                   

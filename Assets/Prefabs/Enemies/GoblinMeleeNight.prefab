@@ -294,8 +294,10 @@ MonoBehaviour:
     type: 2}
   projectilePosition: {fileID: 4000011436396058}
   meleeCollider: {fileID: 68000012996675214}
-  meleeRange: 2
+  meleeRange: 2.5
   projectileRange: 0
+  delayBeforeChasing: 0.5
+  delayBeforeAttacking: 0.5
   cantMove: 0
 --- !u!114 &114000014198110282
 MonoBehaviour:

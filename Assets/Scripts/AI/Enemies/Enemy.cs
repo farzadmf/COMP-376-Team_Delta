@@ -15,6 +15,12 @@ public class Enemy : CombatCharacter {
     private float projectileRange;
 
     [SerializeField]
+    public float delayBeforeChasing;
+
+    [SerializeField]
+    public float delayBeforeAttacking;
+
+    [SerializeField]
     public bool cantMove;
 
 
@@ -72,10 +78,15 @@ public class Enemy : CombatCharacter {
 
             //Translate
             transform.Translate(new Vector3(1 * (characterStats.MovementSpeed * Time.deltaTime), 0,0));
-        
+
         }
        
 
+    }
+
+    public void StopMoving()
+    {
+        ThisAnimator.SetFloat("movementSpeed", 0);
     }
 
     //Gets a vector of which direction they are facing

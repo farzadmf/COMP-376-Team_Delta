@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010416845878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 403.2, y: 10.29, z: 0}
+  m_LocalPosition: {x: 403.2, y: 10.25, z: 0}
   m_LocalScale: {x: 3.71403, y: 3.7140265, z: 3.7140265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -285,6 +285,8 @@ MonoBehaviour:
   meleeCollider: {fileID: 68000013305368912}
   meleeRange: 10
   projectileRange: 0
+  delayBeforeChasing: 0
+  delayBeforeAttacking: 0
   cantMove: 0
 --- !u!114 &114000011184448446
 MonoBehaviour:

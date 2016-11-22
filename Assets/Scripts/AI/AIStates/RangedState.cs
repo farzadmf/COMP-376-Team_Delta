@@ -26,7 +26,7 @@ public class RangedState : IAIState {
         //If there is a target then move towards him
         else if (thisEnemy.Target != null && !thisEnemy.cantMove)
         {
-            thisEnemy.Move();
+            thisEnemy.ChangeState(new ChasingState());
         }
         else if(thisEnemy.cantMove && thisEnemy.Target == null)
         {

@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MeleeBehavior : StateMachineBehaviour {
+public class PlayerDamageBehavior : StateMachineBehaviour
+{
 
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<CombatCharacter>().IsAttacking = true;
-
-        //Currently when a combat character is attacking then he stops moving
-        animator.SetFloat("movementSpeed", 0);
+        animator.GetComponent<Character>().IsTakingDamage = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,9 +18,15 @@ public class MeleeBehavior : StateMachineBehaviour {
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      
-        animator.GetComponent<CombatCharacter>().IsAttacking = false;
+        animator.ResetTrigger("attack1");
+        animator.ResetTrigger("attack2");
+        animator.ResetTrigger("attack3");
+        animator.ResetTrigger("dodge");
+        animator.GetComponent<PlayerControllerScript>().IsAttacking = false;
+        animator.GetComponent<PlayerControllerScript>().IsDodging = false;
 
+        animator.GetComponent<Character>().IsTakingDamage = false;
+        animator.GetComponent<PlayerControllerScript>().DisableBlock();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

@@ -27,14 +27,15 @@ public class MeleeState : IAIState {
         //If target Is not in any range then go into patrol
         else if (!thisEnemy.InMeleeRange && !thisEnemy.InProjectileRange)
         {
-            thisEnemy.ChangeState(new PatrolState());
+            thisEnemy.ChangeState(new ChasingState());
         }
     }
     //Should be triggered when we enter this state holds a reference to its enemy
     public void Enter(Enemy enemy)
     { 
         thisEnemy = enemy;
-        attackCooldown = ATTACK_COOLDOWN;
+        attackCooldown = enemy.delayBeforeAttacking;
+        nextAttackTimer = attackCooldown + Time.time;
     }
     //Should be triggered when we exit this state
     public void Exit()
@@ -58,6 +59,8 @@ public class MeleeState : IAIState {
             nextAttackTimer = attackCooldown + Time.time;
 
         }
+        else
+            thisEnemy.StopMoving();
 
         if (canAttack)
         {
@@ -66,7 +69,6 @@ public class MeleeState : IAIState {
                 thisEnemy.ThisAnimator.SetTrigger("basicAttack");
             else
             {
-                attackCooldown = 2;
                 if (thisEnemy.targetDistance() <= 3)
                 {
                     thisEnemy.ThisAnimator.SetTrigger("closeRangeAttack");
@@ -82,7 +84,7 @@ public class MeleeState : IAIState {
                     thisEnemy.ThisAnimator.SetTrigger("longRangeAttack");
                 }
                 else
-                    thisEnemy.ChangeState(new PatrolState());
+                    thisEnemy.ChangeState(new ChasingState());
 
             }
         }

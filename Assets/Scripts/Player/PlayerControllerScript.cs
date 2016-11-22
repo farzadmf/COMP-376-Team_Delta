@@ -46,9 +46,16 @@ public class PlayerControllerScript : Character
     private float blockSpeed;
 
     [SerializeField]
+    private int dodgeCost;
+
+    [SerializeField]
     private GameObject  shield;
 	public int staminaRegen;
 	public int hpRegen;
+
+
+    [SerializeField]
+    private float delayAfterDeath;
 
     // Use this for initialization
     public override void Start() {
@@ -73,35 +80,37 @@ public class PlayerControllerScript : Character
         firstAttack = true;
         setIsBlocking(false);
 		InvokeRepeating ("staminaRegeneration", 0, 0.1f);
-		InvokeRepeating ("hpRegeneration", 0, 0.1f);
+		InvokeRepeating ("hpRegeneration", 0, 0.5f);
     }
     protected override void Update()
     {
-        base.Update();
-
-        //Player can't move,jump or attack if he is taking damage
-        if (!base.IsTakingDamage)
+        if (!IsDead())
         {
-            //Player can't move while attacking
-            if (!IsAttacking && !IsDodging)
+            base.Update();
+
+            //Player can't move,jump or attack if he is taking damage
+            if (!base.IsTakingDamage)
             {
-                move();
-                block();
-                if (!IsBlocking)
+                //Player can't move while attacking
+                if (!IsAttacking && !IsDodging)
                 {
-                    jump();
-                    dodge();
-                    if (CanUseSword)
-                        attack();
+                    move();
+                    block();
+                    if (!IsBlocking)
+                    {
+                        jump();
+                        dodge();
+                        if (CanUseSword)
+                            attack();
+                    }
+
                 }
-
             }
-        }
-     
 
-        checkMoveX ();
-		fixTextOrientation ();
-		checkDeathAndRestart ();
+
+            checkMoveX();
+            fixTextOrientation();
+        }
 
     }
 
@@ -110,15 +119,21 @@ public class PlayerControllerScript : Character
     {
     }
 
-    void checkDeathAndRestart() {
-		bool dead = false;
-		if (base.characterStats.Health <= 0)
-			dead = true;
-		if (dead) {
-			SceneManager.LoadScene (getWholeLevelSceneString ());
-		}
+    //Used to reload a checkpoint after player death
+    public void Restart() {
+        StartCoroutine(RestartAfterDelay());
 	}
-	void attack() {
+
+    //Used to reload a checkpoint after player death
+    public IEnumerator RestartAfterDelay()
+    {
+        //Wait for delay then execute reload
+        yield return new WaitForSecondsRealtime(delayAfterDeath);
+
+        SceneManager.LoadScene(getWholeLevelSceneString());
+    }
+
+    void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
 
             ThisAnimator.SetTrigger(getNextAttack());
@@ -130,10 +145,10 @@ public class PlayerControllerScript : Character
     {
         if(GetComponent<PlayerScript>().getGrounded() == true)
         {
-            if (Input.GetKey(KeyCode.LeftAlt))
+            if (Input.GetKey(KeyCode.LeftAlt) && characterStats.Stamina >= dodgeCost)
             {
                 ThisAnimator.SetTrigger("dodge");
-				base.characterStats.decreaseStamina (10);
+				base.characterStats.decreaseStamina (dodgeCost);
                 rigidBody.velocity = new Vector2(0,0);
                 SetFacingDirection();
 				if (isFacingRight)
@@ -144,6 +159,11 @@ public class PlayerControllerScript : Character
             }
         }
     }
+
+
+    /*
+     * Both Stamina regen and Health regen should check if the player is dead and shouldn't add more than the total max because now it check if < then max but it does it before the addition so it can still add more then total
+     */
 	void staminaRegeneration() {
 		
 		if (base.characterStats.Stamina < base.characterStats.TotalStamina) {
@@ -152,9 +172,15 @@ public class PlayerControllerScript : Character
 	}
 	void hpRegeneration() {
 
-		if (base.characterStats.Health < base.characterStats.TotalHealth) {
-			GetComponent<PlayerControllerScript> ().characterStats.increaseHealth (hpRegen);
-		}
+        //Added a death check you will have to fix the rest
+        if (!IsDead())
+        {
+            if (base.characterStats.Health < base.characterStats.TotalHealth)
+            {
+                GetComponent<PlayerControllerScript>().characterStats.increaseHealth(hpRegen);
+            }
+        }
+		
 	}
     void block()
     {
@@ -162,17 +188,27 @@ public class PlayerControllerScript : Character
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                ThisAnimator.SetTrigger("initialBlock");
-                setIsBlocking(true);
-                shield.GetComponent<BoxCollider2D>().enabled = true;
+                EnableBlock();
             }
             if(Input.GetKeyUp(KeyCode.LeftShift) || !Input.GetKey(KeyCode.LeftShift))
             {
-                setIsBlocking(false);
-                shield.GetComponent<BoxCollider2D>().enabled = false;
+                DisableBlock();
             }
                
         }
+    }
+
+    public void DisableBlock()
+    {
+        setIsBlocking(false);
+        shield.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void EnableBlock()
+    {
+        ThisAnimator.SetTrigger("initialBlock");
+        setIsBlocking(true);
+        shield.GetComponent<BoxCollider2D>().enabled = true;
     }
 
 

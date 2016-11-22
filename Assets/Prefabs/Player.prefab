@@ -60,22 +60,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1000011697178686
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000010950680274}
-  - 65: {fileID: 65000013808988340}
-  m_Layer: 0
-  m_Name: Shield
-  m_TagString: Shield
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!1 &1000011779690688
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,19 +263,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000011940346110}
   m_RootOrder: 3
---- !u!4 &4000010950680274
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011697178686}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.342, y: 0.22096115, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000011940346110}
-  m_RootOrder: 7
 --- !u!4 &4000011185302922
 Transform:
   m_ObjectHideFlags: 1
@@ -339,7 +310,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011779690688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.3, y: -2.3, z: -1}
+  m_LocalPosition: {x: -40.48, y: -2.63, z: -1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -350,7 +321,6 @@ Transform:
   - {fileID: 4000012274235402}
   - {fileID: 4000011353925338}
   - {fileID: 4000010749992468}
-  - {fileID: 4000010950680274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000012274235402
@@ -495,18 +465,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.022}
   serializedVersion: 2
   m_Size: {x: 0.42, y: 0.97}
---- !u!65 &65000013808988340
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011697178686}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.042264, z: 1}
-  m_Center: {x: 0.0000019073486, y: -0.35436976, z: 0}
 --- !u!68 &68000010973949690
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -777,7 +735,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 262400
   weapon: {fileID: 1000012785138240}
-  level: 2
+  level: 1
 --- !u!114 &114000012975287124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -830,8 +788,8 @@ MonoBehaviour:
   HealthSlider: {fileID: 0}
   StaminaSlider: {fileID: 0}
   characterStats:
-    TotalHealth: 50000
-    Health: 50000
+    TotalHealth: 5000
+    Health: 5000
     TotalStamina: 250
     Stamina: 250
     Strength: 5
@@ -844,8 +802,7 @@ MonoBehaviour:
   - EnemyDamage
   - Bullet
   - Bat
-  jumpHeight: 1000
-  hp: 0
+  jumpHeight: 1200
   checkpoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -856,6 +813,10 @@ MonoBehaviour:
   delayForCombo: 2
   dodgeForce: 850
   blockSpeed: 2
+  shield: {fileID: 0}
+  staminaRegen: 1
+  hpRegen: 2
+  delayAfterDeath: 1.5
 --- !u!114 &114000013684929292
 MonoBehaviour:
   m_ObjectHideFlags: 1
