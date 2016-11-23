@@ -24,6 +24,7 @@ TagManager:
   - Fire
   - Shield
   - DeathZone
+  - Music
   layers:
   - Default
   - TransparentFX

@@ -111,6 +111,7 @@ public class PlayerControllerScript : Character
             checkMoveX();
             fixTextOrientation();
         }
+ 
 
     }
 
@@ -293,7 +294,11 @@ public class PlayerControllerScript : Character
 	public override void OnTriggerEnter2D(Collider2D c) {
 
         if (c.gameObject.tag == "DeathZone")
+        {
             characterStats.Health = 0;
+            Restart();
+        }
+            
         else
         {
             if (bodyCollider.IsTouching(c))
