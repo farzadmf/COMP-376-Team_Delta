@@ -310,6 +310,8 @@ public class PlayerControllerScript : Character
             {
                 rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
                 canMoveX = false;
+				rightCollider.isTrigger = false;
+				leftCollider.isTrigger = false;
             }
         }
      
@@ -319,6 +321,8 @@ public class PlayerControllerScript : Character
 		if (!rightCollider.IsTouchingLayers(groundCheckLayerMask) && 
 			!leftCollider.IsTouchingLayers(groundCheckLayerMask)) {
 			canMoveX = true;
+			rightCollider.isTrigger = true;
+			leftCollider.isTrigger = true;
 		}
 	}
 
