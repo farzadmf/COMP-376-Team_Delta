@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
@@ -17,12 +18,21 @@ public class PlayerScript : MonoBehaviour {
 	private Animator anim;
 	private int currentStamina;
 	private float cooldown;
+
+    private GameObject levelDisplay;
+    private GameObject expBar;
+
 	void Start() {
 		cooldown = 0;
 		canMagic = false;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
         anim = GetComponent<Animator>();
-        GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text = "Level\n" + level;
+
+        levelDisplay = GameObject.Find("LevelDisplay");
+        levelDisplay.GetComponentInChildren<Text>().text = "Level\n" + level;
+
+        expBar = GameObject.Find("ExpBar");
+        expBar.GetComponentInChildren<Text>().text = getExpPercentage();
 
 	}
 	void coolTheDown() {
@@ -96,9 +106,9 @@ public class PlayerScript : MonoBehaviour {
 		}
 		currentStamina = GetComponent<PlayerControllerScript> ().characterStats.Stamina;
 		playerAnimator ();
-        if (!GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text.EndsWith(level + ""))
+        if (!levelDisplay.GetComponentInChildren<Text>().text.EndsWith(level + ""))
         {
-            GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text = "Level\n" + level;
+            levelDisplay.GetComponentInChildren<Text>().text = "Level\n" + level;
         }
 	}
 	void manageCooldown(float cd) {
@@ -172,7 +182,7 @@ public class PlayerScript : MonoBehaviour {
                 levelUp();
             }
             Exp += 1;
-            GameObject.Find("ExpBar").GetComponent<Image>().fillAmount = Exp / 100.0f;
+            expBar.GetComponent<Image>().fillAmount = Exp / 100.0f;
         }
 
         if (Exp == 100)
@@ -193,8 +203,8 @@ public class PlayerScript : MonoBehaviour {
         GetComponent<PlayerControllerScript>().characterStats.increaseMaxForceResistence(2.5f);
         GetComponent<PlayerControllerScript>().characterStats.increaseMovementSpeed(1);
 
-        GameObject.Find("ExpBar").GetComponent<Image>().fillAmount = Exp / 100.0f;
-        GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text = "Level\n" + level;
+        expBar.GetComponent<Image>().fillAmount = Exp / 100.0f;
+        levelDisplay.GetComponentInChildren<Text>().text = "Level\n" + level;
     }
 
 }
