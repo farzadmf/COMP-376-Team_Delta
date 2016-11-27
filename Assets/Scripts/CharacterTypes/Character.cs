@@ -112,7 +112,13 @@ public abstract class Character : MonoBehaviour {
 
     public bool IsDead()
     {
-        return characterStats.Health <= 0;
+        bool d = false;
+        if (characterStats.Health <= 0)
+        {
+            d = true;
+            BestowExp(GetExpVal());
+        }
+        return d;
     }
 
     protected void Die()
@@ -336,7 +342,9 @@ public abstract class Character : MonoBehaviour {
 
     }
 
+    public virtual void BestowExp(int value) { }
 
+    public virtual int GetExpVal() { return 0; }
 
     //Deals with removing health, activating damage animations, and checking if dead then trigger death
     private void TakeDamage(Damage damage, bool triggerAnimation)

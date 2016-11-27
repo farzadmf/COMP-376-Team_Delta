@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
@@ -10,7 +11,9 @@ public class PlayerScript : MonoBehaviour {
 	private float radius = 0.2f;
 	private bool canMagic;
 	private bool canLifeSteal;
-	public int level;
+    public int level;
+    [SerializeField]
+    private int Exp;
 	private Animator anim;
 	private int currentStamina;
 	private float cooldown;
@@ -18,7 +21,8 @@ public class PlayerScript : MonoBehaviour {
 		cooldown = 0;
 		canMagic = false;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
-		anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text = "Level\n" + level;
 
 	}
 	void coolTheDown() {
@@ -50,6 +54,31 @@ public class PlayerScript : MonoBehaviour {
 		return grounded;
 	}
 
+    public void addExp(int value)
+    {
+        int v = value;
+
+        if (v >= 10 && v < 20)
+        {
+            v -= 3 * (level - 1);
+        }
+        else if (v >= 20 && v < 50)
+        {
+            v -= 6 * (level - 1);
+        }
+        else
+        {
+            v -= 10 * (level - 1);
+        }
+
+        increaseExp(v);
+    }
+
+    public string getExpPercentage()
+    {
+        return Exp + "%";
+    }
+
 	void playerAnimator() {
 		anim.SetBool("grounded", grounded);
         //Removed running set boolean you should just set it in the player move method based on it's input
@@ -67,6 +96,10 @@ public class PlayerScript : MonoBehaviour {
 		}
 		currentStamina = GetComponent<PlayerControllerScript> ().characterStats.Stamina;
 		playerAnimator ();
+        if (!GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text.EndsWith(level + ""))
+        {
+            GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text = "Level\n" + level;
+        }
 	}
 	void manageCooldown(float cd) {
 		cooldown = cd;
@@ -130,6 +163,38 @@ public class PlayerScript : MonoBehaviour {
 
 	}
 
+    void increaseExp(int value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            if (Exp == 100)
+            {
+                levelUp();
+            }
+            Exp += 1;
+            GameObject.Find("ExpBar").GetComponent<Image>().fillAmount = Exp / 100.0f;
+        }
 
+        if (Exp == 100)
+            levelUp();
+    }
+
+    void levelUp()
+    {
+        level += 1;
+        Exp = 0;
+
+        GetComponent<PlayerControllerScript>().characterStats.increaseTotalHealth(200);
+        GetComponent<PlayerControllerScript>().characterStats.increaseTotalStamina(50);
+        GetComponent<PlayerControllerScript>().characterStats.increaseStrength(1);
+        GetComponent<PlayerControllerScript>().characterStats.increaseDefense(1);
+        GetComponent<PlayerControllerScript>().characterStats.increaseCritChance(0.05f);
+        GetComponent<PlayerControllerScript>().characterStats.increaseCritMultiplier(0.05f);
+        GetComponent<PlayerControllerScript>().characterStats.increaseMaxForceResistence(2.5f);
+        GetComponent<PlayerControllerScript>().characterStats.increaseMovementSpeed(1);
+
+        GameObject.Find("ExpBar").GetComponent<Image>().fillAmount = Exp / 100.0f;
+        GameObject.Find("LevelDisplay").GetComponentInChildren<Text>().text = "Level\n" + level;
+    }
 
 }

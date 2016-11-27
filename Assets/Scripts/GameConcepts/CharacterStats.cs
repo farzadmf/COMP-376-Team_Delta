@@ -93,6 +93,13 @@ public class CharacterStats {
         Health = TotalHealth;
     }
 
+    //Increases TotalHealth when level up based on value provided
+    public void increaseTotalHealth(int value)
+    {
+        TotalHealth += value;
+        increaseHealth(value);
+    }
+
     /* ---------------Stamina--------------*/
 
 
@@ -112,6 +119,13 @@ public class CharacterStats {
     public void maxRegenerateStamina()
     {
         Stamina = TotalStamina;
+    }
+
+    //Increases TotalStamina when level up based on value provided
+    public void increaseTotalStamina(int value)
+    {
+        TotalStamina += value;
+        increaseStamina(value);
     }
 
     /* ---------------Strength--------------*/

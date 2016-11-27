@@ -153,7 +153,8 @@ public class BatScript : Character {
 		}
 
 		if (anim.GetBool ("death") == true && deaad == false) {
-			deaad = true;
+            deaad = true;
+            GameObject.Find("Player").GetComponent<PlayerScript>().addExp(115);
 			StartCoroutine (DestroyMonster ());
 		}
 		fixYRotation ();

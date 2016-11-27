@@ -23,6 +23,8 @@ public class Enemy : CombatCharacter {
     [SerializeField]
     public bool cantMove;
 
+    private bool once;
+
 
     // Use this for initialization
     public override void Start()
@@ -30,6 +32,7 @@ public class Enemy : CombatCharacter {
         //Call the start method of the parent class
         base.Start();
         ChangeState(new IdleState());
+        once = false;
     }
 	
 	// Update is called once per frame
@@ -161,6 +164,37 @@ public class Enemy : CombatCharacter {
 
     }
 
+    public override void BestowExp(int value) {
+        if (!once)
+        {
+            GameObject.Find("Player").GetComponent<PlayerScript>().addExp(value);
+            once = true;
+        }
+    }
+
+    public override int GetExpVal()
+    {
+        int expVal = 0;
+        string name = gameObject.transform.parent.name;
+
+        if (name.Contains("GoblinMelee"))
+        {
+            if (name.Contains("GoblinMeleeNight"))
+                expVal = 50;
+            else
+                expVal = 20;
+        }
+        else if (name.Contains("GoblinRanged"))
+        {
+            expVal = 25;
+        }
+        else if (name.Contains("BossGoblin"))
+        {
+            expVal = 60;
+        }
+
+        return expVal;
+    }
 
     private void LookAtTarget()
     {
