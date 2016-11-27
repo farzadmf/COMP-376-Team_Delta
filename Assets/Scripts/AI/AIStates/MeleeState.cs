@@ -65,8 +65,9 @@ public class MeleeState : IAIState {
         if (canAttack)
         {
             canAttack = false;
-            if (thisEnemy.gameObject.tag != "Boss")
-                thisEnemy.ThisAnimator.SetTrigger("basicAttack");
+			if (thisEnemy.gameObject.tag != "Boss") {
+				thisEnemy.ThisAnimator.SetTrigger ("basicAttack");
+			}
             else
             {
                 if (thisEnemy.targetDistance() <= 3)

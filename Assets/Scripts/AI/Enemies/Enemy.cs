@@ -25,12 +25,25 @@ public class Enemy : CombatCharacter {
 
     private bool once;
 
+	private AudioSource audioSource1; // for swoosh sound
 
+	private AudioSource audioSource2; // for hit sound
+
+	[SerializeField]
+	private AudioClip hitClip;
+
+	[SerializeField]
+	private AudioClip runClip;
+
+	[SerializeField]
+	private AudioClip swooshClip;
     // Use this for initialization
     public override void Start()
     {
         //Call the start method of the parent class
         base.Start();
+		audioSource1 = gameObject.AddComponent<AudioSource> ();
+		audioSource2 = gameObject.AddComponent<AudioSource> ();
         ChangeState(new IdleState());
         once = false;
     }
@@ -70,7 +83,30 @@ public class Enemy : CombatCharacter {
         //Do enter state code and send our self as the Enemy
         currentAIState.Enter(this);
     }
+	public void playHitSound() {
 
+		audioSource1.clip = hitClip;
+		audioSource1.Play ();
+	}
+	public void playSwooshSound() {
+		if (!audioSource2.isPlaying) {
+			audioSource2.clip = swooshClip;
+			audioSource2.Play ();
+		}
+	}
+	void playRunSoundNearPlayer() {
+		if (Target && !audioSource1.isPlaying) {
+			float distanceZ = Mathf.Abs (transform.position.x - Target.transform.position.x);
+			if (distanceZ <= 10) {
+
+				float volume = 1 - distanceZ / 10;
+				audioSource1.volume = volume;
+			}
+			audioSource1.Play ();
+			audioSource1.clip = runClip;
+			audioSource1.Play ();
+		}
+	}
     public void Move()
     {
         //Currently can only move if he is not attacking
@@ -78,7 +114,7 @@ public class Enemy : CombatCharacter {
         {
             //Tell animator that we are moving
             ThisAnimator.SetFloat("movementSpeed", 1);
-
+			playRunSoundNearPlayer ();
             //Translate
             transform.Translate(new Vector3(1 * (characterStats.MovementSpeed * Time.deltaTime), 0,0));
 
@@ -89,6 +125,8 @@ public class Enemy : CombatCharacter {
 
     public void StopMoving()
     {
+		
+		audioSource1.Stop ();
         ThisAnimator.SetFloat("movementSpeed", 0);
     }
 

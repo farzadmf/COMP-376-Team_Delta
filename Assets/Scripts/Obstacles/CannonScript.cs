@@ -14,7 +14,7 @@ public class CannonScript : MonoBehaviour {
 	public Sprite cannonBeforeFiring;
 	public Sprite cannonAfterFiring;
 	public bool gravity;
-	private GameObject mouse;
+	private Transform playerTrans;
 	private SpriteRenderer currentSpriteRenderer;
 	public ParticleSystem beam;
 	public float timeOffForBeam;
@@ -23,7 +23,7 @@ public class CannonScript : MonoBehaviour {
 	public int shape;
 	public bool active;
 	public bool fireSpitter;
-	private AudioSource audioo;
+	private AudioSource audioSource1;
 	void activateEvent(bool a) {
 		active = !a;
 }
@@ -62,17 +62,7 @@ public class CannonScript : MonoBehaviour {
 			bullet.transform.FindChild("Bullet").GetComponent<Rigidbody2D> ().velocity = newVelocity;
 
 	
-			//bullet.transform.rotation = Quaternion.Euler (Vector3.forward * rotationOfBullet);
-			float distanceX = Mathf.Abs (transform.position.x - mouse.transform.position.x);
-			float distanceY = Mathf.Abs (transform.position.y - mouse.transform.position.y);
-			/*
-			if (distanceX <= DataManagerScript.distanceForSFX && distanceY <= DataManagerScript.distanceForSFX) {
-				float volume = 1 - distanceX / DataManagerScript.distanceForSFX;
-				audioo.volume = volume;
-
-				audioo.Play();
-			}
-			*/
+			playerSoundNearPlayer ();
 		}
 	}
 	void resetSprite() {
@@ -80,11 +70,9 @@ public class CannonScript : MonoBehaviour {
 		currentSpriteRenderer.sprite = cannonBeforeFiring;
 	}
 	void Start () {
-		/*
-		audioo = GetComponent<AudioSource> ();
-		audioo.clip = shootSound;
-		*/
-		mouse = GameObject.FindWithTag ("Player");
+		playerTrans =  GameObject.FindWithTag ("Player").transform;
+		audioSource1 = gameObject.AddComponent<AudioSource> ();
+		audioSource1.clip = shootSound;
 		currentSpriteRenderer = GetComponent<SpriteRenderer> ();
 		if (!fireSpitter) {
 
@@ -123,8 +111,6 @@ public class CannonScript : MonoBehaviour {
 			
 			
 			bullet.transform.rotation = Quaternion.Euler (Vector3.forward * rotationOfBullet);
-			float distanceX = Mathf.Abs (transform.position.x - mouse.transform.position.x);
-			float distanceY = Mathf.Abs (transform.position.y - mouse.transform.position.y);
 			/*
 			if (distanceX <= 10 && distanceY <= 10) {
 				float volume = 1 - distanceX / 10;
@@ -174,6 +160,20 @@ public class CannonScript : MonoBehaviour {
 		if (c.tag == "Player") {
 			GetComponent<CannonScript> ().enabled = true;
 			active = true;
+		}
+	}
+
+	void playerSoundNearPlayer() {
+		if (playerTrans && !audioSource1.isPlaying) {
+			float distanceZ = Mathf.Abs (transform.position.x - playerTrans.position.x);
+			if (distanceZ <= 10) {
+
+				float volume = 1 - distanceZ / 10;
+				audioSource1.volume = volume;
+				audioSource1.Play ();
+			} else {
+				audioSource1.Stop ();
+			}
 		}
 	}
 }

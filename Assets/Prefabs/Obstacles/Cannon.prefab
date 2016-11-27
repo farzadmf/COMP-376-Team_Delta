@@ -114,7 +114,7 @@ MonoBehaviour:
   tun: {fileID: 1000011199987508}
   velocityX: 0
   velocityY: -0.5
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: f8f72e4ff96f92040894dda5f0c3adda, type: 3}
   rotationOfBullet: 60
   time: 1
   cannonBeforeFiring: {fileID: 21300000, guid: 253b6cd248dae744999f1e420d697890, type: 3}

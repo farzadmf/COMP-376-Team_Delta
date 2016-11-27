@@ -31,8 +31,11 @@ public abstract class CombatCharacter : Character {
 
     public void EnableMeleeCollider()
     {
-        if (meleeCollider)
-            meleeCollider.enabled = true;
+
+		if (meleeCollider) {
+			meleeCollider.enabled = true;
+
+		}
 
     }
 

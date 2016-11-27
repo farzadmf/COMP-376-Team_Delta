@@ -736,6 +736,7 @@ MonoBehaviour:
     m_Bits: 262400
   weapon: {fileID: 1000012785138240}
   level: 1
+  Exp: 0
 --- !u!114 &114000012975287124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -810,6 +811,13 @@ MonoBehaviour:
   rightCollider: {fileID: 61000010679006174}
   leftCollider: {fileID: 61000010538195932}
   bodyCollider: {fileID: 61000013895879496}
+  clips:
+  - {fileID: 8300000, guid: 877e067ff10cc4a4b8019a646817e489, type: 3}
+  - {fileID: 8300000, guid: ddab5dd63346154459d6c903d295ffc6, type: 3}
+  - {fileID: 8300000, guid: af85cb4b57b37674499207be9d08fd40, type: 3}
+  - {fileID: 8300000, guid: 1bcfcfd217ab2f74eb3435f6a78b286b, type: 3}
+  - {fileID: 8300000, guid: 232036d3b655eec4aa2003178754d174, type: 3}
+  - {fileID: 8300000, guid: b9033c78c50106e45af78fc25654f462, type: 3}
   delayForCombo: 2
   dodgeForce: 850
   blockSpeed: 2
@@ -891,7 +899,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012084219982}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 0.5
   startDelay:
     scalar: 0
@@ -929,12 +937,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 2946986240
   looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 2
+  randomSeed: -1347981056
   InitialModule:
     serializedVersion: 2
     enabled: 1

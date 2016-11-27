@@ -314,8 +314,8 @@ MonoBehaviour:
   - Fireball
   - Bullet
   - FireBurst
-  audio1: {fileID: 0}
-  audio2: {fileID: 0}
+  flyBat: {fileID: 8300000, guid: acbb9356e459afd4cbb564b18ec7d744, type: 3}
+  deadBat: {fileID: 8300000, guid: 27ef938503caf5042b25d9257c0e5495, type: 3}
 --- !u!212 &212000010744808316
 SpriteRenderer:
   m_ObjectHideFlags: 1

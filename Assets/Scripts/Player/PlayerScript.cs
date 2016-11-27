@@ -18,7 +18,6 @@ public class PlayerScript : MonoBehaviour {
 	private Animator anim;
 	private int currentStamina;
 	private float cooldown;
-
     private GameObject levelDisplay;
     private GameObject expBar;
 

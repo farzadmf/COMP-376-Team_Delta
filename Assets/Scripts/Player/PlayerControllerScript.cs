@@ -15,7 +15,12 @@ public class PlayerControllerScript : Character
     public BoxCollider2D bodyCollider;
     private bool canMoveX;
     private LayerMask groundCheckLayerMask;
-
+	private AudioSource audioSource1; // other random sounds
+	private AudioSource audioSource2; // run sounds
+	private AudioSource audioSource3; // get hit sound
+	// clip 0 is sword attack, clip 1 sword attack 2, 
+	// sound clip 2 get hit, clip 3 block, clip 4 is run
+	public AudioClip[] clips;
 
     //State Variables
     public bool IsAttacking { get; set; }
@@ -81,9 +86,31 @@ public class PlayerControllerScript : Character
         setIsBlocking(false);
 		InvokeRepeating ("staminaRegeneration", 0, 0.1f);
 		InvokeRepeating ("hpRegeneration", 0, 0.5f);
+		audioSource1 = gameObject.AddComponent<AudioSource> ();
+		audioSource2 = gameObject.AddComponent<AudioSource> ();
+		audioSource3 = gameObject.AddComponent<AudioSource> ();
+		audioSource3.clip = clips [2];
+		audioSource2.clip = clips [4];
     }
+	public void playHitSound() {
+		audioSource3.clip = clips[2];
+		audioSource3.Play ();
+		//playSounds ();
+	}
+	void playSounds() {
+		
+		if (base.IsTakingDamage && !audioSource3.isPlaying) {
+			audioSource3.Play ();
+		}
+		if (!audioSource1.isPlaying) {
+			audioSource1.Play ();
+		}
+	}
+
+
     protected override void Update()
     {
+		
         if (!IsDead())
         {
             base.Update();
@@ -122,6 +149,8 @@ public class PlayerControllerScript : Character
 
     //Used to reload a checkpoint after player death
     public void Restart() {
+		audioSource1.clip = clips [5];
+		audioSource1.Play ();
         StartCoroutine(RestartAfterDelay());
 	}
 
@@ -136,8 +165,18 @@ public class PlayerControllerScript : Character
 
     void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
-
-            ThisAnimator.SetTrigger(getNextAttack());
+			string nextAttack = getNextAttack();
+			if (nextAttack == "attack1" || nextAttack == "attack3") {
+				audioSource1.Stop ();
+				audioSource1.clip = clips [0];
+				audioSource1.Play ();
+				//playSounds ();
+			} else if (nextAttack == "attack2") {
+				audioSource1.Stop ();
+				audioSource1.clip = clips [1];
+				audioSource1.Play ();
+			}
+            ThisAnimator.SetTrigger(nextAttack);
             IsAttacking = true;
         }
 	}
@@ -216,6 +255,7 @@ public class PlayerControllerScript : Character
     void jump() {
 		if (Input.GetKeyDown("space")) {
 			if (GetComponent<PlayerScript> ().getGrounded () == true) {
+				
 				rigidBody.velocity = new Vector2 (rigidBody.velocity.x,0);
 				rigidBody.AddForce (new Vector2 (0, jumpHeight));
 				canDoubleJump = true;
@@ -242,6 +282,12 @@ public class PlayerControllerScript : Character
 
         //Tell animator the Y velocity
         ThisAnimator.SetFloat("ySpeed", rigidBody.velocity.y);
+		if (Mathf.Abs (rigidBody.velocity.x) > 0 && !audioSource2.isPlaying) {
+			audioSource2.Play ();
+
+		} else if (Mathf.Abs (rigidBody.velocity.x) == 0) {
+			audioSource2.Stop ();
+		}
 
         if (canMoveX)
 			rigidBody.velocity = new Vector2 (IsBlocking? movex * blockSpeed : movex * characterStats.MovementSpeed,rigidBody.velocity.y);

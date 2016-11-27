@@ -349,6 +349,8 @@ public abstract class Character : MonoBehaviour {
     //Deals with removing health, activating damage animations, and checking if dead then trigger death
     private void TakeDamage(Damage damage, bool triggerAnimation)
     {
+
+
         characterStats.decreaseHealth(damage.DamageValue);
 
         //Create a UI Damage Pop up
@@ -356,8 +358,15 @@ public abstract class Character : MonoBehaviour {
 
         if (triggerAnimation)
         {
-            if (ThisAnimator != null)
-                ThisAnimator.SetTrigger("damage");
+			if (ThisAnimator != null) {
+				ThisAnimator.SetTrigger ("damage");
+				// play hit audio
+				if (gameObject.tag == "Player") {
+					gameObject.GetComponent<PlayerControllerScript> ().playHitSound ();
+				} else if (gameObject.tag == "Enemy") {
+					gameObject.GetComponent<Enemy> ().playHitSound ();
+				}
+			}
         }
       
         if (IsDead())

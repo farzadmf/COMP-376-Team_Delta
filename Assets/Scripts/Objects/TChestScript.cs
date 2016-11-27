@@ -6,12 +6,13 @@ public class TChestScript : MonoBehaviour
 {
     public GameObject loot;
     public int ItemId;
-
+	private AudioSource audioSource1;
     private bool droppedOnce;
 
     // ReSharper disable once UnusedMember.Local
     private void Start()
     {
+		audioSource1 = gameObject.GetComponent<AudioSource> ();
         droppedOnce = false;
     }
 
@@ -51,6 +52,10 @@ public class TChestScript : MonoBehaviour
 
     private void DropLoot()
     {
+		GameObject aud = new GameObject ();
+		aud.AddComponent<AudioSource> ();
+		aud.GetComponent<AudioSource> ().clip = audioSource1.clip;
+		aud.GetComponent<AudioSource> ().Play ();
         loot = Instantiate(loot);
         loot.GetComponent<LevelItemController>().Item = ItemDatabase.Instance.GetItem(ItemId);
         loot.transform.position = transform.position;

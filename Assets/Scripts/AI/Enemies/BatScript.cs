@@ -13,20 +13,21 @@ public class BatScript : Character {
 	private bool dead;
 	private Quaternion originalRotation;
 	private BoxCollider2D boxCol;
-	public AudioSource audio1;
-	public AudioSource audio2;
+	private AudioSource audio1;
+	private AudioSource audio2;
+	public AudioClip flyBat;
+	public AudioClip deadBat;
 	private bool deaad;
 //	private CircleCollider2D circle;
 
 	public override void OnCollisionEnter2D(Collision2D c) {
-		Debug.Log ("wtf");
 		base.OnCollisionEnter2D (c);
 		if (c.gameObject.tag == "Bullet") {
 			killMonster ();
 			Physics2D.GetIgnoreCollision (c.collider, GetComponent<BoxCollider2D> ());
 
 		} else if (c.gameObject.tag == "Player") {
-			Debug.Log ("sigh");
+			audio1.Stop ();
 			inPursue = false;
 		}
 		Debug.Log (c.gameObject.tag);
@@ -40,10 +41,10 @@ public class BatScript : Character {
 		inPursue = true;
 	}
 	void killMonster() {
-		/*
+		
 		if (!audio2.isPlaying)
 			audio2.Play ();
-			*/
+
 		dead = true;
 		//specialWalkingEffect.enableEmission = false;
 		GetComponent<Rigidbody2D> ().gravityScale = 0;
@@ -75,6 +76,10 @@ public class BatScript : Character {
 		originalRotation = transform.rotation;
 		boxCol = GetComponent<BoxCollider2D> ();
 		//audio1.volume = 0f;
+		audio1 = gameObject.AddComponent<AudioSource>();
+		audio2 = gameObject.AddComponent<AudioSource> ();
+		audio1.clip = flyBat;
+		audio2.clip = deadBat;
 		//circle.enabled = false;
 	}
 	public void trigEnter() {
@@ -104,19 +109,7 @@ public class BatScript : Character {
 		//move towards the player
 		//if (Vector3.Distance(transform.position,target.position)>1f){//move if distance from target is greater than 1
 			transform.Translate(new Vector3(-moveSpeed* Time.deltaTime,0,0) );
-		/*
-		float distanceX = Mathf.Abs (transform.position.x - target.position.x);
-		float distanceY = Mathf.Abs (transform.position.y - target.position.y);
-		if (distanceX <= 15 && distanceY <= 15) {
-			float volume = 1 - distanceX / 15;
-			if (!audio1.isPlaying) {
-
-				audio1.volume = volume;
-				audio1.Play();
-
-			}
-		}
-		*/
+		playerSoundNearPlayer ();
 	}
 	void checkAndSetHung() {
 		if (Mathf.Abs (originalPosition.x - transform.position.x) < 0.05 &&
@@ -158,11 +151,26 @@ public class BatScript : Character {
 			StartCoroutine (DestroyMonster ());
 		}
 		fixYRotation ();
+		adjustVolume ();
 	}
 	void fixYRotation() {
 		float y = 0;
 		if (target.position.x > transform.position.x)
 			y = 180;
 		transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, y, transform.rotation.eulerAngles.z);
+	}
+	void adjustVolume() {
+		float distanceZ = Mathf.Abs (transform.position.x - target.position.x);
+		if (distanceZ <= 10) {
+
+			float volume = 1 - distanceZ / 10;
+			audio1.volume = volume;
+		}
+	}
+	void playerSoundNearPlayer() {
+		if (target && !audio1.isPlaying) {
+			adjustVolume ();
+			audio1.Play ();
+		}
 	}
 }

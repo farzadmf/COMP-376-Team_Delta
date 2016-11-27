@@ -299,6 +299,9 @@ MonoBehaviour:
   delayBeforeChasing: 0.5
   delayBeforeAttacking: 0.5
   cantMove: 0
+  hitClip: {fileID: 8300000, guid: af85cb4b57b37674499207be9d08fd40, type: 3}
+  runClip: {fileID: 8300000, guid: 232036d3b655eec4aa2003178754d174, type: 3}
+  swooshClip: {fileID: 0}
 --- !u!114 &114000014198110282
 MonoBehaviour:
   m_ObjectHideFlags: 1
