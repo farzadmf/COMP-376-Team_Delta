@@ -19,7 +19,7 @@ public class PlayerControllerScript : Character
 	private AudioSource audioSource2; // run sounds
 	private AudioSource audioSource3; // get hit sound
 	// clip 0 is sword attack, clip 1 sword attack 2, 
-	// sound clip 2 get hit, clip 3 block, clip 4 is run
+	// sound clip 2 get hit, clip 3 block, clip 4 is run, clip 5 is death
 	public AudioClip[] clips;
 
     //State Variables
@@ -95,12 +95,12 @@ public class PlayerControllerScript : Character
 		audioSource1 = gameObject.AddComponent<AudioSource> ();
 		audioSource2 = gameObject.AddComponent<AudioSource> ();
 		audioSource3 = gameObject.AddComponent<AudioSource> ();
-		//audioSource3.clip = clips [2];
-		//audioSource2.clip = clips [4];
+		audioSource3.clip = clips [2];
+		audioSource2.clip = clips [4];
     }
 	public void playHitSound() {
-		//audioSource3.clip = clips[2];
-		//audioSource3.Play ();
+		audioSource3.clip = clips[2];
+		audioSource3.Play ();
 		////playSounds ();
 	}
 	void playSounds() {
@@ -160,8 +160,8 @@ public class PlayerControllerScript : Character
 
     //Used to reload a checkpoint after player death
     public void Restart() {
-		//audioSource1.clip = clips [5];
-		//audioSource1.Play ();
+		audioSource1.clip = clips [5];
+		audioSource1.Play ();
         StartCoroutine(RestartAfterDelay());
 	}
 
@@ -177,16 +177,16 @@ public class PlayerControllerScript : Character
     void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
 			string nextAttack = getNextAttack();
-			//if (nextAttack == "attack1" || nextAttack == "attack3") {
-			//	audioSource1.Stop ();
-			//	audioSource1.clip = clips [0];
-			//	audioSource1.Play ();
-			////	//playSounds ();
-			//} else if (nextAttack == "attack2") {
-			//	audioSource1.Stop ();
-			//	audioSource1.clip = clips [1];
-			//	audioSource1.Play ();
-			//}
+			if (nextAttack == "attack1" || nextAttack == "attack3") {
+				audioSource1.Stop ();
+				audioSource1.clip = clips [0];
+				audioSource1.Play ();
+			//	//playSounds ();
+			} else if (nextAttack == "attack2") {
+				audioSource1.Stop ();
+				audioSource1.clip = clips [1];
+				audioSource1.Play ();
+			}
 
             if (PlayerState != PlayerState.Demon)
             {
