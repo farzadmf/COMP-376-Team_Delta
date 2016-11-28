@@ -25,6 +25,10 @@ public class GameStateScript : MonoBehaviour {
 	private Light sfxNightTime;
 	private float rangeChange;
 	private bool paused;
+
+    [SerializeField]
+    private float transformationPauseTime;
+
 	// Use this for initialization
 	void Start () {
 		rangeChange = 25f;
@@ -35,7 +39,8 @@ public class GameStateScript : MonoBehaviour {
 		enemies = GameObject.Find ("Enemies");
 		effects = GameObject.Find ("Effects");
 		player = GameObject.Find ("Player");
-		toState = "Night";
+        //Why do you start in the Night? Changed to Day
+		toState = "Day";
 		getDayStats ();
 
 	}
@@ -69,13 +74,77 @@ public class GameStateScript : MonoBehaviour {
 	}
 	void changePlayer() {
 		if (toState == "Night") {
-			player.GetComponent<PlayerScript> ().goDemonMode ();
+            StartCoroutine(StopWorldForPlayerTransFormation(PlayerState.Demon));
 		} else if (toState == "Day") {
-			player.GetComponent<PlayerScript> ().goDayMode ();
-		}
+            StartCoroutine(StopWorldForPlayerTransFormation(PlayerState.Normal));
+        }
 	}
 
-	void addSpecialEnemies() {
+    /*
+     * Used to Pause All moving game objects except for the player for a certain amount of time then resume them
+     */
+    private IEnumerator StopWorldForPlayerTransFormation(PlayerState playerState)
+    {
+        //Pause Everything except player
+        PauseOrResumeEnemiesAndSun(false);
+
+        player.GetComponent<PlayerControllerScript>().PausePlayerWhileTransforming();
+
+        //Do player Transformation
+        if(playerState ==PlayerState.Demon)
+            player.GetComponent<PlayerScript>().goDemonMode();
+
+        else if(playerState == PlayerState.Normal)
+            player.GetComponent<PlayerScript>().goDayMode();
+
+        //Wait for Transformation to complete
+        yield return new WaitForSecondsRealtime(transformationPauseTime);
+
+        PauseOrResumeEnemiesAndSun(true);
+
+        player.GetComponent<PlayerControllerScript>().ResumePlayerAfterTransformation();
+
+    }
+
+    /*
+     * Stops Enemies and the Sun From executing(Basically Pausing them) if you send a false boolean
+     * Resumes Enemies and Sun if you send a true boolean
+     */
+    private void PauseOrResumeEnemiesAndSun(bool value)
+    {
+        //The current Way of getting enemies is terrible so I'm doing it this way
+        Enemy[] enemiesArray = FindObjectsOfType<Enemy>();
+        SunScript sunScript = FindObjectOfType<SunScript>();
+
+        //For each Enemy
+        for (int i = 0; i < enemiesArray.Length; i++)
+        {
+            //Pause it or resume it
+            enemiesArray[i].enabled = value;
+            enemiesArray[i].ThisAnimator.enabled = value;
+
+            //Pause all enemies sounds
+            AudioSource[] audioSources = enemiesArray[i].GetAudioSources();
+
+            if (audioSources.Length > 0)
+            {
+                for (int j = 0; j < audioSources.Length; j++)
+                {
+                    if (value)
+                        audioSources[j].UnPause();
+                    else
+                        audioSources[j].Pause();
+                }
+            }
+
+        }
+
+        //For the Sun
+        sunScript.enabled = value;
+    }
+
+
+    void addSpecialEnemies() {
 		if (toState == "Night") {
 			nightTimeEnemies.SetActive (true);
 			for (int i = 0; i < nightTimeEnemies.transform.childCount; ++i) {
@@ -119,10 +188,11 @@ public class GameStateScript : MonoBehaviour {
 		transitionStart = false;
 	}
 	void checkTransitionState() {
-		if (currentTime == 0) {
+      //This wasn't properly coded it had some bugs where the day whouldn't trigger back from the night. Should be fixed now
+		if (toState == "Night" && currentTime < nightStart) {
 			toState = "Day";
 			transitionStart = true;
-		} else if (currentTime == nightStart) {
+		} else if (toState == "Day" && currentTime > nightStart) {
 			toState = "Night";
 			transitionStart = true;
 		} else

@@ -1,0 +1,1 @@
+﻿public enum PlayerState { Normal, Demon }

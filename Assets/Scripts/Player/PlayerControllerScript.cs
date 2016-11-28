@@ -24,11 +24,13 @@ public class PlayerControllerScript : Character
 
     //State Variables
     public bool IsAttacking { get; set; }
-    public bool CanUseSword { get; set; }
     public bool IsDodging { get; set; }
     public bool IsBlocking { get; set; }
-    
-  
+
+    public bool IsTransforming { get; set; }
+    public bool IsChargingAShot { get; set; }
+    public PlayerState PlayerState { get; set; }
+
 
     //Attack variables
     [SerializeField]
@@ -62,6 +64,8 @@ public class PlayerControllerScript : Character
     [SerializeField]
     private float delayAfterDeath;
 
+    private float initialGravityScale;
+
     // Use this for initialization
     public override void Start() {
         SaveLoadScript.LoadGame();
@@ -80,22 +84,24 @@ public class PlayerControllerScript : Character
         //initial set of state variables
         IsAttacking = false;
         IsDodging = false;
-        CanUseSword = true;
         attackCounter = 0;
         firstAttack = true;
         setIsBlocking(false);
-		InvokeRepeating ("staminaRegeneration", 0, 0.1f);
+        IsTransforming = false;
+        IsChargingAShot = false;
+        initialGravityScale = ThisRigidBody.gravityScale;
+        InvokeRepeating ("staminaRegeneration", 0, 0.1f);
 		InvokeRepeating ("hpRegeneration", 0, 0.5f);
 		audioSource1 = gameObject.AddComponent<AudioSource> ();
 		audioSource2 = gameObject.AddComponent<AudioSource> ();
 		audioSource3 = gameObject.AddComponent<AudioSource> ();
-		audioSource3.clip = clips [2];
-		audioSource2.clip = clips [4];
+		//audioSource3.clip = clips [2];
+		//audioSource2.clip = clips [4];
     }
 	public void playHitSound() {
-		audioSource3.clip = clips[2];
-		audioSource3.Play ();
-		//playSounds ();
+		//audioSource3.clip = clips[2];
+		//audioSource3.Play ();
+		////playSounds ();
 	}
 	void playSounds() {
 		
@@ -111,23 +117,28 @@ public class PlayerControllerScript : Character
     protected override void Update()
     {
 		
-        if (!IsDead())
+        if (!IsDead() && !IsTransforming)
         {
             base.Update();
 
             //Player can't move,jump or attack if he is taking damage
-            if (!base.IsTakingDamage)
+            if (!IsTakingDamage && !IsChargingAShot)
             {
                 //Player can't move while attacking
                 if (!IsAttacking && !IsDodging)
                 {
                     move();
-                    block();
+
+                    if (PlayerState != PlayerState.Demon)
+                        block();
+
                     if (!IsBlocking)
                     {
                         jump();
-                        dodge();
-                        if (CanUseSword)
+
+                        if (PlayerState != PlayerState.Demon)
+                            dodge();
+
                             attack();
                     }
 
@@ -149,8 +160,8 @@ public class PlayerControllerScript : Character
 
     //Used to reload a checkpoint after player death
     public void Restart() {
-		audioSource1.clip = clips [5];
-		audioSource1.Play ();
+		//audioSource1.clip = clips [5];
+		//audioSource1.Play ();
         StartCoroutine(RestartAfterDelay());
 	}
 
@@ -166,17 +177,25 @@ public class PlayerControllerScript : Character
     void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
 			string nextAttack = getNextAttack();
-			if (nextAttack == "attack1" || nextAttack == "attack3") {
-				audioSource1.Stop ();
-				audioSource1.clip = clips [0];
-				audioSource1.Play ();
-				//playSounds ();
-			} else if (nextAttack == "attack2") {
-				audioSource1.Stop ();
-				audioSource1.clip = clips [1];
-				audioSource1.Play ();
-			}
-            ThisAnimator.SetTrigger(nextAttack);
+			//if (nextAttack == "attack1" || nextAttack == "attack3") {
+			//	audioSource1.Stop ();
+			//	audioSource1.clip = clips [0];
+			//	audioSource1.Play ();
+			////	//playSounds ();
+			//} else if (nextAttack == "attack2") {
+			//	audioSource1.Stop ();
+			//	audioSource1.clip = clips [1];
+			//	audioSource1.Play ();
+			//}
+
+            if (PlayerState != PlayerState.Demon)
+            {
+                ThisAnimator.SetTrigger(nextAttack);
+            }
+            else
+                ThisAnimator.SetTrigger("DemonMelee");
+
+
             IsAttacking = true;
         }
 	}
@@ -251,6 +270,21 @@ public class PlayerControllerScript : Character
         shield.GetComponent<BoxCollider2D>().enabled = true;
     }
 
+    public void PausePlayerWhileTransforming()
+    {
+        ThisRigidBody.velocity = new Vector2(0, 0);
+        ThisRigidBody.gravityScale = 0;
+        IsTransforming = true;
+        ThisAnimator.SetBool("isTransforming", IsTransforming);
+    }
+
+    public void ResumePlayerAfterTransformation()
+    {
+        ThisRigidBody.gravityScale = initialGravityScale;
+        IsTransforming = false;
+        ThisAnimator.SetBool("isTransforming", IsTransforming);
+    }
+
 
     void jump() {
 		if (Input.GetKeyDown("space")) {
@@ -283,10 +317,10 @@ public class PlayerControllerScript : Character
         //Tell animator the Y velocity
         ThisAnimator.SetFloat("ySpeed", rigidBody.velocity.y);
 		if (Mathf.Abs (rigidBody.velocity.x) > 0 && !audioSource2.isPlaying) {
-			audioSource2.Play ();
+			//audioSource2.Play ();
 
 		} else if (Mathf.Abs (rigidBody.velocity.x) == 0) {
-			audioSource2.Stop ();
+			//audioSource2.Stop ();
 		}
 
         if (canMoveX)

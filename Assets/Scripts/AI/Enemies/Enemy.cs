@@ -262,5 +262,15 @@ public class Enemy : CombatCharacter {
         }
     }
 
+    public AudioSource[] GetAudioSources()
+    {
+        AudioSource[] audioSources = new AudioSource[2];
+
+        audioSources[0] = audioSource1;
+        audioSources[1] = audioSource2;
+
+        return audioSources;
+    }
+
 
 }

@@ -21,9 +21,26 @@ public class PlayerScript : MonoBehaviour {
     private GameObject levelDisplay;
     private GameObject expBar;
 
-	void Start() {
+
+    [SerializeField]
+    private Transform projectileLocation;
+
+    [SerializeField]
+    private float chargeDelayThreshold, scaleAddedPerTick, pushbackAddedPerTick, maxProjectileSize;
+
+    [SerializeField]
+    private int damageAddedPerTick;
+
+    private float chargeShotTimer;
+    private float tempScale;
+    private int tempDmg;
+    private float tempForce;
+
+
+    void Start() {
 		cooldown = 0;
-		canMagic = false;
+        chargeShotTimer = 0.0f;
+        canMagic = false;
 		dmg = weapon.GetComponent<WeaponScript> ().dmg;
         anim = GetComponent<Animator>();
 
@@ -42,24 +59,34 @@ public class PlayerScript : MonoBehaviour {
 			CancelInvoke ("coolTheDown");
 		}
 	}
-	public void goDemonMode() {
-		canMagic = true;
-		canLifeSteal = true;
-        //Replace with bool Can Use Sword in player Controller
-        //weapon.SetActive (false);
-        GetComponent<PlayerControllerScript>().CanUseSword = false;
+    public void goDemonMode()
+    {
+        anim.SetTrigger("DemonTransformation");
+
+        canMagic = true;
+        canLifeSteal = true;
+
+
+        GetComponent<PlayerControllerScript>().PlayerState = PlayerState.Demon;
+        anim.SetBool("DemonForm", true);
 
     }
-	public void goDayMode() {
-		canMagic = false;
-		canLifeSteal = false;
 
-        //Replace with bool Can Use Sword in player Controller
-        //weapon.SetActive (false);
-        GetComponent<PlayerControllerScript>().CanUseSword = true;
-        //weapon.SetActive (true);
-	}
-	public bool getGrounded() {
+    public void goDayMode()
+    {
+
+        anim.SetTrigger("BackToNormalTransformation");
+
+        canMagic = false;
+        canLifeSteal = false;
+
+
+        GetComponent<PlayerControllerScript>().PlayerState = PlayerState.Normal;
+
+        anim.SetBool("DemonForm", false);
+    }
+
+    public bool getGrounded() {
 		return grounded;
 	}
 
@@ -93,24 +120,57 @@ public class PlayerScript : MonoBehaviour {
         //Removed running set boolean you should just set it in the player move method based on it's input
 	}
 
-	void Update() {
-		updateGroundedStatus ();
-		if (Input.GetMouseButtonDown (1)) {
-			if (canMagic == true && !GetComponent<PlayerControllerScript>().IsBlocking) {
-				if (level == 1 || level == 2)
-					shootFireball ();
-				else if (level == 3)
-					fireBurst ();
-			}
-		}
-		currentStamina = GetComponent<PlayerControllerScript> ().characterStats.Stamina;
-		playerAnimator ();
+    void Update()
+    {
+        updateGroundedStatus();
+
+        //If player can use magic
+        if (canMagic == true)
+        {
+
+            //If the Right mouse button is currently held down
+            if (Input.GetMouseButton(1))
+            {
+                if (level == 1 || level == 2)
+                {
+                    //Activate Timer to see if it's a normal shot or a charge one
+                    chargeShotTimer = chargeShotTimer + Time.deltaTime;
+
+                    if (!GetComponent<PlayerControllerScript>().IsChargingAShot)
+                    {
+                        if (chargeShotTimer > chargeDelayThreshold)
+                            setIsChargedShot();
+                    }
+                    else
+                        powerUpProjectile();
+
+                }
+            }
+            //If The Right mouse button has been released
+            else if (Input.GetMouseButtonUp(1))
+            {
+                if (level == 1 || level == 2)
+                {
+                    shootRapidProjectile();
+                    chargeShotTimer = 0.0f;
+                }
+
+                else if (level == 3)
+                    fireBurst();
+            }
+
+        }
+
+
+        currentStamina = GetComponent<PlayerControllerScript>().characterStats.Stamina;
+        playerAnimator();
         if (!levelDisplay.GetComponentInChildren<Text>().text.EndsWith(level + ""))
         {
             levelDisplay.GetComponentInChildren<Text>().text = "Level\n" + level;
         }
-	}
-	void manageCooldown(float cd) {
+    }
+
+    void manageCooldown(float cd) {
 		cooldown = cd;
 		InvokeRepeating ("coolTheDown",0,0.1f);
 	}
@@ -130,40 +190,133 @@ public class PlayerScript : MonoBehaviour {
 			}
 		}
 	}
-	void shootFireball() {
-		if (cooldown == 0) {
-			Vector3 cursorPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			bool cursorRight = false;
-			if (cursorPos.x > transform.position.x)
-				cursorRight = true;
-			if ((cursorRight && transform.localScale.x > 0)
-				|| (transform.localScale.x < 0 && !cursorRight)) {
-				GameObject g = (GameObject)Instantiate (Resources.Load ("Fireball"));
-				g.transform.position = new Vector3 (transform.position.x + 1, transform.position.y, g.transform.position.z);
-			
-				float ballSpeed = 20f;
-				Vector3 v = ((cursorPos - g.transform.position).normalized * ballSpeed);
-				v.z = 0;
-				if (transform.localScale.x < 0) {
-					g.transform.position = new Vector3 (transform.position.x - 1, transform.position.y, transform.position.z);
-				}
 
-				g.GetComponent<Rigidbody2D> ().velocity = v;
-				if (level == 1) {
-					g.GetComponent<FireballScript> ().fireBallType ("normal");
-					manageCooldown (0.5f);
-				} else if (level == 2) {
-					manageCooldown (0.7f);
-					g.GetComponent<FireballScript> ().fireBallType ("exploding");
-				}
-				g.transform.GetChild (0).GetChild (0).parent = null;
-			}
-		}
-		//g.transform.GetChild (0).GetChild (0).GetComponent<Rigidbody2D> ().velocity = -v;
-	}
+    void shootFireball()
+    {
+
+        GameObject projectile;
+
+        Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        projectile = (GameObject)Instantiate(Resources.Load("Fireball"));
 
 
-	void updateGroundedStatus() {
+        if (GetComponent<PlayerControllerScript>().IsChargingAShot)
+        {
+            //Changes the values of the projectile
+            projectile.transform.Find("FireballP").gameObject.GetComponent<ParticleSystem>().startSize = tempScale;
+            projectile.GetComponent<DamageDealer>().Attack.BaseDamage = tempDmg;
+            projectile.GetComponent<DamageDealer>().Attack.Force = tempForce;
+        }
+
+
+        projectile.transform.position = projectileLocation.position;
+
+        float ballSpeed = 20f;
+
+        Vector3 v = ((cursorPosition - projectile.transform.position).normalized * ballSpeed);
+
+        v.z = 0;
+
+        projectile.GetComponent<Rigidbody2D>().velocity = v;
+
+        if (level == 1)
+        {
+            projectile.GetComponent<FireballScript>().fireBallType("normal");
+        }
+        else if (level == 2)
+        {
+            projectile.GetComponent<FireballScript>().fireBallType("exploding");
+        }
+
+        projectile.transform.GetChild(0).GetChild(0).parent = null;
+
+
+        //g.transform.GetChild (0).GetChild (0).GetComponent<Rigidbody2D> ().velocity = -v;
+    }
+
+
+    private void setIsChargedShot()
+    {
+        GetComponent<PlayerControllerScript>().IsChargingAShot = true;
+        tempScale = 0;
+        tempDmg = 0;
+        tempForce = 0;
+        anim.SetTrigger("chargeShot");
+
+    }
+
+    private void powerUpProjectile()
+    {
+        if (tempScale < maxProjectileSize)
+        {
+            tempScale += scaleAddedPerTick;
+
+            tempDmg += damageAddedPerTick;
+
+            tempForce += pushbackAddedPerTick;
+        }
+
+    }
+
+    private void shootRapidProjectile()
+    {
+        Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (canIShoot(cursorPosition))
+        {
+            if (GetComponent<PlayerControllerScript>().IsChargingAShot)
+            {
+                //The Animation is the one triggering the shot now, since the fireball triggers at a specific part of an animation
+                triggerChargeShootingAnimation();
+            }
+            else
+            {
+                //The Animation is the one triggering the shot now, since the fireball triggers at a specific part of an animation
+                triggerRapidShootingAnimation();
+            }
+
+        }
+        else
+        {
+            if (GetComponent<PlayerControllerScript>().IsChargingAShot)
+                anim.SetTrigger("cancelCharge");
+        }
+
+
+    }
+
+    private void triggerRapidShootingAnimation()
+    {
+        anim.SetTrigger("shootMagic");
+    }
+
+    private void triggerChargeShootingAnimation()
+    {
+        anim.SetTrigger("releaseShot");
+    }
+
+    private bool canIShoot(Vector3 cursorPosition)
+    {
+
+        //If the player is trying to shoot on his right and he is facing right
+        if (cursorPosition.x > transform.position.x && isFacingRight())
+            return true;
+        //If the player is trying to shoot on his left and he is facing left
+        else if (cursorPosition.x < transform.position.x && !isFacingRight())
+            return true;
+        else
+            //Else he is trying to shoot behind himself which isn't allowed
+            return false;
+    }
+
+    private bool isFacingRight()
+    {
+        return GetComponent<PlayerControllerScript>().CharacterIsFacingRight();
+    }
+
+
+    void updateGroundedStatus() {
 		
 		if (Physics2D.OverlapCircle (groundCheckTransform.position, radius, groundCheckLayerMask)) {
 			grounded = true;

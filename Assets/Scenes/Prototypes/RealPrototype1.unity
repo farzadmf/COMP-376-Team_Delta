@@ -18074,6 +18074,7 @@ MonoBehaviour:
     MaxForceResistence: 100000
     MovementSpeed: 6
   nightTimeEnemies: {fileID: 1893418322}
+  transformationPauseTime: 1.12
 --- !u!4 &1086710336
 Transform:
   m_ObjectHideFlags: 0
@@ -31889,40 +31890,6 @@ Prefab:
       propertyPath: shield
       value: 
       objectReference: {fileID: 78353546}
-    - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 136
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -90.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 142
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013047608258, guid: 160ff76841495f1429c935305ca57c83,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 51
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011779690688, guid: 160ff76841495f1429c935305ca57c83, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 160ff76841495f1429c935305ca57c83, type: 2}
   m_IsPrefabParent: 0
@@ -33478,6 +33445,16 @@ Prefab:
     - target: {fileID: 4000011764777814, guid: 4c9ecf995a8fcea469db89e478739e14, type: 2}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010407759100, guid: 4c9ecf995a8fcea469db89e478739e14,
+        type: 2}
+      propertyPath: delayBeforeChasing
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010407759100, guid: 4c9ecf995a8fcea469db89e478739e14,
+        type: 2}
+      propertyPath: delayBeforeAttacking
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c9ecf995a8fcea469db89e478739e14, type: 2}

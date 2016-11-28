@@ -110,6 +110,12 @@ public abstract class Character : MonoBehaviour {
 
     }
 
+    public bool CharacterIsFacingRight()
+    {
+        SetFacingDirection();
+        return isFacingRight;
+    }
+
     public bool IsDead()
     {
         bool d = false;

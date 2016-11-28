@@ -188,6 +188,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000013836423526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012823461988}
+  m_Layer: 14
+  m_Name: ProjectileLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000013868723246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013602056896}
+  - 68: {fileID: 68000013098789938}
+  - 114: {fileID: 114000010617268344}
+  m_Layer: 0
+  m_Name: DemonMelee
+  m_TagString: Sword
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000013894839484
 GameObject:
   m_ObjectHideFlags: 1
@@ -310,7 +342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011779690688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.39, y: -2.73, z: -1}
+  m_LocalPosition: {x: -40.44, y: -2.69, z: -1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -321,6 +353,8 @@ Transform:
   - {fileID: 4000012274235402}
   - {fileID: 4000011353925338}
   - {fileID: 4000010749992468}
+  - {fileID: 4000013602056896}
+  - {fileID: 4000012823461988}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000012274235402
@@ -336,6 +370,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000011940346110}
   m_RootOrder: 4
+--- !u!4 &4000012823461988
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013836423526}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.671999, y: 0.23699999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000011940346110}
+  m_RootOrder: 8
+--- !u!4 &4000013602056896
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013868723246}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7411747, y: 0.44941294, z: -0.015625}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000011940346110}
+  m_RootOrder: 7
 --- !u!50 &50000013478473744
 Rigidbody2D:
   serializedVersion: 2
@@ -510,6 +570,29 @@ EdgeCollider2D:
   - {x: 0.8261032, y: -0.9807868}
   - {x: 0.5486984, y: -1.0397906}
   - {x: -0.21669388, y: -1.1845701}
+--- !u!68 &68000013098789938
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013868723246}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -0.7371483, y: -1.7061121}
+  - {x: -1.0955505, y: -1.7686222}
+  - {x: -1.3656578, y: 0.010397792}
+  - {x: -0.8627739, y: 0.22819877}
+  - {x: -0.35246658, y: 0.2267735}
+  - {x: 0.34803772, y: -0.18901742}
+  - {x: 0.36205673, y: -1.1872344}
+  - {x: -0.06259537, y: -1.7541654}
+  - {x: -0.45515442, y: -1.6905522}
+  - {x: -0.8066864, y: -1.7137637}
 --- !u!68 &68000013526544196
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -587,6 +670,28 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
+--- !u!114 &114000010617268344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013868723246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1248aa597160cfc429818f2ce400e5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack:
+    BaseDamage: 15
+    Cooldown: 0
+    Range: 0
+    Force: 350
+    DamageType: 0
+    DamageOvertime:
+      IsDamageOvertime: 0
+      Damage: 10
+      Duration: 4
+      Intervals: 1
 --- !u!114 &114000010792044808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -737,6 +842,12 @@ MonoBehaviour:
   weapon: {fileID: 1000012785138240}
   level: 1
   Exp: 0
+  projectileLocation: {fileID: 4000012823461988}
+  chargeDelayThreshold: 0.3
+  scaleAddedPerTick: 0.1
+  pushbackAddedPerTick: 5
+  maxProjectileSize: 6
+  damageAddedPerTick: 3
 --- !u!114 &114000012975287124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -811,13 +922,7 @@ MonoBehaviour:
   rightCollider: {fileID: 61000010679006174}
   leftCollider: {fileID: 61000010538195932}
   bodyCollider: {fileID: 61000013895879496}
-  clips:
-  - {fileID: 8300000, guid: 877e067ff10cc4a4b8019a646817e489, type: 3}
-  - {fileID: 8300000, guid: ddab5dd63346154459d6c903d295ffc6, type: 3}
-  - {fileID: 8300000, guid: af85cb4b57b37674499207be9d08fd40, type: 3}
-  - {fileID: 8300000, guid: 1bcfcfd217ab2f74eb3435f6a78b286b, type: 3}
-  - {fileID: 8300000, guid: 232036d3b655eec4aa2003178754d174, type: 3}
-  - {fileID: 8300000, guid: b9033c78c50106e45af78fc25654f462, type: 3}
+  clips: []
   delayForCombo: 2
   dodgeForce: 850
   blockSpeed: 2
@@ -899,7 +1004,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012084219982}
-  serializedVersion: 4
+  serializedVersion: 2
   lengthInSec: 0.5
   startDelay:
     scalar: 0
@@ -937,13 +1042,12 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
+  randomSeed: 2946986240
   looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
-  autoRandomSeed: 0
   scalingMode: 2
-  randomSeed: -1347981056
   InitialModule:
     serializedVersion: 2
     enabled: 1

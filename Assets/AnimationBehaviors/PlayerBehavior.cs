@@ -22,8 +22,14 @@ public class PlayerBehavior : StateMachineBehaviour
         animator.ResetTrigger("attack2");
         animator.ResetTrigger("attack3");
         animator.ResetTrigger("dodge");
+        animator.ResetTrigger("DemonMelee");
+        animator.ResetTrigger("shootMagic");
+        animator.ResetTrigger("chargeShot");
+        animator.ResetTrigger("releaseShot");
         animator.GetComponent<PlayerControllerScript>().IsAttacking = false;
         animator.GetComponent<PlayerControllerScript>().IsDodging = false;
+        animator.GetComponent<PlayerControllerScript>().IsBlocking = false;
+        animator.GetComponent<PlayerControllerScript>().IsChargingAShot = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

@@ -18074,6 +18074,7 @@ MonoBehaviour:
     MaxForceResistence: 100000
     MovementSpeed: 6
   nightTimeEnemies: {fileID: 1893418322}
+  transformationPauseTime: 1.12
 --- !u!4 &1086710336
 Transform:
   m_ObjectHideFlags: 0
