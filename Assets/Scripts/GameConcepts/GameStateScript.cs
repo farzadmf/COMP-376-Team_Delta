@@ -296,7 +296,7 @@ public class GameStateScript : MonoBehaviour {
 
 	}
 	void OnGUI() {
-		DisplayConfirmationButton ();
+		//DisplayConfirmationButton ();
 	}
 
     public void pauseGameForTip()
