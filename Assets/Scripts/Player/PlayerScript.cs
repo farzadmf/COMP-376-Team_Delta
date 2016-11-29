@@ -154,7 +154,7 @@ public class PlayerScript : MonoBehaviour {
                     chargeShotTimer = 0.0f;
                 }
 
-                else if (level == 3)
+                else if (level >= 3)
                     fireBurst();
             }
 
