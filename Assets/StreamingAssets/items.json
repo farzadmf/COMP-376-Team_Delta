@@ -1,21 +1,6 @@
 [
   {
     "id": 0,
-    "title": "Red Potion",
-    "type": "Consumable",
-    "description": "A potion that is red. Yeah!",
-    "flipIcon": false,
-    "iconIndex": "31",
-    "stackable": true,
-    "stats": {
-      "health": 50,
-      "stamina": 30,
-      "strength": 1,
-      "defense": 1
-    }
-  },
-  {
-    "id": 1,
     "title": "The Great Stick",
     "type": "Weapon",
     "attack": {
@@ -33,11 +18,11 @@
     },
     "description": "It's a stick that's pretty great!",
     "flipIcon": true,
-    "iconIndex": "73",
+    "iconIndex": 73,
     "stackable": false
   },
   {
-    "id": 2,
+    "id": 1,
     "title": "The Dangerous Axe",
     "type": "Weapon",
     "attack": {
@@ -55,7 +40,37 @@
     },
     "description": "It's a powerful axe, be careful!",
     "flipIcon": true,
-    "iconIndex": "110",
+    "iconIndex": 110,
     "stackable": false
+  },
+  {
+    "id": 2,
+    "title": "Red Potion",
+    "type": "Consumable",
+    "description": "A potion that is red. Yeah! Your life depends on it!",
+    "flipIcon": false,
+    "iconIndex": 31,
+    "stackable": true,
+    "stats": {
+      "health": 50,
+      "stamina": 10,
+      "strength": 1,
+      "defense": 1
+    }
+  },
+  {
+    "id": 3,
+    "title": "Green Potion",
+    "type": "Consumable",
+    "description": "Drink it and feel the strength!",
+    "flipIcon": false,
+    "iconIndex": 36,
+    "stackable": true,
+    "stats": {
+      "health": 10,
+      "stamina": 50,
+      "strength": 1,
+      "defense": 1
+    }
   }
 ]
