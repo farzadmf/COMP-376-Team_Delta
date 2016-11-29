@@ -16,9 +16,9 @@ public class SunScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		nightLuminosityThreshold = 0.2f;
-		dayLength = 1440;
+		dayLength = 1440*10;
 		dayStart = 0;
-		nightStart = 720;
+		nightStart = 720*10;
 		currentTime = 0;
 		StartCoroutine (TimeOfDay());
 		earth = gameObject.transform.parent.gameObject;
