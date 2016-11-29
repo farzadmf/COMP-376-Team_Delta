@@ -87,6 +87,7 @@ public class OverlayScript : MonoBehaviour {
     {
         HideOverlay();
         gss.resumeGameForTip();
+        GameObject.Find("Main Camera").GetComponent<CameraFollow>().enabled = true;
     }
 
     void TurnOffTips()
@@ -95,14 +96,29 @@ public class OverlayScript : MonoBehaviour {
         ReturnToGame();
     }
 
-    public void DisplayOverlay(string[] text)
+    void TurnOffCamera()
+    {
+        GameObject.Find("Main Camera").GetComponent<CameraFollow>().enabled = false;
+
+        gss.pauseGameForTip();
+        Next();
+    }
+
+    public void DisplayOverlay(string[] text, int tipN)
     {
         display.SetActive(true);
         instructions = text;
         currentTip = 0;
         GameObject.Find("Player").GetComponent<PlayerControllerScript>().enabled = false;
-        gss.pauseGameForTip();
-        Next();
+
+        if (tipN == 1 && GameObject.Find("Main Camera").GetComponent<CameraFollow>().enabled)
+        {
+            Invoke("TurnOffCamera", 0.1f);
+        }
+        else
+        {
+            TurnOffCamera();
+        }
     }
 
     public bool AreTipsOn()

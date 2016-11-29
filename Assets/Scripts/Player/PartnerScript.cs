@@ -88,7 +88,7 @@ public class PartnerScript : MonoBehaviour
                         msgs = new string[1];
                         msgs[0] = message;
                     }
-                    GameObject.Find("Overlay").GetComponent<OverlayScript>().DisplayOverlay(msgs);
+                    GameObject.Find("Overlay").GetComponent<OverlayScript>().DisplayOverlay(msgs, tipN);
                 }
             }
             else
