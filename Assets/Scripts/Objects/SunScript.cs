@@ -13,12 +13,13 @@ public class SunScript : MonoBehaviour {
 	public GameObject earth;
 	public GameObject[] weatherEffects;
 	private float nightLuminosityThreshold;
+	public int interval;
 	// Use this for initialization
 	void Start () {
 		nightLuminosityThreshold = 0.2f;
-		dayLength = 1440*10;
+		dayLength = 1440*interval;
 		dayStart = 0;
-		nightStart = 720*10;
+		nightStart = 720*interval;
 		currentTime = 0;
 		StartCoroutine (TimeOfDay());
 		earth = gameObject.transform.parent.gameObject;
