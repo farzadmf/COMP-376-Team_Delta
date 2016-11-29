@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
     public GameObject HotKeySlot;
     public GameObject Item;
     public GameObject HotkeyItem;
+    public GameObject ItemEffect;
 
     public Text HealthText;
     public Text StaminaText;
@@ -34,6 +35,7 @@ public class Inventory : MonoBehaviour
     private readonly List<GameObject> _hotKeySlots = new List<GameObject>();
 
     private GameObject _player;
+    private GameObject _itemEffect;
     private PlayerScript _playerScript;
     private PlayerControllerScript _playerControllerScript;
     private Tooltip _tooltip;
@@ -277,6 +279,9 @@ public class Inventory : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        _itemEffect = (GameObject) Instantiate(ItemEffect, _player.transform.position, Quaternion.identity);
+        Destroy(_itemEffect, 1);
     }
 
     private void UpdatePlayerWithWeapon(Item item)
