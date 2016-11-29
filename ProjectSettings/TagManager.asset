@@ -25,6 +25,7 @@ TagManager:
   - Shield
   - DeathZone
   - Music
+  - EndGame
   layers:
   - Default
   - TransparentFX
