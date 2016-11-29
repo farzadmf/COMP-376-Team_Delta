@@ -25,6 +25,7 @@ public class GameStateScript : MonoBehaviour {
 	private Light sfxNightTime;
 	private float rangeChange;
 	private bool paused;
+    private bool tipPause;
 
     [SerializeField]
     private float transformationPauseTime;
@@ -42,6 +43,7 @@ public class GameStateScript : MonoBehaviour {
         //Why do you start in the Night? Changed to Day
 		toState = "Day";
 		getDayStats ();
+        tipPause = false;
 
 	}
 	void getDayStats() {
@@ -297,19 +299,35 @@ public class GameStateScript : MonoBehaviour {
 		DisplayConfirmationButton ();
 	}
 
+    public void pauseGameForTip()
+    {
+        tipPause = true;
+        Time.timeScale = 0;
+    }
+
+    public void resumeGameForTip()
+    {
+        tipPause = false;
+        Time.timeScale = 1;
+    }
+
 	void pauseGame() {
-		if (!paused)
-			Time.timeScale = 0;
-		else
-			Time.timeScale = 1;
-		paused = !paused;
+        if (!tipPause)
+        {
+            if (!paused)
+                Time.timeScale = 0;
+            else
+                Time.timeScale = 1;
+            paused = !paused;
+        }
 	}
 	void resumeGame() {
 		Time.timeScale = 1;
 	}
 
 	void DisplayConfirmationButton() {
-		if (paused) {
+        if (paused)
+        {
 			Rect buttonRect = new Rect (Screen.width * 0.15f, Screen.height * 0.45f, 
 				Screen.width * 0.30f, Screen.height * 0.1f);
 			Rect buttonRect2 = buttonRect;
