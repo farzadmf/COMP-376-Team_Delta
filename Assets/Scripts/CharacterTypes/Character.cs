@@ -361,6 +361,8 @@ public abstract class Character : MonoBehaviour {
     private void TakeDamage(Damage damage, bool triggerAnimation)
     {
 
+        if (damage.DamageValue < 0)
+            damage.DamageValue = 0;
 
         characterStats.decreaseHealth(damage.DamageValue);
 
