@@ -290,7 +290,14 @@ public class Inventory : MonoBehaviour
 
     private void UpdatePlayerWithWeapon(Item item)
     {
-        // Weapon is now part of the player, so skip trying to add it to the player
+        /*
+         * Added temporary code to give the player the second weapon daggers will need to clean up after and redo.
+         */
+        if (item.Id == 0)
+            _player.GetComponent<PlayerControllerScript>().ChangePlayerWeapon(Weapons.Daggers);
+        else
+            _player.GetComponent<PlayerControllerScript>().ChangePlayerWeapon(Weapons.Claymore);
+
     }
 
     private void UpdatePlayerWithConsumable(Item item)

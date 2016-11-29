@@ -41,9 +41,12 @@ public class PlayerControllerScript : Character
 
     //Constants For Animations
     private const int NUM_ATTACKS = 3;
-    private string[] ATTACKS = new string[] { "attack1", "attack2", "attack3" };
+    private string[] ATTACKS = new string[] { "attack1", "attack2", "attack3", "attack4", "attack5", "attack6" };
 
     private int attackCounter;
+
+    private int weaponIndex;
+
 
     //Dodge variables
     [SerializeField]
@@ -87,6 +90,7 @@ public class PlayerControllerScript : Character
         IsAttacking = false;
         IsDodging = false;
         attackCounter = 0;
+        weaponIndex = 0;
         firstAttack = true;
         setIsBlocking(false);
         IsTransforming = false;
@@ -179,12 +183,12 @@ public class PlayerControllerScript : Character
     void attack() {
 		if (Input.GetMouseButtonDown (0)) { // left click
 			string nextAttack = getNextAttack();
-			if (nextAttack == "attack1" || nextAttack == "attack3") {
+			if (nextAttack == "attack1" || nextAttack == "attack3" || nextAttack == "attack4" || nextAttack == "attack6") {
 				audioSource1.Stop ();
 				audioSource1.clip = clips [0];
 				audioSource1.Play ();
 			//	//playSounds ();
-			} else if (nextAttack == "attack2") {
+			} else if (nextAttack == "attack2" || nextAttack == "attack5") {
 				audioSource1.Stop ();
 				audioSource1.clip = clips [1];
 				audioSource1.Play ();
@@ -286,6 +290,15 @@ public class PlayerControllerScript : Character
         ThisRigidBody.gravityScale = initialGravityScale;
         IsTransforming = false;
         ThisAnimator.SetBool("isTransforming", IsTransforming);
+    }
+
+    public void ChangePlayerWeapon(Weapons weapon)
+    {
+        if (weapon == Weapons.Daggers)
+            weaponIndex = 3;
+        else
+            weaponIndex = 0;
+
     }
 
 
@@ -432,7 +445,7 @@ public class PlayerControllerScript : Character
 
             firstAttack = false;
 
-            return ATTACKS[attackCounter];
+            return ATTACKS[attackCounter + weaponIndex];
         }
         else
         {
@@ -441,14 +454,15 @@ public class PlayerControllerScript : Character
             {
                 attackCounter++;
 
-                if (attackCounter >= ATTACKS.Length)
-                    attackCounter = 0;
+                if (attackCounter >= weaponIndex + NUM_ATTACKS)
+                    attackCounter = weaponIndex;
             }
             else
-                attackCounter = 0;
+                attackCounter = weaponIndex;
 
 
             nextAttackTimer = delayForCombo + Time.time;
+
             return ATTACKS[attackCounter];
         }
    
@@ -460,5 +474,7 @@ public class PlayerControllerScript : Character
         IsBlocking = value;
         ThisAnimator.SetBool("block", IsBlocking);
     }
+
+
 
 }
