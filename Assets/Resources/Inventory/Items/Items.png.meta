@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 989183fccecaab94989d4c35bade2152
-timeCreated: 1480446796
+timeCreated: 1480451191
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -879,6 +879,7 @@ TextureImporter:
     21301744: Items_435
     21301746: Items_436
     21301748: Items_437
+    21301750: Items_438
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -6616,6 +6617,19 @@ TextureImporter:
         y: 18
         width: 35
         height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Items_438
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 18
+        width: 35
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

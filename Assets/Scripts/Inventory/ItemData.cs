@@ -29,7 +29,7 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Item == null || eventData.button != InputButton.Right)
+        if (Item == null || eventData.button != InputButton.Left)
             return;
 
         _offset = eventData.position - (Vector2) transform.position;
@@ -40,14 +40,14 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button != InputButton.Right)
+        if (eventData.button != InputButton.Left)
             return;
 
         _originalParent = transform.parent;
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (Item == null || eventData.button != InputButton.Right)
+        if (Item == null || eventData.button != InputButton.Left)
             return;
 
         SetPosition(eventData.position);
@@ -55,7 +55,7 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (eventData.button != InputButton.Right)
+        if (eventData.button != InputButton.Left)
             return;
 
         transform.SetParent(_originalParent);

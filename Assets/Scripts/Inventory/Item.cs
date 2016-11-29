@@ -59,4 +59,6 @@ public class Item
     }
 
     public Sprite Sprite { get; set; }
+
+    public Weapons WeaponName { get; set; }
 }

@@ -18,8 +18,9 @@
     },
     "description": "It's a stick that's pretty great!",
     "flipIcon": true,
-    "iconIndex": 73,
-    "stackable": false
+    "iconIndex": 438,
+    "stackable": false,
+    "weaponName": "Claymore"
   },
   {
     "id": 1,
@@ -92,7 +93,8 @@
     },
     "description": "Daggers that will tear enemies apart!",
     "flipIcon": true,
-    "iconIndex": 437, 
-    "stackable": false
+    "iconIndex": 437,
+    "stackable": false,
+    "weaponName": "Daggers"
   }
 ]

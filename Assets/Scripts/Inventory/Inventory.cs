@@ -79,12 +79,11 @@ public class Inventory : MonoBehaviour
         }
 
         // After initialization, we add a weapon to the inventory and equip the player with it
-        const int itemId = 1;
+        const int itemId = 0;
         AddItem(itemId);
 
         //Sorry Disabled For Now Since Attacks are weapon dependent 
-        //UpdatePlayerWithItem(ItemDatabase.Instance.GetItem(itemId));
-
+        UpdatePlayerWithWeapon(ItemDatabase.Instance.GetItem(itemId));
     }
 
     // ReSharper disable once UnusedMember.Local
@@ -290,14 +289,7 @@ public class Inventory : MonoBehaviour
 
     private void UpdatePlayerWithWeapon(Item item)
     {
-        /*
-         * Added temporary code to give the player the second weapon daggers will need to clean up after and redo.
-         */
-        if (item.Id == 0)
-            _player.GetComponent<PlayerControllerScript>().ChangePlayerWeapon(Weapons.Daggers);
-        else
-            _player.GetComponent<PlayerControllerScript>().ChangePlayerWeapon(Weapons.Claymore);
-
+        _playerControllerScript.ChangePlayerWeapon(item.WeaponName);
     }
 
     private void UpdatePlayerWithConsumable(Item item)
