@@ -72,5 +72,27 @@
       "strength": 1,
       "defense": 1
     }
+  },
+  {
+    "id": 4,
+    "title": "Dangerous Daggers",
+    "type": "Weapon",
+    "attack": {
+      "baseDamage": 30,
+      "coolDown": 0,
+      "range": 0,
+      "force": 200,
+      "damageType": "normal",
+      "damageOverTime": {
+        "isDamageOvertime": false,
+        "damage": 0,
+        "duration": 0,
+        "intervals": 0
+      }
+    },
+    "description": "Daggers that will tear enemies apart!",
+    "flipIcon": true,
+    "iconIndex": 437, 
+    "stackable": false
   }
 ]

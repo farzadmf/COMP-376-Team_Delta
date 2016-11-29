@@ -116,6 +116,10 @@ public class Inventory : MonoBehaviour
             UseHotKeyItem(3);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
             UseHotKeyItem(4);
+
+        // If the effect is alive, follow the player
+        if (_itemEffect != null)
+            _itemEffect.transform.position = _player.transform.position;
     }
 
     private void OnItemDropped(int slotIndex, GameObject itemObject)
@@ -286,23 +290,7 @@ public class Inventory : MonoBehaviour
 
     private void UpdatePlayerWithWeapon(Item item)
     {
-        var weaponPosition = _playerScript.weapon.transform.position;
-
-        // Delete the old weapon object
-        Destroy(_playerScript.weapon.gameObject);
-
-        // Instantiate weapon prefab at weapon's location and set the parent
-        var newWeapon = (GameObject) Instantiate(item.Prefab, weaponPosition, Quaternion.identity);
-        newWeapon.transform.SetParent(_player.transform);
-        newWeapon.transform.localScale = Vector3.one * 1.5f;
-
-        // Adjust weapon properties
-        newWeapon.name = "Weapon";
-        var damageDealerScript = newWeapon.GetComponent<DamageDealer>();
-        damageDealerScript.Attack = item.Attack;
-
-        // Set this weapon as player's weapon
-        _playerScript.weapon = newWeapon;
+        // Weapon is now part of the player, so skip trying to add it to the player
     }
 
     private void UpdatePlayerWithConsumable(Item item)
