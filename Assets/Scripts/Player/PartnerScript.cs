@@ -61,9 +61,10 @@ public class PartnerScript : MonoBehaviour
                 {
                     string[] msgs;
                     if (tipN == 1) {
-                        msgs = new string[2];
+                        msgs = new string[3];
                         msgs[0] = message;
                         msgs[1] = "I suppose you need to move.\nMust I teach you EVERYTHING?\n*Sighs* The left arrow key or A key\nmoves you to the left and the right\narrowkey or D key moves you\nto the right.";
+                        msgs[2] = "If you don't want to take damage\nI would suggest you hit the Left - Shift\nkey to block or the Left-Alt key to\ndodge.But be careful, if you use\neither too much, you'll run out of\nstamina.";
                     }
                     else if (tipN == 7)
                     {
