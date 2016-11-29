@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Prototypes/StoryScene.unity
   - enabled: 1
     path: Assets/Scenes/MenuScenes/Credits.unity
+  - enabled: 1
+    path: Assets/Scenes/Prototypes/RealPrototype3.unity

@@ -1108,8 +1108,8 @@ MonoBehaviour:
   HealthSlider: {fileID: 0}
   StaminaSlider: {fileID: 0}
   characterStats:
-    TotalHealth: 5000
-    Health: 5000
+    TotalHealth: 500
+    Health: 500
     TotalStamina: 250
     Stamina: 250
     Strength: 5
@@ -1240,7 +1240,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012084219982}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 0.5
   startDelay:
     scalar: 0
@@ -1278,12 +1278,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 2946986240
   looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 2
+  randomSeed: -1347981056
   InitialModule:
     serializedVersion: 2
     enabled: 1

@@ -345,7 +345,7 @@ public class PlayerScript : MonoBehaviour {
         level += 1;
         Exp = 0;
 
-        GetComponent<PlayerControllerScript>().characterStats.increaseTotalHealth(200);
+        GetComponent<PlayerControllerScript>().characterStats.increaseTotalHealth(75);
         GetComponent<PlayerControllerScript>().characterStats.increaseTotalStamina(50);
         GetComponent<PlayerControllerScript>().characterStats.increaseStrength(1);
         GetComponent<PlayerControllerScript>().characterStats.increaseDefense(1);
