@@ -13,8 +13,7 @@ public class PlayerScript : MonoBehaviour {
 	private bool canMagic;
 	private bool canLifeSteal;
     public int level;
-    [SerializeField]
-    private int Exp;
+    public int Exp;
 	private Animator anim;
 	private int currentStamina;
 	private float cooldown;

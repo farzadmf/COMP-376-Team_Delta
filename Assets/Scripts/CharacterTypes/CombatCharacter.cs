@@ -42,6 +42,7 @@ public abstract class CombatCharacter : Character {
 
     public void DisableMeleeCollider()
     {
+		
         if (meleeCollider)
             meleeCollider.enabled = false;
 

@@ -73,6 +73,8 @@ public class PlayerControllerScript : Character
         // check if game was saved at least once, otherwise we put the player stats to null
         if (SaveLoadScript.saved == true) {
             base.characterStats = stats;
+			GetComponent<PlayerScript> ().level = SaveLoadScript.playerLevel;
+			GetComponent<PlayerScript> ().Exp = SaveLoadScript.playerXP;
         }
 
         canMoveX = true;
@@ -265,6 +267,7 @@ public class PlayerControllerScript : Character
 
     public void EnableBlock()
     {
+
         ThisAnimator.SetTrigger("initialBlock");
         setIsBlocking(true);
         shield.GetComponent<BoxCollider2D>().enabled = true;

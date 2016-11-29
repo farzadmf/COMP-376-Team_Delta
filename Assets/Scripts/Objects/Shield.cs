@@ -17,7 +17,7 @@ public class Shield : MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D other)
     {
         //If it hit a shield then nulify this attack the collider will be reenabled when he does next attack
-        if (other.tag == "EnemyDamage")
+		if (other.tag == "EnemyDamage")
         {
             if (other.gameObject.transform.parent)
             {

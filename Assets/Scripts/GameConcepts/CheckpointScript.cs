@@ -19,7 +19,8 @@ public class CheckpointScript : MonoBehaviour {
 		}
 	}
 	void saveGame() {
-		SaveLoadScript.SaveGame (player.GetComponent<PlayerControllerScript> ().characterStats);
+		SaveLoadScript.SaveGame (player.GetComponent<PlayerControllerScript> ().characterStats,
+			player.GetComponent<PlayerScript>().level, player.GetComponent<PlayerScript>().Exp);
 	}
 	void Start () {
 		player = GameObject.Find ("Player");

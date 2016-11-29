@@ -302,7 +302,12 @@ public abstract class Character : MonoBehaviour {
             {
                 if (gameObject.tag == "Player")
                 {
-                    if (gameObject.GetComponent<PlayerControllerScript>().IsBlocking)
+					bool inFrontOfShield = false;
+					if ((transform.localScale.x < 0 && other.transform.position.x < transform.position.x) ||
+						(transform.localScale.x > 0 && other.transform.position.x > transform.position.x)) {
+						inFrontOfShield = true;
+					}
+					if (gameObject.GetComponent<PlayerControllerScript>().IsBlocking && inFrontOfShield)
                         return;
                 }
 
